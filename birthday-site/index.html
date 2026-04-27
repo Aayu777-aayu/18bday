@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Niki's 18th Birthday</title>
+  <script type="module">
+    // Firebase removed - site now works locally only
+  </script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{width:360px;margin:0 auto;background:#fdf8f5;border-radius:36px;border:1.5px solid #e8ddd5;overflow:hidden;font-family:'Inter',sans-serif;position:relative;}
+@media (max-width: 768px) {
+  .wrap { width: 100%; border-radius: 0; border: none; }
+}
+.screen{height:700px;overflow-y:auto;scrollbar-width:none;}
+.screen::-webkit-scrollbar{display:none;}
+.confetti-overlay{position:absolute;inset:0;pointer-events:none;z-index:999;border-radius:36px;overflow:hidden;}
+
+.hero{background:#1a0f1f;padding:52px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.age-badge{display:inline-block;font-size:10px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:#d4a8c7;margin-bottom:14px;padding:5px 16px;border:0.5px solid rgba(212,168,199,0.4);border-radius:20px;}
+.hero-photo{width:100px;height:100px;border-radius:50%;margin:0 auto 14px;border:2px solid rgba(212,168,199,0.5);background:rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;}
+.hero-photo img{width:100%;height:100%;object-fit:cover;}
+.hero-photo-label{font-size:10px;color:rgba(212,168,199,0.7);text-align:center;line-height:1.5;padding:0 6px;}
+.hero-name{font-family:'Playfair Display',serif;font-size:40px;color:#fdf0f8;line-height:1.1;margin-bottom:6px;}
+.hero-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#c890b8;margin-bottom:24px;}
+.music-bar{background:rgba(255,255,255,0.06);border:0.5px solid rgba(212,168,199,0.2);border-radius:24px;padding:9px 16px;display:flex;align-items:center;gap:10px;}
+.play-btn{width:26px;height:26px;border-radius:50%;background:#c890b8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.play-btn svg{width:9px;height:9px;fill:#1a0f1f;margin-left:2px;}
+.music-info{flex:1;min-width:0;}
+.music-title{font-size:11px;color:#fdf0f8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-artist{font-size:10px;color:rgba(212,168,199,0.6);}
+.wave{display:flex;align-items:center;gap:2px;height:14px;}
+.wbar{width:3px;border-radius:2px;background:#c890b8;opacity:0.5;}
+@keyframes wv{0%,100%{height:3px}50%{height:13px}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+@keyframes burst{0%{transform:scale(1);opacity:1}100%{transform:scale(2.5);opacity:0}}
+@keyframes msgSlide{0%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+.content{padding:28px 20px;}
+.sec-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#b87fa8;margin-bottom:14px;font-weight:300;}
+
+.balloons-hero{display:flex;justify-content:center;gap:18px;margin-bottom:28px;padding:16px 0;}
+.balloon-deco{display:flex;flex-direction:column;align-items:center;}
+.balloon-deco-body{width:36px;height:44px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:flex;align-items:center;justify-content:center;}
+.balloon-deco-string{width:1px;height:20px;background:#ccc;margin-top:2px;}
+
+.game-section{margin-bottom:28px;}
+.game-card{background:#1a0f1f;border-radius:20px;padding:20px;position:relative;overflow:hidden;}
+.game-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.game-title{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#fdf0f8;}
+.game-score{font-size:12px;color:#c890b8;letter-spacing:1px;}
+.game-sub{font-size:11px;color:rgba(212,168,199,0.6);margin-bottom:18px;}
+.game-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.balloon-btn{aspect-ratio:3/4;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0;position:relative;}
+.balloon-body-game{width:100%;flex:1;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:flex;align-items:center;justify-content:center;transition:transform 0.1s;position:relative;overflow:hidden;}
+.balloon-btn:hover .balloon-body-game{transform:scale(1.08);}
+.balloon-btn:active .balloon-body-game{transform:scale(0.95);}
+.balloon-string-game{width:1px;height:12px;background:rgba(255,255,255,0.3);}
+.balloon-num-game{font-size:11px;font-weight:500;color:rgba(255,255,255,0.9);}
+.balloon-popped{opacity:0;pointer-events:none;transition:all 0.3s;}
+.burst-ring{position:absolute;inset:-4px;border-radius:50%;border:3px solid;animation:burst 0.4s ease-out forwards;pointer-events:none;}
+
+.msg-reveal{background:rgba(255,255,255,0.08);border:0.5px solid rgba(212,168,199,0.25);border-radius:14px;padding:16px;min-height:64px;display:flex;align-items:center;justify-content:center;text-align:center;}
+.msg-text{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#fdf0f8;line-height:1.6;animation:msgSlide 0.4s ease-out;}
+.msg-placeholder{font-size:11px;color:rgba(212,168,199,0.4);letter-spacing:1px;}
+
+.game-progress{margin-top:14px;}
+.progress-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:#c890b8;border-radius:2px;transition:width 0.4s ease;}
+.progress-label{font-size:10px;color:rgba(212,168,199,0.5);margin-top:6px;text-align:center;letter-spacing:1px;}
+
+.game-complete{display:none;text-align:center;padding:10px 0;}
+.game-complete.show{display:block;animation:popIn 0.5s ease-out;}
+.complete-emoji{font-size:32px;margin-bottom:8px;}
+.complete-text{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#fdf0f8;margin-bottom:6px;}
+.complete-sub{font-size:12px;color:#c890b8;}
+.replay-btn{margin-top:14px;padding:9px 22px;background:rgba(200,144,184,0.2);border:0.5px solid rgba(212,168,199,0.4);border-radius:20px;color:#fdf0f8;font-size:12px;cursor:pointer;font-family:inherit;}
+.replay-btn:hover{background:rgba(200,144,184,0.35);}
+
+.carousel{margin-bottom:28px;position:relative;}
+.car-track-wrap{overflow:hidden;border-radius:14px;}
+.car-track{display:flex;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+.car-slide{min-width:100%;aspect-ratio:4/3;background:#f5edf2;border-radius:14px;border:1px dashed #d4b8cb;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;}
+.car-slide img{width:100%;height:100%;object-fit:cover;}
+.car-slide-label{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
+.car-caption{font-size:12px;font-style:italic;color:#7a5a78;text-align:center;margin-top:8px;min-height:18px;outline:none;}
+.car-caption:focus{background:#fff9fd;border-radius:6px;padding:2px 8px;}
+.car-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
+.car-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.2s;cursor:pointer;}
+.car-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
+.car-nav{position:absolute;top:42%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);border:0.5px solid #e0c8d8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#7a5a78;z-index:2;}
+.car-nav.prev{left:6px;}
+.car-nav.next{right:6px;}
+
+.letter-card{background:#fff;border-radius:16px;border:0.5px solid #ead9e4;padding:22px;margin-bottom:24px;}
+.letter-open{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#3d1f3a;margin-bottom:12px;outline:none;}
+.letter-body{font-size:13px;line-height:1.85;color:#5a3d58;white-space:pre-wrap;outline:none;}
+.letter-close{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#3d1f3a;text-align:right;outline:none;}
+
+.reasons{margin-bottom:8px;}
+.reason-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:0.5px solid #f0e4ec;}
+.reason-item:last-child{border-bottom:none;}
+.rnum{width:24px;height:24px;border-radius:50%;background:#f5edf2;border:0.5px solid #e0c8d8;display:flex;align-items:center;justify-content:center;font-size:10px;color:#b87fa8;flex-shrink:0;}
+.rtxt{font-size:13px;color:#4a2e48;line-height:1.6;flex:1;outline:none;}
+.rtxt:focus{background:#fff9fd;border-radius:6px;padding:2px 6px;}
+.promises{margin-bottom:8px;}
+.promise-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:0.5px solid #f0e4ec;}
+.promise-item:last-child{border-bottom:none;}
+.ptxt{font-size:13px;color:#4a2e48;line-height:1.5;flex:1;outline:none;}
+.ptxt:focus{background:#fff9fd;border-radius:6px;padding:2px 6px;}
+.add-btn{display:flex;align-items:center;gap:8px;color:#b87fa8;font-size:12px;background:none;border:0.5px dashed #d4b8cb;border-radius:8px;padding:9px 14px;cursor:pointer;width:100%;margin-top:6px;margin-bottom:24px;font-family:inherit;display:none;}
+.add-btn:hover{background:#f5edf2;}
+
+.secret-box{background:#1a0f1f;border-radius:16px;padding:24px;text-align:center;cursor:pointer;margin-bottom:28px;}
+.secret-hint{font-size:13px;color:#c890b8;font-style:italic;font-family:'Playfair Display',serif;}
+.secret-tap{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,168,199,0.5);margin-top:8px;}
+.secret-msg{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#fdf0f8;line-height:1.7;outline:none;display:none;}
+
+.closing{background:#1a0f1f;border-radius:16px;padding:26px 22px;text-align:center;margin-bottom:28px;}
+.closing-txt{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:#fdf0f8;margin-bottom:6px;outline:none;}
+.closing-from{font-size:11px;color:#c890b8;letter-spacing:1px;outline:none;}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#2c1a2e;color:#fdf0f8;border:none;border-radius:12px;font-size:13px;cursor:pointer;margin-bottom:12px;font-family:inherit;}
+.share-btn:hover{background:#3d2640;}
+
+.edit-bar{background:#fff;border-top:0.5px solid #ead9e4;padding:12px 20px;display:flex;gap:7px;flex-wrap:wrap;}
+.lock-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#2c1a2e;color:#fdf0f8;border:none;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;z-index:10;}
+.lock-btn:hover{background:#3d2640;}
+.edit-bar{display:none;}
+.ebtn{font-size:11px;padding:6px 12px;border:0.5px solid #e0c8d8;border-radius:20px;background:#fdf8f5;color:#7a5a78;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.ebtn:hover{background:#f0e4ec;border-color:#b87fa8;}
+.ebtn.pri{background:#2c1a2e;color:#fdf0f8;border-color:#2c1a2e;}
+.ebtn.pri:hover{background:#3d2640;}
+
+.modal-wrap{position:absolute;inset:0;background:rgba(28,10,26,0.6);display:flex;align-items:flex-end;z-index:200;border-radius:36px;}
+.sheet{background:#fdf8f5;border-radius:20px 20px 0 0;padding:22px;width:100%;max-height:78%;overflow-y:auto;}
+.sheet h3{font-family:'Playfair Display',serif;font-size:17px;color:#2c1a2e;margin-bottom:14px;}
+.sheet label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b87fa8;margin:14px 0 5px;}
+.sheet input,.sheet textarea{width:100%;border:0.5px solid #e0c8d8;border-radius:10px;padding:9px 12px;font-size:13px;color:#3d1f3a;background:#fff;outline:none;font-family:inherit;resize:vertical;}
+.sheet textarea{min-height:70px;line-height:1.7;}
+.sheet-actions{display:flex;gap:8px;margin-top:18px;}
+.msg-edit-item{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+.msg-edit-item input{flex:1;}
+.msg-edit-item span{font-size:14px;color:#b87fa8;cursor:pointer;padding:4px;}
+.hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap" id="mainWrap">
+  <div class="confetti-overlay">
+    <canvas id="confettiCanvas" width="360" height="700"></canvas>
+  </div>
+
+  <div class="screen">
+    <div class="hero">
+      <div class="hero-photo" id="heroSlot" onclick="document.getElementById('hInput').click()">
+        <div style="font-size:20px;opacity:0.5;margin-bottom:4px">📷</div>
+        <div class="hero-photo-label">tap to add photo</div>
+      </div>
+      <input type="file" accept="image/*" class="hidden" id="hInput" onchange="loadHero(event)">
+      <div class="age-badge">18th birthday</div>
+      <div class="hero-name" id="hName">Niki</div>
+      <div class="hero-sub" id="hSub">forever my baby</div>
+      <div class="music-bar">
+        <button class="play-btn" onclick="togglePlay()">
+          <svg viewBox="0 0 9 11"><polygon points="0,0 9,5.5 0,11"/></svg>
+        </button>
+        <div class="music-info">
+          <div class="music-title" id="sTitle">Hours In Silence</div>
+          <div class="music-artist" id="sArtist">Drake & 21 Savage</div>
+        </div>
+        <div class="wave">
+          <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0s"></div>
+          <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.2s"></div>
+          <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.4s"></div>
+          <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.15s"></div>
+          <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.3s"></div>
+        </div>
+        <audio id="audio" src="song1.mp3"></audio>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="sec-label">You finally 18 </div>
+      <div class="balloons-hero" id="balloonsRow"></div>
+
+      <div class="sec-label">pop the balloons</div>
+      <div class="game-section">
+        <div class="game-card">
+          <div class="game-header">
+            <div class="game-title">a message in every balloon</div>
+            <div class="game-score" id="gameScore">0 / 8</div>
+          </div>
+          <div class="game-sub">pop each balloon to reveal a love message ♡</div>
+          <div class="game-grid" id="gameGrid"></div>
+          <div class="msg-reveal" id="msgReveal">
+            <div class="msg-placeholder">tap a balloon...</div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            <div class="progress-label" id="progressLabel">pop all 8 to complete</div>
+          </div>
+          <div class="game-complete" id="gameComplete">
+            <div class="complete-emoji">🎉</div>
+            <div class="complete-text">you found them all!</div>
+            <div class="complete-sub" id="completeSub">i love you my heart ♡</div>
+            <button class="replay-btn" onclick="initGame()">pop again</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-label">our memories</div>
+  
+      <div class="carousel" id="carouselWrap">
+        <button class="car-nav prev" onclick="carMove(-1)">&#8249;</button>
+        <button class="car-nav next" onclick="carMove(1)">&#8250;</button>
+        <div class="car-track-wrap">
+          <div class="car-track" id="carTrack"></div>
+        </div>
+        <div class="car-dots" id="carDots"></div>
+        <div class="car-caption" id="carCaption" contenteditable="false" spellcheck="false">add a caption for this memory...</div>
+      </div>
+
+      <div class="sec-label">a letter for you</div>
+      <div class="letter-card">
+        <div class="letter-open" id="lOpen" contenteditable="false" spellcheck="false">My dearest Niki,</div>
+        <div class="letter-body" id="lBody" contenteditable="false" spellcheck="false">Happy 18th birthday, my love. Today is entirely yours — a day the world pauses to celebrate the most remarkable person I know.
+
+Watching you grow into who you are has been one of the greatest gifts of my life. Your laugh, your heart, your soul — everything about you leaves me in awe every single day.
+
+18 feels like the beginning of everything beautiful. And I want to be there for all of it.</div>
+        <div class="letter-close" id="lClose" contenteditable="false" spellcheck="false">Yours, always ♡</div>
+      </div>
+
+      <div class="sec-label">reasons i love you</div>
+      <div class="reasons" id="reasonList">
+        <div class="reason-item"><div class="rnum">1</div><div class="rtxt" contenteditable="false" spellcheck="false">The energy you bring with you everywhere</div></div>
+        <div class="reason-item"><div class="rnum">2</div><div class="rtxt" contenteditable="false" spellcheck="false">How you always show compassion towards everyone</div></div>
+        <div class="reason-item"><div class="rnum">3</div><div class="rtxt" contenteditable="false" spellcheck="false">Your way of words, awwww so cute iykyk</div></div>
+        <div class="reason-item"><div class="rnum">4</div><div class="rtxt" contenteditable="false" spellcheck="false">The way you make ordinary moments feel magical</div></div>
+        <div class="reason-item"><div class="rnum">5</div><div class="rtxt" contenteditable="false" spellcheck="false">Simply everything — I could fill a thousand pages</div></div>
+      </div>
+      <button class="add-btn" onclick="addReason()">+ add another reason</button>
+
+      <div class="sec-label">a secret just for you</div>
+      <div class="secret-box" id="secretBox" onclick="revealSecret()">
+        <div id="secretLock">
+          <div style="font-size:28px;margin-bottom:8px">🔒</div>
+          <div class="secret-hint">tap to unlock your secret message</div>
+          <div class="secret-tap">press to reveal</div>
+        </div>
+        <div class="secret-msg" id="secretMsg" contenteditable="false" spellcheck="false">I think about you every single day. You are the person I want to grow with, laugh with, and love for the rest of my life. Happy 18th — this is just the beginning of us. ♡</div>
+      </div>
+
+      <div class="sec-label">my promises to you</div>
+      <div class="promises" id="promiseList">
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To always make you feel seen, heard, and loved</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To be your biggest supporter in everything you chase</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To choose you, every single day, for as long as you'll have me</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To never stop finding new reasons to fall in love with you</div></div>
+      </div>
+      <button class="add-btn" onclick="addPromise()">+ add a promise</button>
+
+      <div class="closing">
+        <div style="font-size:20px;letter-spacing:6px;margin-bottom:10px;color:#fdf0f8">♡ ♡ ♡</div>
+        <div class="closing-txt" id="cMsg" contenteditable="false" spellcheck="false">Happy 18th, Niki</div>
+        <div class="closing-from" id="cFrom" contenteditable="false" spellcheck="false">from your love</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-bar">
+    <button class="ebtn" onclick="openModal('details')">edit details</button>
+    <button class="ebtn" onclick="openModal('song')">edit song</button>
+    <button class="ebtn" onclick="openModal('messages')">edit messages</button>
+    <button class="ebtn pri" onclick="launchConfetti()">🎊 confetti!</button>
+  </div>
+
+  <button class="lock-btn" onclick="unlockEdit()">🔒</button>
+
+  <div class="modal-wrap hidden" id="modalWrap">
+    <div class="sheet" id="sheet"></div>
+  </div>
+</div>
+
+<script>
+let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
+const carCaptions=Array(carSlides).fill('add a caption for this memory...');
+
+let balloonMessages = [
+  "You are the best thing that ever happened to me",
+  "I fall more in love with you every single day",
+  "Your smile is my favourite place in the world",
+  "Being with you feels like home",
+  "You make everything brighter just by being there",
+  "I am so proud of the person you are",
+  "I choose you. Always. Without hesitation.",
+  "Happy 18th — here's to forever with you ♡"
+];
+
+const balloonColors = ['#c890b8','#d4a8c7','#9d6a95','#e8c4df','#b87fa8','#cc9abb','#a06090','#ddb3d0'];
+let popped = [];
+let poppedCount = 0;
+
+function unlockEdit() {
+  if (editMode) return;
+  let code = prompt("Enter 4-digit PIN to unlock editing:");
+  if (code === "1234") {
+    editMode = true;
+    document.querySelector('.edit-bar').style.display = 'flex';
+    document.querySelector('.lock-btn').style.display = 'none';
+    enableEditing();
+  } else {
+    alert("Incorrect PIN.");
+  }
+}
+
+function enableEditing() {
+  document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = true);
+  document.querySelectorAll('.add-btn').forEach(btn => btn.style.display = 'flex');
+}
+
+function initGame() {
+  popped = Array(8).fill(false);
+  poppedCount = 0;
+  document.getElementById('gameScore').textContent = '0 / 8';
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressLabel').textContent = 'pop all 8 to complete';
+  document.getElementById('gameComplete').classList.remove('show');
+  document.getElementById('gameComplete').style.display = 'none';
+  document.getElementById('msgReveal').innerHTML = '<div class="msg-placeholder">tap a balloon...</div>';
+  buildGrid();
+}
+
+function buildGrid() {
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'balloon-btn';
+    btn.id = 'balloon_' + i;
+    btn.style.animation = `float ${2.2 + i * 0.25}s ease-in-out infinite`;
+    btn.style.animationDelay = (i * 0.18) + 's';
+    btn.innerHTML = `
+      <div class="balloon-body-game" style="background:${balloonColors[i]};box-shadow:inset -3px -3px 0 rgba(0,0,0,0.12)">
+        <span class="balloon-num-game">${i + 1}</span>
+      </div>
+      <div class="balloon-string-game"></div>`;
+    btn.onclick = () => popBalloon(i);
+    grid.appendChild(btn);
+  }
+}
+
+function popBalloon(i) {
+  if (popped[i]) return;
+  popped[i] = true;
+  poppedCount++;
+
+  const btn = document.getElementById('balloon_' + i);
+  const body = btn.querySelector('.balloon-body-game');
+
+  const ring = document.createElement('div');
+  ring.className = 'burst-ring';
+  ring.style.borderColor = balloonColors[i];
+  body.appendChild(ring);
+  setTimeout(() => ring.remove(), 450);
+
+  btn.style.animation = 'none';
+  btn.style.transform = 'scale(0)';
+  btn.style.opacity = '0';
+  btn.style.transition = 'all 0.25s ease-out';
+  btn.style.pointerEvents = 'none';
+
+  playPop();
+
+  document.getElementById('msgReveal').innerHTML = `<div class="msg-text">"${balloonMessages[i]}"</div>`;
+  document.getElementById('gameScore').textContent = `${poppedCount} / 8`;
+  document.getElementById('progressFill').style.width = `${(poppedCount / 8) * 100}%`;
+
+  if (poppedCount === 8) {
+    setTimeout(() => {
+      document.getElementById('progressLabel').textContent = 'all messages revealed!';
+      document.getElementById('gameComplete').style.display = 'block';
+      setTimeout(() => document.getElementById('gameComplete').classList.add('show'), 50);
+      launchConfetti();
+    }, 600);
+  } else {
+    document.getElementById('progressLabel').textContent = `${8 - poppedCount} balloon${8 - poppedCount !== 1 ? 's' : ''} left`;
+  }
+}
+
+function playPop() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+    osc.start(); osc.stop(ctx.currentTime + 0.1);
+  } catch(e) {}
+}
+
+function buildCarousel() {
+  const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
+  const photoVersion = '59d05de1';
+  const photos = [`photo1.jpg?v=${photoVersion}`, `photo2.jpg?v=${photoVersion}`, '', '', ''];
+  for(let i=0;i<carSlides;i++){
+    const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
+    slide.onclick=()=>document.getElementById('fInput_'+i).click();
+    if (photos[i]) {
+      slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">
+        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
+    } else {
+      slide.innerHTML=`<div class="car-slide-label">tap to add a memory photo</div>
+        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
+    }
+    track.appendChild(slide);
+    const dot=document.createElement('div'); dot.className='car-dot'+(i===0?' active':'');
+    dot.onclick=()=>{carIdx=i;updateCar();}; dots.appendChild(dot);
+  }
+}
+
+function updateCar(){
+  document.getElementById('carTrack').style.transform=`translateX(-${carIdx*100}%)`;
+  document.querySelectorAll('.car-dot').forEach((d,i)=>d.className='car-dot'+(i===carIdx?' active':''));
+  document.getElementById('carCaption').textContent=carCaptions[carIdx];
+}
+
+function carMove(dir){carIdx=(carIdx+dir+carSlides)%carSlides;updateCar();}
+document.getElementById('carCaption').addEventListener('input',e=>{carCaptions[carIdx]=e.target.textContent;});
+
+function loadSlide(e,i){
+  const file=e.target.files[0]; if(!file)return;
+  const slide=document.getElementById('slide_'+i);
+  slide.innerHTML=`<img src="${URL.createObjectURL(file)}"><input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
+  slide.onclick=()=>document.getElementById('fInput_'+i).click();
+}
+
+function buildBalloonsDeco(){
+  const row=document.getElementById('balloonsRow');
+  const colors=['#c890b8','#d4a8c7','#b87fa8','#e8c4df','#9d6a95'];
+  const labels=['♡','♡','18','♡','♡'];
+  for(let i=0;i<5;i++){
+    const b=document.createElement('div'); b.className='balloon-deco';
+    b.style.animation=`float ${2.5+i*0.3}s ease-in-out infinite`; b.style.animationDelay=(i*0.2)+'s';
+    b.innerHTML=`<div class="balloon-deco-body" style="background:${colors[i]};box-shadow:inset -4px -4px 0 rgba(0,0,0,0.12);width:36px;height:44px"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:500;color:#fff">${labels[i]}</span></div><div class="balloon-deco-string"></div>`;
+    row.appendChild(b);
+  }
+}
+
+function loadHero(e){
+  const file=e.target.files[0]; if(!file)return;
+  const slot=document.getElementById('heroSlot');
+  slot.innerHTML=`<img src="${URL.createObjectURL(file)}">`;slot.onclick=null;
+}
+
+function togglePlay(){
+  const a=document.getElementById('audio');
+  if(!a.src||a.src===window.location.href){alert('Add a song — tap "edit song"!');return;}
+  const bars=document.querySelectorAll('.wbar');
+  if(playing){a.pause();bars.forEach(b=>b.style.animationPlayState='paused');}
+  else{a.play();bars.forEach(b=>b.style.animationPlayState='running');}
+  playing=!playing;
+}
+
+function revealSecret(){
+  if(secretUnlocked)return; secretUnlocked=true;
+  document.getElementById('secretLock').style.display='none';
+  document.getElementById('secretMsg').style.display='block';
+}
+
+function addReason(){
+  rcnt++;
+  const list=document.getElementById('reasonList');
+  const item=document.createElement('div'); item.className='reason-item';
+  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="${editMode}" spellcheck="false">write your reason here...</div>`;
+  list.appendChild(item); item.querySelector('.rtxt').focus();
+}
+
+function addPromise(){
+  const list=document.getElementById('promiseList');
+  const item=document.createElement('div'); item.className='promise-item';
+  item.innerHTML=`<div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="true" spellcheck="false">write your promise here...</div>`;
+  list.appendChild(item); item.querySelector('.ptxt').focus();
+}
+
+function launchConfetti(){
+  const canvas=document.getElementById('confettiCanvas'),ctx=canvas.getContext('2d'),W=360,H=700;
+  canvas.width=W;canvas.height=H;
+  if(confettiAnim)cancelAnimationFrame(confettiAnim);
+  const colors=['#c890b8','#fdf0f8','#d4a8c7','#e8c4df','#b87fa8','#ffffff','#f7c5e8','#ffe0f5'];
+  const pieces=[];
+  for(let i=0;i<120;i++){
+    pieces.push({x:Math.random()*W,y:-20-Math.random()*200,vx:(Math.random()-0.5)*3,vy:2+Math.random()*4,rot:Math.random()*360,rv:(Math.random()-0.5)*10,w:5+Math.random()*8,h:3+Math.random()*5,color:colors[Math.floor(Math.random()*colors.length)],alpha:1,shape:Math.random()>0.5?'rect':'circle'});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H); let alive=false;
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;
+      if(p.y>H+20)p.alpha=0;
+      if(p.alpha>0)alive=true;
+      ctx.save();ctx.globalAlpha=Math.max(0,p.alpha);ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;
+      if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      else ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    });
+    if(alive)confettiAnim=requestAnimationFrame(draw);else ctx.clearRect(0,0,W,H);
+  }
+  draw();
+}
+
+function openModal(type){
+  const wrap=document.getElementById('modalWrap'),sheet=document.getElementById('sheet');
+  wrap.classList.remove('hidden');
+  if(type==='details'){
+    sheet.innerHTML=`<h3>Edit details</h3>
+      <label>Her name</label><input id="e_name" value="${document.getElementById('hName').textContent}">
+      <label>Subtitle</label><input id="e_sub" value="${document.getElementById('hSub').textContent}">
+      <label>Your sign-off</label><input id="e_from" value="${document.getElementById('cFrom').textContent}">
+      <label>Birthday message</label><input id="e_msg" value="${document.getElementById('cMsg').textContent}">
+      <div class="sheet-actions"><button class="ebtn pri" onclick="saveDetails()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
+  } else if(type==='song'){
+    sheet.innerHTML=`<h3>Add your song</h3>
+      <label>Song title</label><input id="e_title" placeholder="e.g. Essence – Wizkid">
+      <label>Artist</label><input id="e_artist" placeholder="e.g. Wizkid ft. Tems">
+      <label>Upload mp3</label><input type="file" accept="audio/*" id="e_audio">
+      <div class="sheet-actions"><button class="ebtn pri" onclick="saveSong()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
+  } else if(type==='messages'){
+    let html=`<h3>Edit balloon messages</h3><p style="font-size:12px;color:#9d7a9b;margin-bottom:12px">Each message is revealed when she pops a balloon</p>`;
+    balloonMessages.forEach((m,i)=>{
+      html+=`<label>Balloon ${i+1}</label><input class="bmsg" data-i="${i}" value="${m}">`;
+    });
+    html+=`<div class="sheet-actions"><button class="ebtn pri" onclick="saveMessages()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
+    sheet.innerHTML=html;
+  }
+}
+
+function closeModal(){document.getElementById('modalWrap').classList.add('hidden');}
+
+function saveDetails(){
+  document.getElementById('hName').textContent=document.getElementById('e_name').value;
+  document.getElementById('hSub').textContent=document.getElementById('e_sub').value;
+  document.getElementById('cFrom').textContent=document.getElementById('e_from').value;
+  document.getElementById('cMsg').textContent=document.getElementById('e_msg').value;
+  closeModal();
+}
+
+function saveSong(){
+  const t=document.getElementById('e_title').value,a=document.getElementById('e_artist').value,f=document.getElementById('e_audio').files[0];
+  if(t)document.getElementById('sTitle').textContent=t;
+  if(a)document.getElementById('sArtist').textContent=a;
+  if(f)document.getElementById('audio').src=URL.createObjectURL(f);
+  closeModal();
+}
+
+function saveMessages(){
+  document.querySelectorAll('.bmsg').forEach((inp,i)=>{ balloonMessages[i]=inp.value; });
+  closeModal();
+  initGame();
+}
+
+function doShare(){
+  if(navigator.share)navigator.share({title:'Happy 18th Birthday Niki ♡',text:'A love letter just for you...'});
+  else alert('Screenshot or screen-record this to share with Niki!');
+}
+
+document.getElementById('modalWrap').addEventListener('click',e=>{if(e.target===document.getElementById('modalWrap'))closeModal();});
+
+buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
+setTimeout(launchConfetti, 500);
+
+// Disable editing initially
+document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = false);
+
+</script>
+</body>
+</html>
