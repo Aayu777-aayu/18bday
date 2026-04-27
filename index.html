@@ -1,3 +1,4 @@
+<h1>TEST UPDATE WORKING</h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,11 +180,27 @@
           <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.3s"></div>
         </div>
         <audio id="audio" src="song1.mp3"></audio>
+      
       </div>
     </div>
-    <div class="content">
+ <audio id="audio" src="song1.mp3"></audio>
 
-      <div class="sec-label">You finally 18 </div>
+  <script>
+    const audio = document.getElementById("audio");
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>
+    <div class="content">
+      <div class="sec-label">You finally 18! </div>
       <div class="balloons-hero" id="balloonsRow"></div>
 
       <div class="sec-label">pop the balloons</div>
@@ -268,105 +285,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="closing-txt" id="cMsg" contenteditable="false" spellcheck="false">Happy 18th, Niki</div>
         <div class="closing-from" id="cFrom" contenteditable="false" spellcheck="false">from your love</div>
       </div>
-
-    <!-- ===== SPIN THE WHEEL OF LOVE ===== -->
-<!-- Paste this block anywhere inside your app's .content div -->
-
-<div class="sec-label" style="margin-top:0">spin the wheel of love</div>
-<div style="background:#1a0f1f;border-radius:20px;padding:20px 16px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;font-family:'Inter',sans-serif;">
-  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#fdf0f8;margin-bottom:4px;">a little game for Niki ♡</div>
-  <div style="font-size:10px;color:rgba(212,168,199,0.5);letter-spacing:2px;margin-bottom:20px;">TAP TO SPIN</div>
-
-  <div style="position:relative;width:240px;height:240px;margin-bottom:8px;">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:20px solid #c890b8;z-index:10;"></div>
-    <canvas id="loveWheelCanvas" width="240" height="240" style="border-radius:50%;display:block;"></canvas>
-  </div>
-
-  <button id="loveWheelBtn" onclick="spinLoveWheel()" style="margin-top:16px;padding:11px 36px;background:rgba(200,144,184,0.15);color:#fdf0f8;border:0.5px solid rgba(212,168,199,0.4);border-radius:30px;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;letter-spacing:0.5px;">spin ✦</button>
-
-  <div id="loveWheelResult" style="margin-top:18px;width:240px;min-height:60px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(212,168,199,0.2);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 16px;text-align:center;">
-    <div id="loveWheelPlaceholder" style="font-size:10px;color:rgba(212,168,199,0.4);letter-spacing:2px;text-transform:uppercase;">waiting for a spin...</div>
-    <div id="loveWheelOut" style="display:none;">
-      <div id="loveWheelEmoji" style="font-size:26px;margin-bottom:6px;"></div>
-      <div id="loveWheelMsg" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#fdf0f8;line-height:1.5;"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-(function() {
-  const segs = [
-    { label:"kiss \uD83D\uDC8B",          color:"#c890b8", emoji:"\uD83D\uDC8B", msg:"give Niki a kiss right now!" },
-    { label:"hug \uD83E\uDD17",           color:"#9d6a95", emoji:"\uD83E\uDD17", msg:"wrap her in the tightest hug" },
-    { label:"cute message \uD83D\uDC8C",  color:"#d4a8c7", emoji:"\uD83D\uDC8C", msg:"send her the sweetest message" },
-    { label:"truth question \uD83C\uDF38",color:"#b87fa8", emoji:"\uD83C\uDF38", msg:"answer her truth question honestly" },
-    { label:"serenade \uD83C\uDFB5",      color:"#a06090", emoji:"\uD83C\uDFB5", msg:"sing or hum her favourite song" },
-    { label:"compliment \u2728",          color:"#e8c4df", emoji:"\u2728",        msg:"give her your best compliment" },
-    { label:"forehead kiss \uD83E\uDD70", color:"#cc9abb", emoji:"\uD83E\uDD70", msg:"sweet forehead kiss for her" },
-    { label:"dare \uD83C\uDF80",          color:"#7a4f78", emoji:"\uD83C\uDF80", msg:"she picks a dare for you!" }
-  ];
-  const cvs = document.getElementById('loveWheelCanvas');
-  const ctx = cvs.getContext('2d');
-  const cx=120,cy=120,r=116,N=segs.length;
-  let angle=0,spinning=false;
-
-  function draw(rot){
-    ctx.clearRect(0,0,240,240);
-    const arc=(2*Math.PI)/N;
-    segs.forEach((s,i)=>{
-      const st=rot+i*arc,en=st+arc;
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,st,en);ctx.closePath();
-      ctx.fillStyle=s.color;ctx.fill();
-      ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=1.5;ctx.stroke();
-      ctx.save();ctx.translate(cx,cy);ctx.rotate(st+arc/2);
-      ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,0.92)';
-      ctx.font='500 10px Inter,sans-serif';ctx.fillText(s.label,r-8,4);ctx.restore();
-    });
-    ctx.beginPath();ctx.arc(cx,cy,20,0,2*Math.PI);
-    ctx.fillStyle='#1a0f1f';ctx.fill();
-    ctx.strokeStyle='rgba(212,168,199,0.5)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='#fdf0f8';ctx.font='italic 12px Georgia,serif';ctx.textAlign='center';ctx.fillText('\u2665',cx,cy+4);
-  }
-
-  window.spinLoveWheel=function(){
-    if(spinning)return;
-    spinning=true;
-    document.getElementById('loveWheelBtn').disabled=true;
-    document.getElementById('loveWheelOut').style.display='none';
-    document.getElementById('loveWheelPlaceholder').style.display='block';
-    document.getElementById('loveWheelPlaceholder').textContent='spinning...';
-    const extra=(5+Math.random()*5)*2*Math.PI;
-    const target=angle+extra,dur=3500+Math.random()*800,t0=performance.now(),a0=angle;
-    function ease(t){return 1-Math.pow(1-t,4);}
-    function step(now){
-      const p=Math.min((now-t0)/dur,1);
-      angle=a0+(target-a0)*ease(p);draw(angle);
-      if(p<1){requestAnimationFrame(step);}
-      else{
-        angle=angle%(2*Math.PI);spinning=false;
-        document.getElementById('loveWheelBtn').disabled=false;
-        const arc2=(2*Math.PI)/N;
-        const norm=((3*Math.PI/2-angle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
-        const seg=segs[Math.floor(norm/arc2)%N];
-        document.getElementById('loveWheelPlaceholder').style.display='none';
-        const out=document.getElementById('loveWheelOut');
-        out.style.display='block';out.style.animation='none';void out.offsetWidth;out.style.animation='popIn 0.4s ease-out';
-        document.getElementById('loveWheelEmoji').textContent=seg.emoji;
-        document.getElementById('loveWheelMsg').textContent=seg.msg;
-      }
-    }
-    requestAnimationFrame(step);
-  };
-
-  draw(0);
-  if(!document.getElementById('popInStyle')){
-    const s=document.createElement('style');s.id='popInStyle';
-    s.textContent='@keyframes popIn{0%{transform:scale(0.7);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}';
-    document.head.appendChild(s);
-  }
-})();
-</script>
-<!-- ===== END SPIN THE WHEEL ===== -->
 
     </div>
   </div>
@@ -507,7 +425,8 @@ function playPop() {
 
 function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
-  const photos = ['photo1.jpg', 'photo2.jpg', '', '', ''];
+  const photoVersion = '59d05de1';
+  const photos = [`photo1.jpg?v=${photoVersion}`, `photo2.jpg?v=${photoVersion}`, '', '', ''];
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
     slide.onclick=()=>document.getElementById('fInput_'+i).click();
@@ -577,7 +496,7 @@ function addReason(){
   rcnt++;
   const list=document.getElementById('reasonList');
   const item=document.createElement('div'); item.className='reason-item';
-  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="${editMode}" spellcheck="false">write your reason here...</div>`;
+  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="false" spellcheck="false">write your reason here...</div>`;
   list.appendChild(item); item.querySelector('.rtxt').focus();
 }
 
