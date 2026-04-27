@@ -179,25 +179,8 @@
           <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.3s"></div>
         </div>
         <audio id="audio" src="song1.mp3"></audio>
-      
       </div>
     </div>
- <audio id="audio" src="song1.mp3"></audio>
-
-  <script>
-    const audio = document.getElementById("audio");
-
-    function togglePlay() {
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-  </script>
-
-</body>
-</html>
     <div class="content">
 
       <div class="sec-label">You finally 18 </div>
@@ -524,13 +507,18 @@ function playPop() {
 
 function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
-  const icons=['🌸','✨','🌙','💫','🎀'];
+  const photos = ['photo1.jpg', 'photo2.jpg', '', '', ''];
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
     slide.onclick=()=>document.getElementById('fInput_'+i).click();
-const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg'];
-slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">
-  <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;    track.appendChild(slide);
+    if (photos[i]) {
+      slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">
+        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
+    } else {
+      slide.innerHTML=`<div class="car-slide-label">tap to add a memory photo</div>
+        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
+    }
+    track.appendChild(slide);
     const dot=document.createElement('div'); dot.className='car-dot'+(i===0?' active':'');
     dot.onclick=()=>{carIdx=i;updateCar();}; dots.appendChild(dot);
   }
@@ -589,7 +577,7 @@ function addReason(){
   rcnt++;
   const list=document.getElementById('reasonList');
   const item=document.createElement('div'); item.className='reason-item';
-  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="false" spellcheck="false">write your reason here...</div>`;
+  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="${editMode}" spellcheck="false">write your reason here...</div>`;
   list.appendChild(item); item.querySelector('.rtxt').focus();
 }
 
