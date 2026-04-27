@@ -517,7 +517,7 @@ function buildCarousel() {
   ];
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
-    slide.onclick=()=>document.getElementById('fInput_'+i).click();
+    slide.onclick=()=>{ if(editMode) document.getElementById('fInput_'+i).click(); };
     if (photos[i]) {
       slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">
         <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
@@ -541,10 +541,11 @@ function carMove(dir){carIdx=(carIdx+dir+carSlides)%carSlides;updateCar();}
 document.getElementById('carCaption').addEventListener('input',e=>{carCaptions[carIdx]=e.target.textContent;});
 
 function loadSlide(e,i){
+  if(!editMode)return;
   const file=e.target.files[0]; if(!file)return;
   const slide=document.getElementById('slide_'+i);
   slide.innerHTML=`<img src="${URL.createObjectURL(file)}"><input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-  slide.onclick=()=>document.getElementById('fInput_'+i).click();
+  slide.onclick=()=>{ if(editMode) document.getElementById('fInput_'+i).click(); };
 }
 
 function buildBalloonsDeco(){
