@@ -83,8 +83,8 @@
 .carousel{margin-bottom:28px;position:relative;}
 .car-track-wrap{overflow:hidden;border-radius:14px;}
 .car-track{display:flex;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
-.car-slide{min-width:100%;aspect-ratio:4/3;background:#f5edf2;border-radius:14px;border:1px dashed #d4b8cb;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;}
-.car-slide img{width:100%;height:100%;object-fit:cover;}
+.car-slide{min-width:100%;aspect-ratio:4/3;background:#f5edf2;border-radius:14px;border:1px dashed #d4b8cb;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;position:relative;}
+.car-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#f5edf2;}
 .car-slide-label{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
 .car-caption{font-size:12px;font-style:italic;color:#7a5a78;text-align:center;margin-top:8px;min-height:18px;outline:none;}
 .car-caption:focus{background:#fff9fd;border-radius:6px;padding:2px 8px;}
@@ -408,13 +408,12 @@ function playPop() {
 function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
   const photoVersion = '59d05de1';
-  const photoBase = window.location.pathname.includes('/birthday-site/') ? '' : 'birthday-site/';
   const photos = [
-    `${photoBase}photo1.jpg?v=${photoVersion}`,
-    `${photoBase}photo2.jpg?v=${photoVersion}`,
-    `${photoBase}photo3.jpg?v=${photoVersion}`,
-    `${photoBase}photo4.jpg?v=${photoVersion}`,
-    `${photoBase}photo5.jpg?v=${photoVersion}`
+    `photo1.jpg?v=${photoVersion}`,
+    `photo2.jpg?v=${photoVersion}`,
+    `photo3.jpg?v=${photoVersion}`,
+    `photo4.jpg?v=${photoVersion}`,
+    `photo5.jpg?v=${photoVersion}`
   ];
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
