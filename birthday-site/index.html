@@ -80,33 +80,21 @@
 .replay-btn{margin-top:14px;padding:9px 22px;background:rgba(200,144,184,0.2);border:0.5px solid rgba(212,168,199,0.4);border-radius:20px;color:#fdf0f8;font-size:12px;cursor:pointer;font-family:inherit;}
 .replay-btn:hover{background:rgba(200,144,184,0.35);}
 
-.memory-gallery{margin-bottom:28px;background:#fff;border:0.5px solid #ead9e4;border-radius:18px;overflow:hidden;}
-.memory-post-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:0.5px solid #f0e4ec;}
-.memory-author{display:flex;align-items:center;gap:10px;}
-.memory-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#e8c4df,#c890b8);padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.memory-avatar-inner{width:100%;height:100%;border-radius:50%;background:#fff;color:#b87fa8;font-family:'Playfair Display',serif;font-size:14px;display:flex;align-items:center;justify-content:center;}
-.memory-name{font-size:13px;color:#4a2e48;font-weight:500;}
-.memory-subline{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#b87fa8;margin-top:2px;}
-.memory-stage{position:relative;background:#f7f2f6;}
+.memory-gallery{margin-bottom:28px;background:#fff;border:0.5px solid #ead9e4;border-radius:18px;padding:16px;}
+.memory-stage{position:relative;background:#f7f2f6;border-radius:16px;border:1px dashed #d4b8cb;overflow:hidden;margin-bottom:12px;}
 .memory-frame{height:clamp(320px,72vw,460px);background:#f5edf2;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:16px;}
 .memory-frame.is-editable{cursor:pointer;}
 .memory-media{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .memory-frame img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block;border-radius:12px;box-shadow:0 10px 24px rgba(61,31,58,0.08);}
 .memory-empty{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
-.memory-actions{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 8px;}
-.memory-action-icons{display:flex;align-items:center;gap:12px;color:#7a5a78;font-size:15px;}
+.memory-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px;}
 .memory-count{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b87fa8;white-space:nowrap;}
-.car-caption{font-size:13px;line-height:1.7;color:#5a3d58;outline:none;display:block;padding:0 16px 16px;text-align:left;}
+.car-caption{font-size:13px;line-height:1.7;color:#5a3d58;outline:none;display:block;padding:0 4px;text-align:left;flex:1;}
 .car-caption:focus{background:#fff9fd;border-radius:6px;padding:2px 8px;}
 .memory-dots{display:flex;align-items:center;justify-content:center;gap:6px;flex:1;}
 .memory-dot{width:7px;height:7px;border-radius:50%;background:#e5cfdd;cursor:pointer;transition:transform 0.2s,background 0.2s;}
 .memory-dot.active{background:#b87fa8;transform:scale(1.15);}
-.memory-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:0 16px 16px;}
-.memory-thumb{aspect-ratio:1;border:1px solid #ead9e4;border-radius:12px;background:#f5edf2;overflow:hidden;padding:0;cursor:pointer;position:relative;}
-.memory-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.memory-thumb.active{border-color:#b87fa8;box-shadow:0 0 0 2px rgba(184,127,168,0.18);}
-.memory-thumb-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b09ab8;padding:8px;text-align:center;}
-.car-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.92);border:0.5px solid #e7d7e1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:#7a5a78;z-index:2;box-shadow:0 8px 20px rgba(61,31,58,0.08);}
+.car-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.94);border:0.5px solid #e7d7e1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#7a5a78;z-index:2;box-shadow:0 8px 20px rgba(61,31,58,0.08);}
 .car-nav.prev{left:12px;}
 .car-nav.next{right:12px;}
 @media (max-width: 420px) {
@@ -140,6 +128,7 @@
 .closing{background:#1a0f1f;border-radius:16px;padding:26px 22px;text-align:center;margin-bottom:28px;}
 .closing-txt{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:#fdf0f8;margin-bottom:6px;outline:none;}
 .closing-from{font-size:11px;color:#c890b8;letter-spacing:1px;outline:none;}
+.site-signature{font-size:11px;color:#a884a1;text-align:center;margin:-10px 0 24px;letter-spacing:0.3px;}
 .share-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#2c1a2e;color:#fdf0f8;border:none;border-radius:12px;font-size:13px;cursor:pointer;margin-bottom:12px;font-family:inherit;}
 .share-btn:hover{background:#3d2640;}
 
@@ -232,31 +221,16 @@
       <div class="sec-label">our memories</div>
   
       <div class="memory-gallery" id="carouselWrap">
-        <div class="memory-post-head">
-          <div class="memory-author">
-            <div class="memory-avatar"><div class="memory-avatar-inner">N</div></div>
-            <div>
-              <div class="memory-name">Niki</div>
-              <div class="memory-subline">memories with you</div>
-            </div>
-          </div>
-          <div style="color:#b87fa8;font-size:18px;line-height:1">...</div>
-        </div>
         <div class="memory-stage">
           <button class="car-nav prev" onclick="carMove(-1)">&#8249;</button>
           <button class="car-nav next" onclick="carMove(1)">&#8250;</button>
           <div class="memory-frame" id="carTrack"></div>
         </div>
         <div class="memory-actions">
-          <div class="memory-action-icons">
-            <span>&#9825;</span>
-            <span>&#9993;</span>
-          </div>
           <div class="memory-dots" id="carPagination"></div>
           <div class="memory-count" id="carCount">1 / 5</div>
         </div>
         <div class="car-caption" id="carCaption" contenteditable="false" spellcheck="false">add a caption for this memory...</div>
-        <div class="memory-strip" id="carDots"></div>
       </div>
 
       <div class="sec-label">a letter for you</div>
@@ -304,6 +278,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="closing-txt" id="cMsg" contenteditable="false" spellcheck="false">Happy 18th, Niki</div>
         <div class="closing-from" id="cFrom" contenteditable="false" spellcheck="false">from your love</div>
       </div>
+      <div class="site-signature">made with ❤️ by Aaryan (Aayu)</div>
     </div>
   </div>
 
@@ -443,7 +418,7 @@ function playPop() {
 }
 
 function buildCarousel() {
-  const track=document.getElementById('carTrack'), dots=document.getElementById('carDots'), pagination=document.getElementById('carPagination');
+  const track=document.getElementById('carTrack'), pagination=document.getElementById('carPagination');
   const photoVersion = '59d05de1';
   const photoBase = window.location.pathname.includes('/birthday-site/') ? '' : 'birthday-site/';
   carouselPhotos = [
@@ -454,17 +429,8 @@ function buildCarousel() {
     `${photoBase}photo5.jpg?v=${photoVersion}`
   ];
   track.innerHTML = '';
-  dots.innerHTML = '';
   pagination.innerHTML = '';
   for(let i=0;i<carSlides;i++){
-    const thumb=document.createElement('button');
-    thumb.className='memory-thumb'+(i===carIdx?' active':'');
-    thumb.type='button';
-    thumb.onclick=()=>{carIdx=i;updateCar();};
-    thumb.innerHTML = carouselPhotos[i]
-      ? `<img src="${carouselPhotos[i]}" alt="Memory ${i + 1}">`
-      : `<div class="memory-thumb-empty">add photo</div>`;
-    dots.appendChild(thumb);
     const dot=document.createElement('button');
     dot.className='memory-dot'+(i===carIdx?' active':'');
     dot.type='button';
@@ -484,7 +450,6 @@ function updateCar(){
   frame.onclick = () => {
     if(editMode) document.getElementById(`fInput_${carIdx}`).click();
   };
-  document.querySelectorAll('.memory-thumb').forEach((d,i)=>d.className='memory-thumb'+(i===carIdx?' active':''));
   document.querySelectorAll('.memory-dot').forEach((d,i)=>d.className='memory-dot'+(i===carIdx?' active':''));
   document.getElementById('carCaption').textContent=carCaptions[carIdx];
   document.getElementById('carCount').textContent=`${carIdx + 1} / ${carSlides}`;
@@ -497,8 +462,6 @@ function loadSlide(e,i){
   if(!editMode)return;
   const file=e.target.files[0]; if(!file)return;
   carouselPhotos[i] = URL.createObjectURL(file);
-  const thumb = document.querySelectorAll('.memory-thumb')[i];
-  if (thumb) thumb.innerHTML = `<img src="${carouselPhotos[i]}" alt="Memory ${i + 1}">`;
   updateCar();
 }
 
