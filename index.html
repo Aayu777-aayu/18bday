@@ -80,17 +80,21 @@
 .replay-btn{margin-top:14px;padding:9px 22px;background:rgba(200,144,184,0.2);border:0.5px solid rgba(212,168,199,0.4);border-radius:20px;color:#fdf0f8;font-size:12px;cursor:pointer;font-family:inherit;}
 .replay-btn:hover{background:rgba(200,144,184,0.35);}
 
-.carousel{margin-bottom:28px;position:relative;}
-.car-track-wrap{overflow:hidden;border-radius:14px;aspect-ratio:4/3;background:#f5edf2;}
-.car-track{display:flex;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
-.car-slide{min-width:100%;height:100%;background:#f5edf2;border-radius:14px;border:1px dashed #d4b8cb;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;padding:12px;}
-.car-slide img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#f5edf2;border-radius:10px;}
-.car-slide-label{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
-.car-caption{font-size:12px;font-style:italic;color:#7a5a78;text-align:center;margin-top:8px;min-height:18px;outline:none;}
+.memory-gallery{margin-bottom:28px;background:#fff;border:0.5px solid #ead9e4;border-radius:18px;padding:16px;}
+.memory-stage{position:relative;margin-bottom:14px;}
+.memory-frame{aspect-ratio:4/3;border-radius:16px;border:1px dashed #d4b8cb;background:#f5edf2;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:12px;}
+.memory-frame.is-editable{cursor:pointer;}
+.memory-frame img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:12px;display:block;}
+.memory-empty{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
+.memory-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+.memory-count{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b87fa8;white-space:nowrap;}
+.car-caption{font-size:12px;font-style:italic;color:#7a5a78;text-align:right;min-height:18px;outline:none;flex:1;}
 .car-caption:focus{background:#fff9fd;border-radius:6px;padding:2px 8px;}
-.car-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
-.car-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.2s;cursor:pointer;}
-.car-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
+.memory-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.memory-thumb{aspect-ratio:1;border:1px solid #ead9e4;border-radius:12px;background:#f5edf2;overflow:hidden;padding:0;cursor:pointer;position:relative;}
+.memory-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.memory-thumb.active{border-color:#b87fa8;box-shadow:0 0 0 2px rgba(184,127,168,0.18);}
+.memory-thumb-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b09ab8;padding:8px;text-align:center;}
 .car-nav{position:absolute;top:42%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);border:0.5px solid #e0c8d8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#7a5a78;z-index:2;}
 .car-nav.prev{left:6px;}
 .car-nav.next{right:6px;}
@@ -213,14 +217,17 @@
 
       <div class="sec-label">our memories</div>
   
-      <div class="carousel" id="carouselWrap">
+      <div class="memory-gallery" id="carouselWrap">
+        <div class="memory-stage">
         <button class="car-nav prev" onclick="carMove(-1)">&#8249;</button>
         <button class="car-nav next" onclick="carMove(1)">&#8250;</button>
-        <div class="car-track-wrap">
-          <div class="car-track" id="carTrack"></div>
+          <div class="memory-frame" id="carTrack"></div>
         </div>
-        <div class="car-dots" id="carDots"></div>
-        <div class="car-caption" id="carCaption" contenteditable="false" spellcheck="false">add a caption for this memory...</div>
+        <div class="memory-meta">
+          <div class="memory-count" id="carCount">1 / 5</div>
+          <div class="car-caption" id="carCaption" contenteditable="false" spellcheck="false">add a caption for this memory...</div>
+        </div>
+        <div class="memory-strip" id="carDots"></div>
       </div>
 
       <div class="sec-label">a letter for you</div>
@@ -387,6 +394,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 
 <script>
 let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
+let carouselPhotos = [];
 const carCaptions=Array(carSlides).fill('add a caption for this memory...');
 
 let balloonMessages = [
@@ -509,33 +517,41 @@ function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
   const photoVersion = '59d05de1';
   const photoBase = window.location.pathname.includes('/birthday-site/') ? '' : 'birthday-site/';
-  const photos = [
+  carouselPhotos = [
     `${photoBase}photo1.jpg?v=${photoVersion}`,
     `${photoBase}photo2.jpg?v=${photoVersion}`,
     `${photoBase}photo3.jpg?v=${photoVersion}`,
     `${photoBase}photo4.jpg?v=${photoVersion}`,
     `${photoBase}photo5.jpg?v=${photoVersion}`
   ];
+  track.innerHTML = '';
+  dots.innerHTML = '';
   for(let i=0;i<carSlides;i++){
-    const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
-    slide.onclick=()=>{ if(editMode) document.getElementById('fInput_'+i).click(); };
-    if (photos[i]) {
-      slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:14px">
-        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-    } else {
-      slide.innerHTML=`<div class="car-slide-label">tap to add a memory photo</div>
-        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-    }
-    track.appendChild(slide);
-    const dot=document.createElement('div'); dot.className='car-dot'+(i===0?' active':'');
-    dot.onclick=()=>{carIdx=i;updateCar();}; dots.appendChild(dot);
+    const thumb=document.createElement('button');
+    thumb.className='memory-thumb'+(i===carIdx?' active':'');
+    thumb.type='button';
+    thumb.onclick=()=>{carIdx=i;updateCar();};
+    thumb.innerHTML = carouselPhotos[i]
+      ? `<img src="${carouselPhotos[i]}" alt="Memory ${i + 1}">`
+      : `<div class="memory-thumb-empty">add photo</div>`;
+    dots.appendChild(thumb);
   }
+  updateCar();
 }
 
 function updateCar(){
-  document.getElementById('carTrack').style.transform=`translateX(-${carIdx*100}%)`;
-  document.querySelectorAll('.car-dot').forEach((d,i)=>d.className='car-dot'+(i===carIdx?' active':''));
+  const frame = document.getElementById('carTrack');
+  const photo = carouselPhotos[carIdx];
+  frame.classList.toggle('is-editable', editMode);
+  frame.innerHTML = photo
+    ? `<img src="${photo}" alt="Memory ${carIdx + 1}"><input type="file" accept="image/*" class="hidden" id="fInput_${carIdx}" onchange="loadSlide(event,${carIdx})">`
+    : `<div class="memory-empty">tap to add a memory photo</div><input type="file" accept="image/*" class="hidden" id="fInput_${carIdx}" onchange="loadSlide(event,${carIdx})">`;
+  frame.onclick = () => {
+    if(editMode) document.getElementById(`fInput_${carIdx}`).click();
+  };
+  document.querySelectorAll('.memory-thumb').forEach((d,i)=>d.className='memory-thumb'+(i===carIdx?' active':''));
   document.getElementById('carCaption').textContent=carCaptions[carIdx];
+  document.getElementById('carCount').textContent=`${carIdx + 1} / ${carSlides}`;
 }
 
 function carMove(dir){carIdx=(carIdx+dir+carSlides)%carSlides;updateCar();}
@@ -544,9 +560,10 @@ document.getElementById('carCaption').addEventListener('input',e=>{carCaptions[c
 function loadSlide(e,i){
   if(!editMode)return;
   const file=e.target.files[0]; if(!file)return;
-  const slide=document.getElementById('slide_'+i);
-  slide.innerHTML=`<img src="${URL.createObjectURL(file)}" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:14px"><input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-  slide.onclick=()=>{ if(editMode) document.getElementById('fInput_'+i).click(); };
+  carouselPhotos[i] = URL.createObjectURL(file);
+  const thumb = document.querySelectorAll('.memory-thumb')[i];
+  if (thumb) thumb.innerHTML = `<img src="${carouselPhotos[i]}" alt="Memory ${i + 1}">`;
+  updateCar();
 }
 
 function buildBalloonsDeco(){
