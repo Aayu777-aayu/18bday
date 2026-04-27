@@ -508,7 +508,13 @@ function playPop() {
 function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
   const photoVersion = '59d05de1';
-  const photos = [`photo1.jpg?v=${photoVersion}`, `photo2.jpg?v=${photoVersion}`, '', '', ''];
+  const photos = [
+    `photo1.jpg?v=${photoVersion}`,
+    `photo2.jpg?v=${photoVersion}`,
+    `photo3.jpg?v=${photoVersion}`,
+    `photo4.jpg?v=${photoVersion}`,
+    `photo5.jpg?v=${photoVersion}`
+  ];
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
     slide.onclick=()=>document.getElementById('fInput_'+i).click();
