@@ -194,6 +194,24 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .mini-game-btn:hover{background:rgba(200,144,184,0.28);transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,144,184,0.20);}
 .mini-game-btn:active{transform:scale(0.97);}
 
+.wheel-card{background:linear-gradient(180deg,#1f1323 0%,#180f1d 100%);border:1px solid rgba(212,168,199,0.18);border-radius:24px;padding:24px 18px 20px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;box-shadow:var(--shadow-soft);}
+.wheel-kicker{font-size:10px;color:rgba(212,168,199,0.55);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.wheel-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:6px;}
+.wheel-sub{font-size:12px;color:rgba(212,168,199,0.62);text-align:center;line-height:1.6;max-width:240px;margin-bottom:20px;}
+.wheel-stage{position:relative;width:280px;height:280px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;}
+.wheel-pointer{position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:24px solid #f3d0e6;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.18));z-index:3;}
+.wheel-ring{position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 10px rgba(255,255,255,0.03),0 18px 40px rgba(0,0,0,0.22);pointer-events:none;}
+#loveWheelCanvas{width:280px;height:280px;border-radius:50%;display:block;}
+.wheel-spin-btn{margin-top:4px;padding:12px 34px;background:#f0d2e3;color:#241327;border:none;border-radius:999px;font-size:15px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;letter-spacing:0.2px;transition:transform 0.35s var(--ease-apple),box-shadow 0.35s var(--ease-apple),background 0.35s var(--ease-apple);}
+.wheel-spin-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(240,210,227,0.18);background:#f6deeb;}
+.wheel-spin-btn:active{transform:scale(0.97);}
+.wheel-spin-btn:disabled{opacity:0.55;cursor:not-allowed;box-shadow:none;}
+.wheel-result{margin-top:18px;width:100%;max-width:280px;min-height:86px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,199,0.16);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;backdrop-filter:blur(10px);}
+.wheel-placeholder{font-size:10px;color:rgba(212,168,199,0.42);letter-spacing:2px;text-transform:uppercase;}
+.wheel-out{display:none;}
+.wheel-emoji{font-size:28px;margin-bottom:6px;}
+.wheel-msg{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#fdf0f8;line-height:1.55;}
+
 .word-page{position:fixed;inset:0;z-index:4900;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
 .word-page.show{opacity:1;pointer-events:auto;}
 .word-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
@@ -434,22 +452,21 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 <!-- Paste this block anywhere inside your app's .content div -->
 
 <div class="sec-label" style="margin-top:0">spin the wheel of love</div>
-<div style="background:#1a0f1f;border-radius:20px;padding:20px 16px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;font-family:'Inter',sans-serif;">
-  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#fdf0f8;margin-bottom:4px;">a little game for Niki ♡</div>
-  <div style="font-size:10px;color:rgba(212,168,199,0.5);letter-spacing:2px;margin-bottom:20px;">TAP TO SPIN</div>
-
-  <div style="position:relative;width:240px;height:240px;margin-bottom:8px;">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:20px solid #c890b8;z-index:10;"></div>
-    <canvas id="loveWheelCanvas" width="240" height="240" style="border-radius:50%;display:block;"></canvas>
+<div class="wheel-card">
+  <div class="wheel-kicker">little date-night chaos</div>
+  <div class="wheel-title">spin the wheel of love</div>
+  <div class="wheel-sub">let fate pick the next cute thing you have to do for Niki.</div>
+  <div class="wheel-stage">
+    <div class="wheel-pointer"></div>
+    <div class="wheel-ring"></div>
+    <canvas id="loveWheelCanvas" width="280" height="280"></canvas>
   </div>
-
-  <button id="loveWheelBtn" onclick="spinLoveWheel()" style="margin-top:16px;padding:11px 36px;background:rgba(200,144,184,0.15);color:#fdf0f8;border:0.5px solid rgba(212,168,199,0.4);border-radius:30px;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;letter-spacing:0.5px;">spin ✦</button>
-
-  <div id="loveWheelResult" style="margin-top:18px;width:240px;min-height:60px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(212,168,199,0.2);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 16px;text-align:center;">
-    <div id="loveWheelPlaceholder" style="font-size:10px;color:rgba(212,168,199,0.4);letter-spacing:2px;text-transform:uppercase;">waiting for a spin...</div>
-    <div id="loveWheelOut" style="display:none;">
-      <div id="loveWheelEmoji" style="font-size:26px;margin-bottom:6px;"></div>
-      <div id="loveWheelMsg" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#fdf0f8;line-height:1.5;"></div>
+  <button id="loveWheelBtn" class="wheel-spin-btn" onclick="spinLoveWheel()">spin ✦</button>
+  <div id="loveWheelResult" class="wheel-result">
+    <div id="loveWheelPlaceholder" class="wheel-placeholder">waiting for a spin...</div>
+    <div id="loveWheelOut" class="wheel-out">
+      <div id="loveWheelEmoji" class="wheel-emoji"></div>
+      <div id="loveWheelMsg" class="wheel-msg"></div>
     </div>
   </div>
 </div>
@@ -468,25 +485,31 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   ];
   const cvs = document.getElementById('loveWheelCanvas');
   const ctx = cvs.getContext('2d');
-  const cx=120,cy=120,r=116,N=segs.length;
+  const cx=140,cy=140,r=132,N=segs.length;
   let angle=0,spinning=false;
 
   function draw(rot){
-    ctx.clearRect(0,0,240,240);
+    ctx.clearRect(0,0,280,280);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx,cy,r+2,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,0.03)';
+    ctx.fill();
+    ctx.restore();
     const arc=(2*Math.PI)/N;
     segs.forEach((s,i)=>{
       const st=rot+i*arc,en=st+arc;
       ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,st,en);ctx.closePath();
       ctx.fillStyle=s.color;ctx.fill();
-      ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.strokeStyle='rgba(255,255,255,0.16)';ctx.lineWidth=1.2;ctx.stroke();
       ctx.save();ctx.translate(cx,cy);ctx.rotate(st+arc/2);
-      ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,0.92)';
-      ctx.font='500 10px Inter,sans-serif';ctx.fillText(s.label,r-8,4);ctx.restore();
+      ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,0.94)';
+      ctx.font='500 11px Inter,sans-serif';ctx.fillText(s.label,r-16,4);ctx.restore();
     });
-    ctx.beginPath();ctx.arc(cx,cy,20,0,2*Math.PI);
+    ctx.beginPath();ctx.arc(cx,cy,26,0,2*Math.PI);
     ctx.fillStyle='#1a0f1f';ctx.fill();
-    ctx.strokeStyle='rgba(212,168,199,0.5)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='#fdf0f8';ctx.font='italic 12px Georgia,serif';ctx.textAlign='center';ctx.fillText('\u2665',cx,cy+4);
+    ctx.strokeStyle='rgba(240,210,227,0.5)';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.fillStyle='#fdf0f8';ctx.font='italic 15px Georgia,serif';ctx.textAlign='center';ctx.fillText('\u2665',cx,cy+5);
   }
 
   window.spinLoveWheel=function(){
