@@ -10,6 +10,8 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
+body.gate-locked{overflow:hidden;background:#0d0814;}
+#siteContent{min-height:100vh;background:#fdf8f5;}
 .wrap{width:360px;margin:0 auto;background:#fdf8f5;border-radius:36px;border:1.5px solid #e8ddd5;overflow:hidden;font-family:'Inter',sans-serif;position:relative;}
 @media (max-width: 768px) {
   .wrap { width: 100%; border-radius: 0; border: none; }
@@ -146,9 +148,63 @@
 .msg-edit-item input{flex:1;}
 .msg-edit-item span{font-size:14px;color:#b87fa8;cursor:pointer;padding:4px;}
 .hidden{display:none;}
+
+#gate{position:fixed;inset:0;z-index:9999;background:#0d0814;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease,transform 0.8s ease;}
+#gate.unlocking{opacity:0;transform:scale(1.05);pointer-events:none;}
+.gate-wrap{width:min(320px,calc(100vw - 32px));text-align:center;position:relative;z-index:1;}
+.gate-petals{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.petal{position:absolute;width:5px;height:8px;border-radius:50%;opacity:0.12;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:0}10%{opacity:0.15}90%{opacity:0.08}100%{transform:translateY(105vh) rotate(360deg);opacity:0}}
+.gate-icon{font-size:14px;letter-spacing:4px;color:rgba(212,168,199,0.3);margin-bottom:32px;}
+.gate-title{font-family:'Playfair Display',serif;font-style:italic;font-size:28px;color:#fdf0f8;line-height:1.2;margin-bottom:8px;}
+.gate-sub{font-size:11px;color:rgba(212,168,199,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;}
+.gate-hint{font-size:13px;color:rgba(212,168,199,0.5);font-family:'Playfair Display',serif;font-style:italic;margin-bottom:20px;min-height:22px;transition:all 0.3s;}
+.input-wrap{position:relative;margin-bottom:14px;}
+.gate-input{width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(212,168,199,0.2);border-radius:16px;padding:15px 50px 15px 20px;font-size:16px;color:#fdf0f8;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:2px;text-align:center;outline:none;transition:border-color 0.2s,background 0.2s;}
+.gate-input::placeholder{color:rgba(212,168,199,0.25);font-size:13px;letter-spacing:1px;}
+.gate-input:focus{border-color:#c890b8;background:rgba(255,255,255,0.06);}
+.gate-input.wrong{border-color:#e88a8a;animation:shake 0.35s ease-out;}
+.gate-input.right{border-color:#a0e8c0;background:rgba(100,220,160,0.06);}
+.eye-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(212,168,199,0.4);font-size:16px;padding:4px;transition:color 0.2s;}
+.eye-btn:hover{color:#c890b8;}
+.gate-btn{width:100%;padding:14px;background:rgba(200,144,184,0.12);border:0.5px solid rgba(212,168,199,0.3);border-radius:16px;color:#fdf0f8;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
+.gate-btn:hover{background:rgba(200,144,184,0.22);border-color:#c890b8;transform:scale(1.02);}
+.gate-btn:active{transform:scale(0.98);}
+.gate-feedback{margin-top:16px;font-size:11px;min-height:18px;transition:all 0.3s;letter-spacing:0.5px;}
+.gate-feedback.err{color:#e88a8a;}
+.gate-feedback.ok{color:#a0e8c0;}
+.tries-row{display:flex;justify-content:center;gap:10px;margin-top:18px;}
+.try-dot{width:7px;height:7px;border-radius:50%;background:rgba(212,168,199,0.15);transition:all 0.3s;}
+.try-dot.fail{background:#e88a8a;}
+.unlock-particle{position:fixed;pointer-events:none;z-index:10000;font-size:14px;animation:burstUp 0.9s ease-out forwards;}
+@keyframes burstUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.5)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 </style>
 </head>
-<body>
+<body class="gate-locked">
+<div id="gate">
+  <div class="gate-petals" id="petals"></div>
+  <div class="gate-wrap">
+    <div class="gate-icon">♡ &nbsp; ♡ &nbsp; ♡</div>
+    <div class="gate-title">this page was made<br>for one person</div>
+    <div class="gate-sub">enter the password to continue</div>
+    <div class="gate-hint" id="gateHint">what's our special word? 🌸</div>
+    <div class="input-wrap">
+      <input class="gate-input" id="gateInput" type="password" placeholder="enter password..." autocomplete="off" spellcheck="false">
+      <button class="eye-btn" id="eyeBtn" type="button" onclick="toggleEye()" title="show/hide">👁</button>
+    </div>
+    <button class="gate-btn" type="button" onclick="tryPassword()">enter ✦</button>
+    <div class="gate-feedback" id="gateFeedback"></div>
+    <div class="tries-row" id="triesRow">
+      <div class="try-dot" id="td0"></div>
+      <div class="try-dot" id="td1"></div>
+      <div class="try-dot" id="td2"></div>
+      <div class="try-dot" id="td3"></div>
+      <div class="try-dot" id="td4"></div>
+    </div>
+  </div>
+</div>
+<div id="siteContent">
 <div class="wrap" id="mainWrap">
   <div class="confetti-overlay">
     <canvas id="confettiCanvas" width="360" height="700"></canvas>
@@ -379,10 +435,22 @@ Watching you grow into who you are has been one of the greatest gifts of my life
     <div class="sheet" id="sheet"></div>
   </div>
 </div>
+</div>
 
 <script>
 let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
 const carCaptions=Array(carSlides).fill('add a caption for this memory...');
+const PASSWORD = "niki";
+const HINT_TEXT = "what's our special word? 🌸";
+const WRONG_MSGS = [
+  "hmm, not quite... try again 💭",
+  "still not right — think of us 🌸",
+  "one more clue: it's something only she'd know",
+  "getting warmer... 🔥",
+  "check the spelling maybe? 👀"
+];
+let gateTries = 0;
+let eyeOpen = false;
 
 let balloonMessages = [
   "You are the best thing that ever happened to me",
@@ -664,10 +732,107 @@ function doShare(){
   else alert('Screenshot or screen-record this to share with Niki!');
 }
 
+function initPasswordGate() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gateInput');
+  const petals = document.getElementById('petals');
+  if (!gate || !input || !petals) return;
+
+  document.getElementById('gateHint').textContent = HINT_TEXT;
+
+  for (let i = 0; i < 20; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.style.left = `${Math.random() * 100}%`;
+    petal.style.background = Math.random() > 0.5 ? '#d4a8c7' : '#f5c5e0';
+    petal.style.animationDuration = `${6 + Math.random() * 9}s`;
+    petal.style.animationDelay = `${Math.random() * 12}s`;
+    petals.appendChild(petal);
+  }
+
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter') tryPassword();
+    input.classList.remove('wrong');
+  });
+
+  input.focus();
+}
+
+function toggleEye() {
+  eyeOpen = !eyeOpen;
+  const input = document.getElementById('gateInput');
+  const eyeBtn = document.getElementById('eyeBtn');
+  if (!input || !eyeBtn) return;
+  input.type = eyeOpen ? 'text' : 'password';
+  eyeBtn.textContent = eyeOpen ? '🙈' : '👁';
+}
+
+function tryPassword() {
+  const input = document.getElementById('gateInput');
+  const feedback = document.getElementById('gateFeedback');
+  if (!input || !feedback) return;
+  const val = input.value.trim().toLowerCase();
+  if (!val) return;
+
+  if (val === PASSWORD.toLowerCase()) {
+    unlockSite();
+    return;
+  }
+
+  gateTries++;
+  input.classList.add('wrong');
+  setTimeout(() => input.classList.remove('wrong'), 400);
+  if (gateTries <= 5) {
+    document.getElementById(`td${gateTries - 1}`)?.classList.add('fail');
+  }
+  feedback.className = 'gate-feedback err';
+  feedback.textContent = WRONG_MSGS[Math.min(gateTries - 1, WRONG_MSGS.length - 1)];
+}
+
+function unlockSite() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gateInput');
+  const feedback = document.getElementById('gateFeedback');
+  if (!gate || !input || !feedback) return;
+
+  input.classList.add('right');
+  feedback.className = 'gate-feedback ok';
+  feedback.textContent = 'welcome ♡';
+  spawnGateParticles();
+
+  setTimeout(() => {
+    gate.classList.add('unlocking');
+    document.body.classList.remove('gate-locked');
+    setTimeout(() => {
+      gate.style.display = 'none';
+    }, 900);
+  }, 700);
+}
+
+function spawnGateParticles() {
+  const emojis = ['♡', '✨', '🌸', '💫', '🎀'];
+  const gate = document.getElementById('gate');
+  if (!gate) return;
+  const rect = gate.getBoundingClientRect();
+  for (let i = 0; i < 18; i++) {
+    setTimeout(() => {
+      const particle = document.createElement('div');
+      particle.className = 'unlock-particle';
+      particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      particle.style.left = `${rect.width * 0.2 + Math.random() * rect.width * 0.6}px`;
+      particle.style.top = `${rect.height * 0.4 + Math.random() * rect.height * 0.2}px`;
+      particle.style.animationDelay = `${Math.random() * 0.3}s`;
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1000);
+    }, i * 40);
+  }
+}
+
 document.getElementById('modalWrap').addEventListener('click',e=>{if(e.target===document.getElementById('modalWrap'))closeModal();});
 
 buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
 setTimeout(launchConfetti, 500);
+initPasswordGate();
 
 // Disable editing initially
 document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = false);
