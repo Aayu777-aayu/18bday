@@ -201,6 +201,65 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .fade-up{animation:fadeUp 0.6s ease-out forwards;}
 @keyframes fadeUp{0%{transform:translateY(20px);opacity:0}100%{transform:translateY(0);opacity:1}}
 
+.mini-game-card{background:#1a0f1f;border-radius:18px;padding:22px 20px;margin-bottom:28px;text-align:center;}
+.mini-game-title{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#fdf0f8;margin-bottom:8px;}
+.mini-game-sub{font-size:12px;color:rgba(212,168,199,0.6);line-height:1.7;margin-bottom:16px;}
+.mini-game-btn{padding:11px 22px;border:none;border-radius:999px;background:rgba(200,144,184,0.18);border:0.5px solid rgba(212,168,199,0.35);color:#fdf0f8;font-size:13px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;}
+.mini-game-btn:hover{background:rgba(200,144,184,0.28);}
+
+.word-page{position:fixed;inset:0;z-index:4900;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.35s ease;overflow:auto;}
+.word-page.show{opacity:1;pointer-events:auto;}
+.word-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
+.word-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(13,8,20,0.72);backdrop-filter:blur(12px);color:#fdf0f8;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:0.5px solid rgba(212,168,199,0.3);}
+.word-back-btn:hover{background:rgba(24,15,31,0.86);}
+.word-game{width:min(340px,100%);}
+.word-top-bar{background:#1a0f1f;border-radius:20px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.word-top-title{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#fdf0f8;}
+.word-top-stats{display:flex;gap:12px;}
+.word-stat{text-align:center;}
+.word-stat-n{font-family:'Playfair Display',serif;font-size:18px;color:#c890b8;line-height:1;}
+.word-stat-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,168,199,0.4);margin-top:2px;}
+.word-grid-wrap{background:#1a0f1f;border-radius:20px;padding:14px;margin-bottom:12px;position:relative;}
+.word-grid{display:grid;gap:3px;}
+.word-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;cursor:default;transition:all 0.15s;position:relative;user-select:none;}
+.word-cell.letter{background:rgba(255,255,255,0.06);border:0.5px solid rgba(212,168,199,0.15);color:#fdf0f8;cursor:pointer;}
+.word-cell.letter:hover{background:rgba(200,144,184,0.15);border-color:rgba(212,168,199,0.4);}
+.word-cell.selected{background:rgba(200,144,184,0.25);border-color:#c890b8;color:#fdf0f8;transform:scale(1.05);}
+.word-cell.found{background:rgba(200,144,184,0.12);border-color:rgba(200,144,184,0.3);color:#c890b8;}
+.word-cell.found-flash{background:#c890b8;color:#1a0f1f;transform:scale(1.08);}
+.word-cell.hint-flash{background:rgba(255,200,100,0.2);border-color:rgba(255,200,100,0.5);}
+.word-sel-bar{background:#1a0f1f;border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;min-height:48px;gap:12px;}
+.word-sel-letters{font-family:'Playfair Display',serif;font-size:20px;color:#fdf0f8;letter-spacing:4px;min-width:120px;}
+.word-sel-placeholder{font-size:11px;color:rgba(212,168,199,0.3);letter-spacing:2px;text-transform:uppercase;}
+.word-sel-actions{display:flex;gap:8px;}
+.word-action-btn{padding:7px 16px;border:0.5px solid rgba(212,168,199,0.25);border-radius:20px;background:transparent;color:rgba(212,168,199,0.7);font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;white-space:nowrap;}
+.word-action-btn:hover{border-color:#c890b8;color:#fdf0f8;}
+.word-submit-btn{background:rgba(200,144,184,0.2);border-color:#c890b8;color:#fdf0f8;}
+.word-submit-btn:hover{background:#c890b8;color:#1a0f1f;}
+.word-submit-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.word-words-panel{background:#1a0f1f;border-radius:20px;padding:16px;margin-bottom:12px;}
+.word-words-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(212,168,199,0.4);margin-bottom:12px;}
+.word-words-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.word-chip{padding:8px 12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(212,168,199,0.1);border-radius:10px;font-size:12px;color:rgba(212,168,199,0.3);letter-spacing:1px;text-align:center;transition:all 0.3s;font-family:'Playfair Display',serif;font-style:italic;}
+.word-chip.found{background:rgba(200,144,184,0.1);border-color:rgba(200,144,184,0.3);color:#c890b8;text-decoration:line-through;}
+.word-msg-bar{background:#1a0f1f;border-radius:14px;padding:10px 16px;margin-bottom:12px;text-align:center;min-height:38px;display:flex;align-items:center;justify-content:center;}
+.word-msg-txt{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:#c890b8;transition:all 0.3s;}
+.word-msg-txt.correct{color:#a0e8c0;}
+.word-msg-txt.wrong{color:#e88a8a;}
+.word-bottom-btns{display:flex;gap:8px;}
+.word-bot-btn{flex:1;padding:11px;border:0.5px solid rgba(212,168,199,0.2);border-radius:14px;background:transparent;color:rgba(212,168,199,0.6);font-size:12px;cursor:pointer;font-family:'Playfair Display',serif;font-style:italic;transition:all 0.15s;}
+.word-bot-btn:hover{border-color:#c890b8;color:#fdf0f8;background:rgba(200,144,184,0.08);}
+.word-complete-screen{display:none;background:#1a0f1f;border-radius:20px;padding:32px 24px;text-align:center;margin-bottom:12px;}
+.word-complete-screen.show{display:block;}
+.word-comp-emoji{font-size:40px;margin-bottom:12px;}
+.word-comp-title{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:#fdf0f8;margin-bottom:8px;}
+.word-comp-sub{font-size:12px;color:rgba(212,168,199,0.6);line-height:1.7;margin-bottom:20px;}
+.word-comp-score{font-family:'Playfair Display',serif;font-size:36px;color:#c890b8;margin-bottom:4px;}
+.word-comp-score-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,168,199,0.4);margin-bottom:20px;}
+.word-new-btn{padding:12px 32px;background:#c890b8;color:#1a0f1f;border:none;border-radius:14px;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;transition:all 0.15s;}
+.word-new-btn:hover{background:#d4a8c7;transform:scale(1.03);}
+@keyframes wordShakeRow{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
 #gate{position:fixed;top:0;right:0;bottom:0;left:0;width:100vw;height:100vh;height:100dvh;min-height:100vh;z-index:9999;background:#0d0814;display:flex;align-items:center;justify-content:center;padding:24px 16px calc(24px + env(safe-area-inset-bottom));transition:opacity 0.8s ease,transform 0.8s ease;overflow:hidden;}
 #gate.unlocking{opacity:0;transform:scale(1.05);pointer-events:none;}
 .gate-wrap{width:min(320px,calc(100vw - 32px));text-align:center;position:relative;z-index:1;}
@@ -369,6 +428,13 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       </div>
       <button class="add-btn" onclick="addPromise()">+ add a promise</button>
 
+      <div class="sec-label">play something cute</div>
+      <div class="mini-game-card">
+        <div class="mini-game-title">romantic word hunt</div>
+        <div class="mini-game-sub">find the hidden words and see how many sweet ones you can catch.</div>
+        <button class="mini-game-btn" type="button" onclick="openWordGame()">open word game ✦</button>
+      </div>
+
       <div class="closing">
         <div style="font-size:20px;letter-spacing:6px;margin-bottom:10px;color:#fdf0f8">♡ ♡ ♡</div>
         <div class="closing-txt" id="cMsg" contenteditable="false" spellcheck="false">Happy 18th, Niki</div>
@@ -530,6 +596,49 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   </div>
 </div>
 
+<div class="word-page hidden" id="wordPage">
+  <button class="word-back-btn" type="button" onclick="closeWordGame()">← back</button>
+  <div class="word-shell">
+    <div class="word-game" id="wordGame">
+      <div class="word-top-bar">
+        <div class="word-top-title">word hunt</div>
+        <div class="word-top-stats">
+          <div class="word-stat"><div class="word-stat-n" id="wordFoundCount">0</div><div class="word-stat-l">found</div></div>
+          <div class="word-stat"><div class="word-stat-n" id="wordTotalCount">0</div><div class="word-stat-l">total</div></div>
+          <div class="word-stat"><div class="word-stat-n" id="wordScoreNum">0</div><div class="word-stat-l">score</div></div>
+        </div>
+      </div>
+      <div class="word-grid-wrap">
+        <div class="word-grid" id="wordGrid"></div>
+      </div>
+      <div class="word-sel-bar" id="wordSelBar">
+        <div id="wordSelDisplay"><div class="word-sel-placeholder">tap letters to spell a word</div></div>
+        <div class="word-sel-actions">
+          <button class="word-action-btn" type="button" onclick="wordClearSel()">clear</button>
+          <button class="word-action-btn word-submit-btn" id="wordSubmitBtn" type="button" onclick="wordSubmit()" disabled>submit</button>
+        </div>
+      </div>
+      <div class="word-msg-bar"><div class="word-msg-txt" id="wordMsgTxt">find all the romantic words hidden in the grid</div></div>
+      <div class="word-words-panel">
+        <div class="word-words-title">words to find</div>
+        <div class="word-words-grid" id="wordWordsGrid"></div>
+      </div>
+      <div class="word-complete-screen" id="wordCompleteScreen">
+        <div class="word-comp-emoji">🌸</div>
+        <div class="word-comp-title">you found them all!</div>
+        <div class="word-comp-sub" id="wordCompSub">every word was hiding in there for you</div>
+        <div class="word-comp-score" id="wordCompScore">0</div>
+        <div class="word-comp-score-lbl">total score</div>
+        <button class="word-new-btn" type="button" onclick="wordNewGame()">play again</button>
+      </div>
+      <div class="word-bottom-btns">
+        <button class="word-bot-btn" type="button" onclick="wordHint()">hint</button>
+        <button class="word-bot-btn" type="button" onclick="wordNewGame()">new game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
 const carCaptions=Array(carSlides).fill('add a caption for this memory...');
@@ -557,6 +666,15 @@ const eggMaxAttempts = 3;
 let eggFireworks = [];
 let eggFireworksRunning = false;
 let eggFireworksTimer = null;
+const WORD_BANK = [
+  {w:'LOVE',pts:4},{w:'KISS',pts:4},{w:'NIKI',pts:4},{w:'HEART',pts:5},{w:'ADORE',pts:5},{w:'SWEET',pts:5},
+  {w:'BLISS',pts:5},{w:'CHARM',pts:5},{w:'BABE',pts:4},{w:'FLAME',pts:5},{w:'HONEY',pts:5},{w:'DREAM',pts:5},
+  {w:'ANGEL',pts:5},{w:'CHERISH',pts:7},{w:'DEVOTION',pts:8},{w:'SOULMATE',pts:8},{w:'FOREVER',pts:7},
+  {w:'TENDER',pts:6},{w:'WARMTH',pts:6},{w:'EMBRACE',pts:7}
+];
+const WORD_SIZE = 9;
+const WORD_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
+let wordGridData = [], wordFound = new Set(), wordScore = 0, wordSelected = [], wordTargets = [], wordHintUsed = new Set();
 
 let balloonMessages = [
   "You are the best thing that ever happened to me",
@@ -763,6 +881,22 @@ function closeEasterEgg() {
   if (video) video.pause();
   resetEasterEgg();
   setTimeout(() => eggPage.classList.add('hidden'), 350);
+}
+
+function openWordGame() {
+  const page = document.getElementById('wordPage');
+  if (!page) return;
+  page.classList.remove('hidden');
+  requestAnimationFrame(() => page.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWordGame() {
+  const page = document.getElementById('wordPage');
+  if (!page) return;
+  page.classList.remove('show');
+  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  setTimeout(() => page.classList.add('hidden'), 350);
 }
 
 function addReason(){
@@ -1068,6 +1202,216 @@ function stopEggFireworks() {
   }
 }
 
+function wordNewGame() {
+  wordGridData = Array.from({length:WORD_SIZE}, () => Array(WORD_SIZE).fill(''));
+  wordFound.clear();
+  wordScore = 0;
+  wordSelected = [];
+  wordHintUsed.clear();
+  const shuffled = [...WORD_BANK].sort(() => Math.random() - 0.5);
+  wordTargets = shuffled.slice(0, 8);
+  wordTargets.forEach(({w}) => wordPlaceWord(w));
+  wordFillGrid();
+  wordRender();
+  document.getElementById('wordCompleteScreen').classList.remove('show');
+  wordSetMsg('find all the romantic words hidden in the grid', '');
+  document.getElementById('wordTotalCount').textContent = wordTargets.length;
+  document.getElementById('wordFoundCount').textContent = 0;
+  document.getElementById('wordScoreNum').textContent = 0;
+}
+
+function wordPlaceWord(word) {
+  let placed = false;
+  let tries = 0;
+  while (!placed && tries < 200) {
+    tries++;
+    const dir = WORD_DIRS[Math.floor(Math.random() * WORD_DIRS.length)];
+    const r = Math.floor(Math.random() * WORD_SIZE);
+    const c = Math.floor(Math.random() * WORD_SIZE);
+    let fits = true;
+    const cells = [];
+    for (let i = 0; i < word.length; i++) {
+      const nr = r + dir[0] * i;
+      const nc = c + dir[1] * i;
+      if (nr < 0 || nr >= WORD_SIZE || nc < 0 || nc >= WORD_SIZE) { fits = false; break; }
+      if (wordGridData[nr][nc] && wordGridData[nr][nc] !== word[i]) { fits = false; break; }
+      cells.push([nr, nc]);
+    }
+    if (fits) {
+      cells.forEach(([nr, nc], i) => wordGridData[nr][nc] = word[i]);
+      placed = true;
+    }
+  }
+}
+
+function wordFillGrid() {
+  const alpha = 'ABCDEFGHIJKLMNOPRSTUW';
+  for (let r = 0; r < WORD_SIZE; r++) {
+    for (let c = 0; c < WORD_SIZE; c++) {
+      if (!wordGridData[r][c]) wordGridData[r][c] = alpha[Math.floor(Math.random() * alpha.length)];
+    }
+  }
+}
+
+function wordRender() {
+  const el = document.getElementById('wordGrid');
+  el.style.gridTemplateColumns = `repeat(${WORD_SIZE}, 1fr)`;
+  el.innerHTML = '';
+  for (let r = 0; r < WORD_SIZE; r++) {
+    for (let c = 0; c < WORD_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'word-cell letter';
+      cell.textContent = wordGridData[r][c];
+      cell.id = `word-cell-${r}-${c}`;
+      if (wordIsCellFound(r, c)) cell.classList.add('found');
+      else if (wordSelected.some(s => s[0] === r && s[1] === c)) cell.classList.add('selected');
+      cell.addEventListener('click', () => wordToggleCell(r, c));
+      el.appendChild(cell);
+    }
+  }
+  const wg = document.getElementById('wordWordsGrid');
+  wg.innerHTML = '';
+  wordTargets.forEach(({w}) => {
+    const chip = document.createElement('div');
+    chip.className = 'word-chip' + (wordFound.has(w) ? ' found' : '');
+    chip.textContent = wordFound.has(w) ? w : `${w.length} letters`;
+    chip.id = 'word-chip-' + w;
+    wg.appendChild(chip);
+  });
+}
+
+function wordIsCellFound(r, c) {
+  for (const w of wordFound) {
+    const cells = wordGetCells(w);
+    if (cells && cells.some(([wr, wc]) => wr === r && wc === c)) return true;
+  }
+  return false;
+}
+
+function wordGetCells(word) {
+  for (let r = 0; r < WORD_SIZE; r++) {
+    for (let c = 0; c < WORD_SIZE; c++) {
+      for (const dir of WORD_DIRS) {
+        let match = true;
+        const cells = [];
+        for (let i = 0; i < word.length; i++) {
+          const nr = r + dir[0] * i;
+          const nc = c + dir[1] * i;
+          if (nr < 0 || nr >= WORD_SIZE || nc < 0 || nc >= WORD_SIZE || wordGridData[nr][nc] !== word[i]) { match = false; break; }
+          cells.push([nr, nc]);
+        }
+        if (match) return cells;
+      }
+    }
+  }
+  return null;
+}
+
+function wordToggleCell(r, c) {
+  if (wordIsCellFound(r, c)) return;
+  const idx = wordSelected.findIndex(s => s[0] === r && s[1] === c);
+  if (idx !== -1) wordSelected.splice(idx, 1);
+  else wordSelected.push([r, c]);
+  wordUpdateSelection();
+  wordRefreshCells();
+}
+
+function wordUpdateSelection() {
+  const sd = document.getElementById('wordSelDisplay');
+  const btn = document.getElementById('wordSubmitBtn');
+  if (wordSelected.length === 0) {
+    sd.innerHTML = '<div class="word-sel-placeholder">tap letters to spell a word</div>';
+    btn.disabled = true;
+  } else {
+    const word = wordSelected.map(([r, c]) => wordGridData[r][c]).join('');
+    sd.innerHTML = `<div class="word-sel-letters">${word}</div>`;
+    btn.disabled = false;
+  }
+}
+
+function wordRefreshCells() {
+  for (let r = 0; r < WORD_SIZE; r++) {
+    for (let c = 0; c < WORD_SIZE; c++) {
+      const cell = document.getElementById(`word-cell-${r}-${c}`);
+      if (!cell) continue;
+      cell.className = 'word-cell letter';
+      if (wordIsCellFound(r, c)) cell.classList.add('found');
+      else if (wordSelected.some(s => s[0] === r && s[1] === c)) cell.classList.add('selected');
+    }
+  }
+}
+
+function wordClearSel() {
+  wordSelected = [];
+  wordUpdateSelection();
+  wordRefreshCells();
+}
+
+function wordSubmit() {
+  const word = wordSelected.map(([r, c]) => wordGridData[r][c]).join('');
+  const match = wordTargets.find(({w}) => w === word);
+  if (match && !wordFound.has(word)) {
+    wordFound.add(word);
+    const pts = match.pts + (wordHintUsed.has(word) ? 0 : 2);
+    wordScore += pts;
+    document.getElementById('wordScoreNum').textContent = wordScore;
+    document.getElementById('wordFoundCount').textContent = wordFound.size;
+    const cells = wordGetCells(word);
+    if (cells) {
+      cells.forEach(([r, c]) => {
+        const cell = document.getElementById(`word-cell-${r}-${c}`);
+        if (cell) {
+          cell.classList.add('found-flash');
+          setTimeout(() => { cell.classList.remove('found-flash'); cell.classList.add('found'); }, 400);
+        }
+      });
+    }
+    const chip = document.getElementById('word-chip-' + word);
+    if (chip) setTimeout(() => { chip.classList.add('found'); chip.textContent = word; }, 300);
+    const msgs = ['beautiful! ♡','yes! that one!','you found it!','lovely! ♡','perfect! ✨'];
+    wordSetMsg(msgs[Math.floor(Math.random() * msgs.length)], 'correct');
+    wordSelected = [];
+    wordUpdateSelection();
+    wordRefreshCells();
+    if (wordFound.size === wordTargets.length) setTimeout(wordShowComplete, 800);
+  } else if (wordFound.has(word)) {
+    wordSetMsg('already found that one!', 'wrong');
+  } else {
+    wordSetMsg('not in the list — keep looking', 'wrong');
+    const bar = document.getElementById('wordSelBar');
+    bar.style.animation = 'wordShakeRow 0.3s ease-out';
+    setTimeout(() => { bar.style.animation = ''; }, 400);
+  }
+}
+
+function wordHint() {
+  const remaining = wordTargets.filter(({w}) => !wordFound.has(w));
+  if (!remaining.length) return;
+  const {w} = remaining[Math.floor(Math.random() * remaining.length)];
+  const cells = wordGetCells(w);
+  if (!cells) return;
+  wordHintUsed.add(w);
+  const [r, c] = cells[Math.floor(Math.random() * cells.length)];
+  const cell = document.getElementById(`word-cell-${r}-${c}`);
+  if (cell) {
+    cell.classList.add('hint-flash');
+    setTimeout(() => cell.classList.remove('hint-flash'), 1200);
+  }
+  wordSetMsg(`hint: look for a ${w.length}-letter word`, '');
+}
+
+function wordShowComplete() {
+  document.getElementById('wordCompleteScreen').classList.add('show');
+  document.getElementById('wordCompScore').textContent = wordScore;
+}
+
+function wordSetMsg(text, type) {
+  const el = document.getElementById('wordMsgTxt');
+  el.textContent = text;
+  el.className = 'word-msg-txt' + (type ? ` ${type}` : '');
+  if (type) setTimeout(() => { el.className = 'word-msg-txt'; }, 2000);
+}
+
 function initPasswordGate() {
   const gate = document.getElementById('gate');
   const input = document.getElementById('gateInput');
@@ -1172,6 +1516,7 @@ setTimeout(launchConfetti, 500);
 initPasswordGate();
 initEasterEgg();
 resizeEggFireworks();
+wordNewGame();
 
 // Disable editing initially
 document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = false);
