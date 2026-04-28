@@ -683,10 +683,26 @@ let eggFireworks = [];
 let eggFireworksRunning = false;
 let eggFireworksTimer = null;
 const WORD_BANK = [
-  {w:'LOVE',pts:4},{w:'KISS',pts:4},{w:'NIKI',pts:4},{w:'HEART',pts:5},{w:'ADORE',pts:5},{w:'SWEET',pts:5},
-  {w:'BLISS',pts:5},{w:'CHARM',pts:5},{w:'BABE',pts:4},{w:'FLAME',pts:5},{w:'HONEY',pts:5},{w:'DREAM',pts:5},
-  {w:'ANGEL',pts:5},{w:'CHERISH',pts:7},{w:'DEVOTION',pts:8},{w:'SOULMATE',pts:8},{w:'FOREVER',pts:7},
-  {w:'TENDER',pts:6},{w:'WARMTH',pts:6},{w:'EMBRACE',pts:7}
+  {w:'LOVE',pts:4,hint:'the biggest feeling in the whole site'},
+  {w:'KISS',pts:4,hint:'a tiny romantic gesture'},
+  {w:'NIKI',pts:4,hint:'the birthday girl herself'},
+  {w:'HEART',pts:5,hint:'where all the feelings live'},
+  {w:'ADORE',pts:5,hint:'love deeply and tenderly'},
+  {w:'SWEET',pts:5,hint:'gentle, cute, and full of sugar'},
+  {w:'BLISS',pts:5,hint:'pure happiness'},
+  {w:'CHARM',pts:5,hint:'that special pull someone has'},
+  {w:'BABE',pts:4,hint:'a cute nickname'},
+  {w:'FLAME',pts:5,hint:'a spark that keeps burning'},
+  {w:'HONEY',pts:5,hint:'a classic pet name'},
+  {w:'DREAM',pts:5,hint:'something beautiful you hope for'},
+  {w:'ANGEL',pts:5,hint:'someone who feels heaven-sent'},
+  {w:'CHERISH',pts:7,hint:'to hold someone close and dearly'},
+  {w:'DEVOTION',pts:8,hint:'steady, loyal love'},
+  {w:'SOULMATE',pts:8,hint:'the person who feels made for you'},
+  {w:'FOREVER',pts:7,hint:'the longest promise'},
+  {w:'TENDER',pts:6,hint:'soft, caring, and gentle'},
+  {w:'WARMTH',pts:6,hint:'the feeling of comfort and closeness'},
+  {w:'EMBRACE',pts:7,hint:'another word for a loving hug'}
 ];
 const WORD_SIZE = 9;
 const WORD_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
@@ -810,22 +826,24 @@ function playPop() {
 
 function buildCarousel() {
   const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
-  const photoVersion = '59d05de1';
-  const photos = [`photo1.jpg?v=${photoVersion}`, `photo2.jpg?v=${photoVersion}`, '', '', ''];
+  const base = getCarouselPhotoBase();
+  const photoVersion = 'carousel-v1';
+  const photos = [1,2,3,4,5].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
+  track.innerHTML = '';
+  dots.innerHTML = '';
   for(let i=0;i<carSlides;i++){
     const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
     slide.onclick=()=>document.getElementById('fInput_'+i).click();
-    if (photos[i]) {
-      slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">
-        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-    } else {
-      slide.innerHTML=`<div class="car-slide-label">tap to add a memory photo</div>
-        <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-    }
+    slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="Memory photo ${i+1}">
+      <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
     track.appendChild(slide);
     const dot=document.createElement('div'); dot.className='car-dot'+(i===0?' active':'');
     dot.onclick=()=>{carIdx=i;updateCar();}; dots.appendChild(dot);
   }
+}
+
+function getCarouselPhotoBase() {
+  return window.location.pathname.includes('/birthday-site/') ? '' : 'birthday-site/';
 }
 
 function updateCar(){
@@ -1287,10 +1305,10 @@ function wordRender() {
   }
   const wg = document.getElementById('wordWordsGrid');
   wg.innerHTML = '';
-  wordTargets.forEach(({w}) => {
+  wordTargets.forEach(({w,hint}) => {
     const chip = document.createElement('div');
     chip.className = 'word-chip' + (wordFound.has(w) ? ' found' : '');
-    chip.textContent = wordFound.has(w) ? w : `${w.length} letters`;
+    chip.textContent = wordFound.has(w) ? w : hint;
     chip.id = 'word-chip-' + w;
     wg.appendChild(chip);
   });
@@ -1403,7 +1421,7 @@ function wordSubmit() {
 function wordHint() {
   const remaining = wordTargets.filter(({w}) => !wordFound.has(w));
   if (!remaining.length) return;
-  const {w} = remaining[Math.floor(Math.random() * remaining.length)];
+  const {w,hint} = remaining[Math.floor(Math.random() * remaining.length)];
   const cells = wordGetCells(w);
   if (!cells) return;
   wordHintUsed.add(w);
@@ -1413,7 +1431,7 @@ function wordHint() {
     cell.classList.add('hint-flash');
     setTimeout(() => cell.classList.remove('hint-flash'), 1200);
   }
-  wordSetMsg(`hint: look for a ${w.length}-letter word`, '');
+  wordSetMsg(`hint: ${hint}`, '');
 }
 
 function wordShowComplete() {
