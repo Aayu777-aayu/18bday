@@ -90,22 +90,12 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .replay-btn{margin-top:14px;padding:9px 22px;background:rgba(200,144,184,0.2);border:0.5px solid rgba(212,168,199,0.4);border-radius:20px;color:#fdf0f8;font-size:12px;cursor:pointer;font-family:inherit;}
 .replay-btn:hover{background:rgba(200,144,184,0.35);}
 
-.carousel{margin-bottom:28px;position:relative;}
-.car-track-wrap{overflow:hidden;border-radius:14px;}
-.car-track{display:flex;transition:transform 0.7s var(--ease-apple);}
-.car-slide{min-width:100%;aspect-ratio:4/3;background:#f5edf2;border-radius:14px;border:1px dashed #d4b8cb;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;}
-.car-slide img{width:100%;height:100%;object-fit:contain;background:#f5edf2;}
-.car-slide-label{font-size:12px;color:#b09ab8;text-align:center;line-height:1.6;padding:0 20px;}
-.car-caption{font-size:12px;font-style:italic;color:#7a5a78;text-align:center;margin-top:8px;min-height:18px;outline:none;}
-.car-caption:focus{background:#fff9fd;border-radius:6px;padding:2px 8px;}
-.car-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
-.car-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.35s var(--ease-apple);cursor:pointer;}
-.car-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
-.car-nav{position:absolute;top:42%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);border:0.5px solid #e0c8d8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#7a5a78;z-index:2;transition:transform 0.35s var(--ease-apple),background 0.35s var(--ease-apple),box-shadow 0.35s var(--ease-apple);}
-.car-nav.prev{left:6px;}
-.car-nav.next{right:6px;}
-.car-nav:hover{transform:translateY(-50%) scale(1.08);background:#fff;box-shadow:0 8px 18px rgba(34,20,32,0.10);}
-.car-nav:active{transform:translateY(-50%) scale(0.95);}
+.slideshow{margin-bottom:28px;}
+.slide-frame{position:relative;aspect-ratio:4/3;border-radius:14px;border:1px solid #ead9e4;background:#f5edf2;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);}
+.slide-frame img{width:100%;height:100%;object-fit:contain;background:#f5edf2;transition:opacity 0.6s var(--ease-apple);}
+.slide-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
+.slide-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.35s var(--ease-apple);}
+.slide-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
 @media (max-width: 420px) {
   .memory-frame{height:380px;padding:12px;}
 }
@@ -404,14 +394,11 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 
       <div class="sec-label">our memories</div>
   
-      <div class="carousel" id="carouselWrap">
-        <button class="car-nav prev" onclick="carMove(-1)">&#8249;</button>
-        <button class="car-nav next" onclick="carMove(1)">&#8250;</button>
-        <div class="car-track-wrap">
-          <div class="car-track" id="carTrack"></div>
+      <div class="slideshow" id="carouselWrap">
+        <div class="slide-frame">
+          <img id="slideImage" src="" alt="Memory slideshow photo">
         </div>
-        <div class="car-dots" id="carDots"></div>
-        <div class="car-caption" id="carCaption" contenteditable="false" spellcheck="false">add a caption for this memory...</div>
+        <div class="slide-dots" id="slideDots"></div>
       </div>
 
       <div class="sec-label">a letter for you</div>
@@ -665,8 +652,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 
 <script>
-let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
-const carCaptions=Array(carSlides).fill('add a caption for this memory...');
+let carIdx=0, carSlides=5, carTimer=null, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
 const PASSWORD = "ammu";
 const HINT_TEXT = "who's birthday is it? 🎂";
 const WRONG_MSGS = [
@@ -834,41 +820,40 @@ function playPop() {
 }
 
 function buildCarousel() {
-  const track=document.getElementById('carTrack'), dots=document.getElementById('carDots');
+  const image = document.getElementById('slideImage');
+  const dots = document.getElementById('slideDots');
   const base = getCarouselPhotoBase();
-  const photoVersion = 'carousel-v1';
+  const photoVersion = 'slideshow-v1';
   const photos = [1,2,3,4,5].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
-  track.innerHTML = '';
+  image.src = photos[0];
   dots.innerHTML = '';
-  for(let i=0;i<carSlides;i++){
-    const slide=document.createElement('div'); slide.className='car-slide'; slide.id='slide_'+i;
-    slide.onclick=()=>document.getElementById('fInput_'+i).click();
-    slide.innerHTML=`<img src="${photos[i]}" style="width:100%;height:100%;object-fit:contain;background:#f5edf2;border-radius:14px" alt="Memory photo ${i+1}">
-      <input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-    track.appendChild(slide);
-    const dot=document.createElement('div'); dot.className='car-dot'+(i===0?' active':'');
-    dot.onclick=()=>{carIdx=i;updateCar();}; dots.appendChild(dot);
+  for (let i = 0; i < carSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(dot);
   }
+  if (carTimer) clearInterval(carTimer);
+  carTimer = setInterval(() => {
+    carIdx = (carIdx + 1) % carSlides;
+    updateCar();
+  }, 3000);
 }
 
 function getCarouselPhotoBase() {
   return window.location.pathname.includes('/birthday-site/') ? '' : 'birthday-site/';
 }
 
-function updateCar(){
-  document.getElementById('carTrack').style.transform=`translateX(-${carIdx*100}%)`;
-  document.querySelectorAll('.car-dot').forEach((d,i)=>d.className='car-dot'+(i===carIdx?' active':''));
-  document.getElementById('carCaption').textContent=carCaptions[carIdx];
-}
-
-function carMove(dir){carIdx=(carIdx+dir+carSlides)%carSlides;updateCar();}
-document.getElementById('carCaption').addEventListener('input',e=>{carCaptions[carIdx]=e.target.textContent;});
-
-function loadSlide(e,i){
-  const file=e.target.files[0]; if(!file)return;
-  const slide=document.getElementById('slide_'+i);
-  slide.innerHTML=`<img src="${URL.createObjectURL(file)}" style="width:100%;height:100%;object-fit:contain;background:#f5edf2;border-radius:14px"><input type="file" accept="image/*" class="hidden" id="fInput_${i}" onchange="loadSlide(event,${i})">`;
-  slide.onclick=()=>document.getElementById('fInput_'+i).click();
+function updateCar() {
+  const base = getCarouselPhotoBase();
+  const photoVersion = 'slideshow-v1';
+  const photos = [1,2,3,4,5].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
+  const image = document.getElementById('slideImage');
+  image.style.opacity = '0.35';
+  setTimeout(() => {
+    image.src = photos[carIdx];
+    image.style.opacity = '1';
+  }, 140);
+  document.querySelectorAll('.slide-dot').forEach((d, i) => d.className = 'slide-dot' + (i === carIdx ? ' active' : ''));
 }
 
 function buildBalloonsDeco(){
