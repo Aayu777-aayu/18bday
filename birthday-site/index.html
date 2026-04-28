@@ -152,7 +152,7 @@ html.gate-locked,body.gate-locked{overflow:hidden;height:100%;background:#0d0814
 .egg-page{position:fixed;inset:0;z-index:5000;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.35s ease;}
 .egg-page.show{opacity:1;pointer-events:auto;}
 .egg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 0.3s ease;}
-.egg-page.solved .egg-video.ready{opacity:1;}
+.egg-video.ready{opacity:1;}
 .egg-backdrop{position:absolute;inset:0;background:
   linear-gradient(rgba(13,8,20,0.58), rgba(13,8,20,0.82)),
   radial-gradient(circle at top, rgba(200,144,184,0.18), transparent 45%),
@@ -486,7 +486,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 
 <div class="egg-page hidden" id="eggPage">
-  <video class="egg-video" id="eggVideo" autoplay muted loop playsinline></video>
+  <video class="egg-video" id="eggVideo" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
   <div class="egg-backdrop"></div>
   <canvas id="eggFireworks"></canvas>
   <button class="egg-back-btn" type="button" onclick="closeEasterEgg()">← back</button>
@@ -869,7 +869,16 @@ function initEasterEgg() {
   input.addEventListener('keydown', event => {
     if (event.key === 'Enter') checkEggAnswer();
   });
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+  video.preload = 'auto';
   video.src = getEasterVideoPath();
+  video.load();
   video.addEventListener('canplay', () => video.classList.add('ready'));
   video.addEventListener('loadeddata', () => video.classList.add('ready'));
   video.addEventListener('error', () => video.classList.remove('ready'));
