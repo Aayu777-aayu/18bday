@@ -152,6 +152,51 @@ body.gate-locked{overflow:hidden;background:#0d0814;}
 .msg-edit-item span{font-size:14px;color:#b87fa8;cursor:pointer;padding:4px;}
 .hidden{display:none;}
 
+.egg-page{position:fixed;inset:0;z-index:5000;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.35s ease;}
+.egg-page.show{opacity:1;pointer-events:auto;}
+.egg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 0.3s ease;}
+.egg-video.ready{opacity:1;}
+.egg-backdrop{position:absolute;inset:0;background:
+  linear-gradient(rgba(13,8,20,0.45), rgba(13,8,20,0.72)),
+  radial-gradient(circle at top, rgba(200,144,184,0.18), transparent 45%),
+  #0d0814;}
+.egg-shell{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:88px 20px 32px;}
+.egg-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(13,8,20,0.72);backdrop-filter:blur(12px);color:#fdf0f8;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:0.5px solid rgba(212,168,199,0.3);}
+.egg-back-btn:hover{background:rgba(24,15,31,0.86);}
+.egg-wrap{width:min(340px,100%);text-align:center;position:relative;z-index:2;}
+.egg-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(212,168,199,0.55);margin-bottom:20px;}
+.riddle-card{background:rgba(26,15,31,0.82);backdrop-filter:blur(14px);border-radius:24px;border:0.5px solid rgba(212,168,199,0.15);padding:32px 28px;margin-bottom:0;}
+.riddle-icon{font-size:36px;margin-bottom:16px;}
+.riddle-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:8px;}
+.riddle-sub{font-size:11px;color:rgba(212,168,199,0.6);letter-spacing:1px;margin-bottom:28px;}
+.riddle-text{background:rgba(255,255,255,0.04);border:0.5px solid rgba(212,168,199,0.15);border-radius:16px;padding:20px;margin-bottom:24px;}
+.riddle-q{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#e8c4df;line-height:1.7;}
+.answer-input{width:100%;background:rgba(255,255,255,0.05);border:0.5px solid rgba(212,168,199,0.25);border-radius:14px;padding:14px 18px;font-size:15px;color:#fdf0f8;text-align:center;outline:none;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:1px;margin-bottom:14px;transition:border-color 0.2s;}
+.answer-input::placeholder{color:rgba(212,168,199,0.3);font-size:13px;}
+.answer-input:focus{border-color:#c890b8;}
+.answer-input.wrong{border-color:#e88a8a;animation:shake 0.35s ease-out;}
+.submit-btn{width:100%;padding:13px;background:#c890b8;color:#1a0f1f;border:none;border-radius:14px;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;letter-spacing:0.5px;transition:all 0.15s;}
+.submit-btn:hover{background:#d4a8c7;transform:scale(1.02);}
+.submit-btn:active{transform:scale(0.98);}
+.hint-row{margin-top:14px;min-height:20px;}
+.hint-text{font-size:11px;color:rgba(212,168,199,0.5);letter-spacing:0.5px;}
+.hint-text.wrong{color:#e88a8a;}
+.hint-text.hint{color:#c890b8;}
+.attempts-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(212,168,199,0.2);transition:background 0.3s;}
+.dot.used{background:#c890b8;}
+.success-overlay{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;background:rgba(13,8,20,0.38);opacity:0;pointer-events:none;transition:opacity 0.8s;}
+.success-overlay.show{opacity:1;pointer-events:auto;}
+.success-msg{position:relative;z-index:2;}
+.success-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(212,168,199,0.66);margin-bottom:16px;}
+.success-title{font-family:'Playfair Display',serif;font-style:italic;font-size:32px;color:#fdf0f8;line-height:1.2;margin-bottom:12px;}
+.success-sub{font-size:13px;color:rgba(212,168,199,0.78);line-height:1.8;max-width:280px;margin:0 auto 24px;}
+.success-reveal{background:rgba(26,15,31,0.58);backdrop-filter:blur(10px);border:0.5px solid rgba(212,168,199,0.28);border-radius:18px;padding:20px 24px;max-width:300px;margin:0 auto;}
+.success-reveal-text{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#fdf0f8;line-height:1.7;}
+canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.fade-up{animation:fadeUp 0.6s ease-out forwards;}
+@keyframes fadeUp{0%{transform:translateY(20px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
 #gate{position:fixed;inset:0;z-index:9999;background:#0d0814;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease,transform 0.8s ease;}
 #gate.unlocking{opacity:0;transform:scale(1.05);pointer-events:none;}
 .gate-wrap{width:min(320px,calc(100vw - 32px));text-align:center;position:relative;z-index:1;}
@@ -305,13 +350,12 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       <button class="add-btn" onclick="addReason()">+ add another reason</button>
 
       <div class="sec-label">a secret just for you</div>
-      <div class="secret-box" id="secretBox" onclick="revealSecret()">
+      <div class="secret-box" id="secretBox" onclick="openEasterEgg()">
         <div id="secretLock">
-          <div style="font-size:28px;margin-bottom:8px">🔒</div>
-          <div class="secret-hint">tap to unlock your secret message</div>
-          <div class="secret-tap">press to reveal</div>
+          <div style="font-size:28px;margin-bottom:8px">🗝️</div>
+          <div class="secret-hint">tap to enter your secret easter egg</div>
+          <div class="secret-tap">solve the riddle</div>
         </div>
-        <div class="secret-msg" id="secretMsg" contenteditable="false" spellcheck="false">I think about you every single day. You are the person I want to grow with, laugh with, and love for the rest of my life. Happy 18th — this is just the beginning of us. ♡</div>
       </div>
 
       <div class="sec-label">my promises to you</div>
@@ -446,6 +490,44 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 </div>
 
+<div class="egg-page hidden" id="eggPage">
+  <video class="egg-video" id="eggVideo" autoplay muted loop playsinline></video>
+  <div class="egg-backdrop"></div>
+  <canvas id="eggFireworks"></canvas>
+  <button class="egg-back-btn" type="button" onclick="closeEasterEgg()">← back</button>
+  <div class="egg-shell">
+    <div class="egg-wrap" id="eggWrap">
+      <div class="egg-tag">🔐 secret easter egg</div>
+      <div class="riddle-card">
+        <div class="riddle-icon">🌸</div>
+        <div class="riddle-title">solve the riddle</div>
+        <div class="riddle-sub">answer correctly to unlock something special</div>
+        <div class="riddle-text">
+          <div class="riddle-q" id="riddleQ"></div>
+        </div>
+        <input class="answer-input" id="answerInput" placeholder="type your answer..." autocomplete="off" spellcheck="false">
+        <button class="submit-btn" type="button" onclick="checkEggAnswer()">unlock ✦</button>
+        <div class="hint-row"><div class="hint-text" id="hintText">answer and press unlock</div></div>
+        <div class="attempts-dots" id="dots">
+          <div class="dot" id="d0"></div>
+          <div class="dot" id="d1"></div>
+          <div class="dot" id="d2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-msg fade-up">
+      <div class="success-tag">🎉 you solved it</div>
+      <div class="success-title">you got it,<br>Niki ♡</div>
+      <div class="success-sub">time — it's the one thing I never want to run out of when I'm with you.</div>
+      <div class="success-reveal">
+        <div class="success-reveal-text" id="secretRevealText"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 let carIdx=0, carSlides=5, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
 const carCaptions=Array(carSlides).fill('add a caption for this memory...');
@@ -460,6 +542,19 @@ const WRONG_MSGS = [
 ];
 let gateTries = 0;
 let eyeOpen = false;
+const EGG_RIDDLE = "I have no voice, yet I speak to you every day. I show you moments you'll never get back, and ones still to come. I live on your wrist or wall, but never stand still. What am I?";
+const EGG_ANSWERS = ["time", "a clock", "clock", "watch", "a watch"];
+const EGG_HINTS = [
+  "think about something that keeps moving...",
+  "it measures something you can never get back...",
+  "it's on your wrist or on the wall 👀"
+];
+const EGG_SECRET_MESSAGE = "Every second with you is my favourite second. Happy 18th — here's to all the time ahead of us. I love you more than words. ♡";
+let eggAttempts = 0;
+const eggMaxAttempts = 3;
+let eggFireworks = [];
+let eggFireworksRunning = false;
+let eggFireworksTimer = null;
 
 let balloonMessages = [
   "You are the best thing that ever happened to me",
@@ -640,10 +735,24 @@ function togglePlay(){
   playing=!playing;
 }
 
-function revealSecret(){
-  if(secretUnlocked)return; secretUnlocked=true;
-  document.getElementById('secretLock').style.display='none';
-  document.getElementById('secretMsg').style.display='block';
+function openEasterEgg() {
+  const eggPage = document.getElementById('eggPage');
+  if (!eggPage) return;
+  resetEasterEgg();
+  eggPage.classList.remove('hidden');
+  requestAnimationFrame(() => eggPage.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+  document.getElementById('answerInput')?.focus();
+}
+
+function closeEasterEgg() {
+  const eggPage = document.getElementById('eggPage');
+  if (!eggPage) return;
+  eggPage.classList.remove('show');
+  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  stopEggFireworks();
+  resetEasterEgg();
+  setTimeout(() => eggPage.classList.add('hidden'), 350);
 }
 
 function addReason(){
@@ -739,6 +848,198 @@ function saveMessages(){
 function doShare(){
   if(navigator.share)navigator.share({title:'Happy 18th Birthday Niki ♡',text:'A love letter just for you...'});
   else alert('Screenshot or screen-record this to share with Niki!');
+}
+
+function getEasterVideoPath() {
+  return window.location.pathname.includes('/birthday-site/') ? 'easter-video.mp4' : 'birthday-site/easter-video.mp4';
+}
+
+function initEasterEgg() {
+  const riddle = document.getElementById('riddleQ');
+  const reveal = document.getElementById('secretRevealText');
+  const input = document.getElementById('answerInput');
+  const video = document.getElementById('eggVideo');
+  if (!riddle || !reveal || !input || !video) return;
+
+  riddle.textContent = EGG_RIDDLE;
+  reveal.textContent = EGG_SECRET_MESSAGE;
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter') checkEggAnswer();
+  });
+  video.src = getEasterVideoPath();
+  video.addEventListener('canplay', () => video.classList.add('ready'));
+  video.addEventListener('loadeddata', () => video.classList.add('ready'));
+  video.addEventListener('error', () => video.classList.remove('ready'));
+}
+
+function resetEasterEgg() {
+  eggAttempts = 0;
+  document.getElementById('answerInput')?.classList.remove('wrong');
+  document.getElementById('successOverlay')?.classList.remove('show');
+  const input = document.getElementById('answerInput');
+  if (input) input.value = '';
+  const hint = document.getElementById('hintText');
+  if (hint) {
+    hint.textContent = 'answer and press unlock';
+    hint.classList.remove('wrong', 'hint');
+  }
+  document.querySelectorAll('#dots .dot').forEach(dot => dot.classList.remove('used'));
+}
+
+function checkEggAnswer() {
+  const input = document.getElementById('answerInput');
+  const hint = document.getElementById('hintText');
+  if (!input || !hint) return;
+  const val = input.value.trim().toLowerCase();
+  if (!val) return;
+
+  if (EGG_ANSWERS.includes(val)) {
+    showEggSuccess();
+    return;
+  }
+
+  eggAttempts++;
+  input.classList.add('wrong');
+  setTimeout(() => input.classList.remove('wrong'), 400);
+  if (eggAttempts <= eggMaxAttempts) {
+    document.getElementById(`d${eggAttempts - 1}`)?.classList.add('used');
+  }
+  hint.classList.add('wrong');
+  if (eggAttempts < eggMaxAttempts) {
+    hint.textContent = `not quite... ${EGG_HINTS[eggAttempts - 1]}`;
+    setTimeout(() => {
+      hint.classList.remove('wrong');
+      hint.classList.add('hint');
+      hint.textContent = EGG_HINTS[eggAttempts - 1];
+    }, 600);
+  } else {
+    hint.textContent = `hint: ${EGG_HINTS[2]}`;
+    hint.classList.remove('wrong');
+    hint.classList.add('hint');
+  }
+}
+
+function showEggSuccess() {
+  document.getElementById('successOverlay')?.classList.add('show');
+  startEggFireworks();
+}
+
+function resizeEggFireworks() {
+  const canvas = document.getElementById('eggFireworks');
+  if (!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function launchEggFirework(x, y) {
+  const colors = ['#ff85c8','#ffd6ec','#c890b8','#ff4fa0','#ffaad6','#ffffff','#f7c5e8','#e8c4df','#ff69b4'];
+  const count = 60 + Math.floor(Math.random() * 30);
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.3;
+    const speed = 2 + Math.random() * 5;
+    eggFireworks.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      life: 1,
+      decay: 0.012 + Math.random() * 0.01,
+      size: 2 + Math.random() * 3,
+      trail: [],
+      shape: Math.random() > 0.6 ? 'heart' : 'circle'
+    });
+  }
+}
+
+function drawEggHeart(ctx, x, y, size, color, alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  const s = size * 0.5;
+  ctx.moveTo(x, y + s * 0.3);
+  ctx.bezierCurveTo(x, y - s * 0.5, x - s * 1.2, y - s * 0.5, x - s * 1.2, y + s * 0.1);
+  ctx.bezierCurveTo(x - s * 1.2, y + s * 0.8, x, y + s * 1.4, x, y + s * 1.4);
+  ctx.bezierCurveTo(x, y + s * 1.4, x + s * 1.2, y + s * 0.8, x + s * 1.2, y + s * 0.1);
+  ctx.bezierCurveTo(x + s * 1.2, y - s * 0.5, x, y - s * 0.5, x, y + s * 0.3);
+  ctx.fill();
+  ctx.restore();
+}
+
+function eggFireworksLoop() {
+  if (!eggFireworksRunning) return;
+  const canvas = document.getElementById('eggFireworks');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'rgba(13,8,20,0.18)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = eggFireworks.length - 1; i >= 0; i--) {
+    const p = eggFireworks[i];
+    p.trail.push({x: p.x, y: p.y});
+    if (p.trail.length > 5) p.trail.shift();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.07;
+    p.vx *= 0.99;
+    p.life -= p.decay;
+    if (p.life <= 0) {
+      eggFireworks.splice(i, 1);
+      continue;
+    }
+    p.trail.forEach((t, ti) => {
+      const a = (ti / p.trail.length) * p.life * 0.4;
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, p.size * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    if (p.shape === 'heart') drawEggHeart(ctx, p.x, p.y, p.size * 1.5, p.color, p.life);
+    else {
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(eggFireworksLoop);
+}
+
+function randomEggLaunch() {
+  const canvas = document.getElementById('eggFireworks');
+  if (!canvas) return;
+  const x = canvas.width * (0.15 + Math.random() * 0.7);
+  const y = canvas.height * (0.1 + Math.random() * 0.5);
+  launchEggFirework(x, y);
+}
+
+function startEggFireworks() {
+  if (eggFireworksRunning) return;
+  eggFireworksRunning = true;
+  eggFireworksLoop();
+  for (let i = 0; i < 5; i++) setTimeout(randomEggLaunch, i * 250);
+  eggFireworksTimer = setInterval(() => {
+    randomEggLaunch();
+    if (Math.random() > 0.6) setTimeout(randomEggLaunch, 180);
+  }, 800);
+}
+
+function stopEggFireworks() {
+  eggFireworksRunning = false;
+  eggFireworks = [];
+  if (eggFireworksTimer) {
+    clearInterval(eggFireworksTimer);
+    eggFireworksTimer = null;
+  }
+  const canvas = document.getElementById('eggFireworks');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
 }
 
 function initPasswordGate() {
@@ -838,10 +1139,13 @@ function spawnGateParticles() {
 }
 
 document.getElementById('modalWrap').addEventListener('click',e=>{if(e.target===document.getElementById('modalWrap'))closeModal();});
+window.addEventListener('resize', resizeEggFireworks);
 
 buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
 setTimeout(launchConfetti, 500);
 initPasswordGate();
+initEasterEgg();
+resizeEggFireworks();
 
 // Disable editing initially
 document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = false);
