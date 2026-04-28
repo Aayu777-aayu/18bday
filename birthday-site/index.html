@@ -192,7 +192,6 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .mini-game-btn:active{transform:scale(0.97);}
 
 .wheel-card{background:linear-gradient(180deg,#1f1323 0%,#180f1d 100%);border:1px solid rgba(212,168,199,0.18);border-radius:24px;padding:24px 18px 20px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;box-shadow:var(--shadow-soft);}
-.wheel-kicker{font-size:10px;color:rgba(212,168,199,0.55);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
 .wheel-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:6px;}
 .wheel-sub{font-size:12px;color:rgba(212,168,199,0.62);text-align:center;line-height:1.6;max-width:240px;margin-bottom:20px;}
 .wheel-stage{position:relative;width:280px;height:280px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;}
@@ -448,7 +447,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
     <!-- ===== SPIN THE WHEEL OF LOVE ===== -->
 <div class="sec-label" style="margin-top:0">spin the wheel of love</div>
 <div class="wheel-card">
-  <div class="wheel-kicker">little date-night chaos</div>
   <div class="wheel-title">spin the wheel of love</div>
   <div class="wheel-sub">let fate pick the next cute thing you have to do for Niki.</div>
   <div class="wheel-stage">
@@ -480,6 +478,11 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   const cvs = document.getElementById('loveWheelCanvas');
   if (!cvs) return;
   const ctx = cvs.getContext('2d');
+  const wheelSize = 280;
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  cvs.width = wheelSize * dpr;
+  cvs.height = wheelSize * dpr;
+  ctx.scale(dpr, dpr);
   const cx=140,cy=140,r=132,N=segs.length;
   let angle=0,spinning=false;
 
