@@ -991,8 +991,7 @@ function eggFireworksLoop() {
   const canvas = document.getElementById('eggFireworks');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'rgba(13,8,20,0.18)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = eggFireworks.length - 1; i >= 0; i--) {
     const p = eggFireworks[i];
