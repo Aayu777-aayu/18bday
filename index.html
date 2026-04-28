@@ -339,7 +339,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
   <div class="screen">
     <div class="hero">
       <div class="hero-photo" id="heroSlot">
-        <img src="birthday-site/photo1.jpg" alt="Niki">
+        <img src="birthday-site/IMG_0091.JPG" alt="Niki">
       </div>
       <div class="age-badge">18th birthday</div>
       <div class="hero-name" id="hName">Niki</div>
@@ -652,7 +652,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 
 <script>
-let carIdx=0, carSlides=5, carTimer=null, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
+let carIdx=0, carSlides=7, carTimer=null, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
 const PASSWORD = "ammu";
 const HINT_TEXT = "who's birthday is it? 🎂";
 const WRONG_MSGS = [
@@ -824,7 +824,7 @@ function buildCarousel() {
   const dots = document.getElementById('slideDots');
   const base = getCarouselPhotoBase();
   const photoVersion = 'slideshow-v1';
-  const photos = [1,2,3,4,5].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
+  const photos = [1,2,3,4,5,6,7].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
   image.src = photos[0];
   dots.innerHTML = '';
   for (let i = 0; i < carSlides; i++) {
@@ -846,7 +846,7 @@ function getCarouselPhotoBase() {
 function updateCar() {
   const base = getCarouselPhotoBase();
   const photoVersion = 'slideshow-v1';
-  const photos = [1,2,3,4,5].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
+  const photos = [1,2,3,4,5,6,7].map(num => `${base}photo${num}.jpg?v=${photoVersion}`);
   const image = document.getElementById('slideImage');
   image.style.opacity = '0.35';
   setTimeout(() => {
