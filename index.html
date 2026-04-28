@@ -91,8 +91,12 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .replay-btn:hover{background:rgba(200,144,184,0.35);}
 
 .slideshow{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;}
-.slide-frame{position:relative;aspect-ratio:4/3;width:100%;max-width:100%;border-radius:14px;border:1px solid #ead9e4;background:#f5edf2;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);transition:aspect-ratio 0.6s var(--ease-apple),width 0.6s var(--ease-apple),height 0.6s var(--ease-apple);}
+.slide-frame{position:relative;width:100%;max-width:100%;height:420px;border-radius:14px;border:1px solid #ead9e4;background:#f5edf2;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);}
 .slide-frame img{width:100%;height:100%;object-fit:contain;background:#f5edf2;transition:opacity 0.6s var(--ease-apple);}
+.slide-shell{width:100%;max-width:100%;}
+@media (max-width: 420px){
+  .slide-frame{height:380px;}
+}
 .slide-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
 .slide-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.35s var(--ease-apple);}
 .slide-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
@@ -117,8 +121,6 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .promise-item:last-child{border-bottom:none;}
 .ptxt{font-size:13px;color:#4a2e48;line-height:1.5;flex:1;outline:none;}
 .ptxt:focus{background:#fff9fd;border-radius:6px;padding:2px 6px;}
-.add-btn{display:flex;align-items:center;gap:8px;color:#b87fa8;font-size:12px;background:none;border:0.5px dashed #d4b8cb;border-radius:8px;padding:9px 14px;cursor:pointer;width:100%;margin-top:6px;margin-bottom:24px;font-family:inherit;display:none;}
-.add-btn:hover{background:#f5edf2;}
 
 .secret-box{background:#1a0f1f;border-radius:16px;padding:24px;text-align:center;cursor:pointer;margin-bottom:28px;transition:transform 0.55s var(--ease-apple),box-shadow 0.55s var(--ease-apple),background 0.55s var(--ease-apple);box-shadow:var(--shadow-soft);}
 .secret-box:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);background:#241427;}
@@ -133,25 +135,6 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .share-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#2c1a2e;color:#fdf0f8;border:none;border-radius:12px;font-size:13px;cursor:pointer;margin-bottom:12px;font-family:inherit;}
 .share-btn:hover{background:#3d2640;}
 
-.edit-bar{background:#fff;border-top:0.5px solid #ead9e4;padding:12px 20px;display:flex;gap:7px;flex-wrap:wrap;}
-.lock-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#2c1a2e;color:#fdf0f8;border:none;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;z-index:10;}
-.lock-btn:hover{background:#3d2640;}
-.edit-bar{display:none;}
-.ebtn{font-size:11px;padding:6px 12px;border:0.5px solid #e0c8d8;border-radius:20px;background:#fdf8f5;color:#7a5a78;cursor:pointer;white-space:nowrap;font-family:inherit;}
-.ebtn:hover{background:#f0e4ec;border-color:#b87fa8;}
-.ebtn.pri{background:#2c1a2e;color:#fdf0f8;border-color:#2c1a2e;}
-.ebtn.pri:hover{background:#3d2640;}
-
-.modal-wrap{position:absolute;inset:0;background:rgba(28,10,26,0.6);display:flex;align-items:flex-end;z-index:200;border-radius:36px;}
-.sheet{background:#fdf8f5;border-radius:20px 20px 0 0;padding:22px;width:100%;max-height:78%;overflow-y:auto;}
-.sheet h3{font-family:'Playfair Display',serif;font-size:17px;color:#2c1a2e;margin-bottom:14px;}
-.sheet label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b87fa8;margin:14px 0 5px;}
-.sheet input,.sheet textarea{width:100%;border:0.5px solid #e0c8d8;border-radius:10px;padding:9px 12px;font-size:13px;color:#3d1f3a;background:#fff;outline:none;font-family:inherit;resize:vertical;}
-.sheet textarea{min-height:70px;line-height:1.7;}
-.sheet-actions{display:flex;gap:8px;margin-top:18px;}
-.msg-edit-item{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-.msg-edit-item input{flex:1;}
-.msg-edit-item span{font-size:14px;color:#b87fa8;cursor:pointer;padding:4px;}
 .hidden{display:none;}
 
 .egg-page{position:fixed;inset:0;z-index:5000;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);}
@@ -395,8 +378,10 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="sec-label">our memories</div>
   
       <div class="slideshow" id="carouselWrap">
-        <div class="slide-frame">
-          <img id="slideImage" src="" alt="Memory slideshow photo">
+        <div class="slide-shell">
+          <div class="slide-frame">
+            <img id="slideImage" src="" alt="Memory slideshow photo">
+          </div>
         </div>
         <div class="slide-dots" id="slideDots"></div>
       </div>
@@ -420,7 +405,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="reason-item"><div class="rnum">4</div><div class="rtxt" contenteditable="false" spellcheck="false">The way you make ordinary moments feel magical</div></div>
         <div class="reason-item"><div class="rnum">5</div><div class="rtxt" contenteditable="false" spellcheck="false">Simply everything — I could fill a thousand pages</div></div>
       </div>
-      <button class="add-btn" onclick="addReason()">+ add another reason</button>
 
       <div class="sec-label">a secret just for you</div>
       <div class="secret-box" id="secretBox" onclick="openEasterEgg()">
@@ -438,7 +422,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To choose you, every single day, for as long as you'll have me</div></div>
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="false" spellcheck="false">To never stop finding new reasons to fall in love with you</div></div>
       </div>
-      <button class="add-btn" onclick="addPromise()">+ add a promise</button>
 
       <div class="sec-label">play something cute</div>
       <div class="mini-game-card">
@@ -555,18 +538,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
     </div>
   </div>
 
-  <div class="edit-bar">
-    <button class="ebtn" onclick="openModal('details')">edit details</button>
-    <button class="ebtn" onclick="openModal('song')">edit song</button>
-    <button class="ebtn" onclick="openModal('messages')">edit messages</button>
-    <button class="ebtn pri" onclick="launchConfetti()">🎊 confetti!</button>
-  </div>
-
-  <button class="lock-btn" onclick="unlockEdit()">🔒</button>
-
-  <div class="modal-wrap hidden" id="modalWrap">
-    <div class="sheet" id="sheet"></div>
-  </div>
 </div>
 </div>
 
@@ -652,7 +623,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 
 <script>
-let carIdx=0, carSlides=7, carTimer=null, playing=false, rcnt=5, secretUnlocked=false, confettiAnim=null, editMode=false;
+let carIdx=0, carSlides=7, carTimer=null, playing=false, confettiAnim=null;
 const PASSWORD = "ammu";
 const HINT_TEXT = "who's birthday is it? 🎂";
 const WRONG_MSGS = [
@@ -718,23 +689,6 @@ const balloonColors = ['#c890b8','#d4a8c7','#9d6a95','#e8c4df','#b87fa8','#cc9ab
 let popped = [];
 let poppedCount = 0;
 
-function unlockEdit() {
-  if (editMode) return;
-  let code = prompt("Enter 4-digit PIN to unlock editing:");
-  if (code === "1234") {
-    editMode = true;
-    document.querySelector('.edit-bar').style.display = 'flex';
-    document.querySelector('.lock-btn').style.display = 'none';
-    enableEditing();
-  } else {
-    alert("Incorrect PIN.");
-  }
-}
-
-function enableEditing() {
-  document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = true);
-  document.querySelectorAll('.add-btn').forEach(btn => btn.style.display = 'flex');
-}
 
 function initGame() {
   popped = Array(8).fill(false);
@@ -858,16 +812,7 @@ function updateCar() {
   document.querySelectorAll('.slide-dot').forEach((d, i) => d.className = 'slide-dot' + (i === carIdx ? ' active' : ''));
 }
 
-function fitSlideFrame(image) {
-  const frame = document.querySelector('.slide-frame');
-  if (!frame || !image.naturalWidth || !image.naturalHeight) return;
-  const ratio = image.naturalWidth / image.naturalHeight;
-  frame.style.aspectRatio = `${image.naturalWidth} / ${image.naturalHeight}`;
-  if (ratio < 0.82) frame.style.width = '58%';
-  else if (ratio < 1.02) frame.style.width = '72%';
-  else if (ratio < 1.3) frame.style.width = '84%';
-  else frame.style.width = '100%';
-}
+function fitSlideFrame() {}
 
 function buildBalloonsDeco(){
   const row=document.getElementById('balloonsRow');
@@ -940,21 +885,6 @@ function closeWordGame() {
   setTimeout(() => page.classList.add('hidden'), 350);
 }
 
-function addReason(){
-  rcnt++;
-  const list=document.getElementById('reasonList');
-  const item=document.createElement('div'); item.className='reason-item';
-  item.innerHTML=`<div class="rnum">${rcnt}</div><div class="rtxt" contenteditable="${editMode}" spellcheck="false">write your reason here...</div>`;
-  list.appendChild(item); item.querySelector('.rtxt').focus();
-}
-
-function addPromise(){
-  const list=document.getElementById('promiseList');
-  const item=document.createElement('div'); item.className='promise-item';
-  item.innerHTML=`<div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt" contenteditable="true" spellcheck="false">write your promise here...</div>`;
-  list.appendChild(item); item.querySelector('.ptxt').focus();
-}
-
 function launchConfetti(){
   const canvas=document.getElementById('confettiCanvas'),ctx=canvas.getContext('2d'),W=360,H=700;
   canvas.width=W;canvas.height=H;
@@ -978,56 +908,6 @@ function launchConfetti(){
     if(alive)confettiAnim=requestAnimationFrame(draw);else ctx.clearRect(0,0,W,H);
   }
   draw();
-}
-
-function openModal(type){
-  const wrap=document.getElementById('modalWrap'),sheet=document.getElementById('sheet');
-  wrap.classList.remove('hidden');
-  if(type==='details'){
-    sheet.innerHTML=`<h3>Edit details</h3>
-      <label>Her name</label><input id="e_name" value="${document.getElementById('hName').textContent}">
-      <label>Subtitle</label><input id="e_sub" value="${document.getElementById('hSub').textContent}">
-      <label>Your sign-off</label><input id="e_from" value="${document.getElementById('cFrom').textContent}">
-      <label>Birthday message</label><input id="e_msg" value="${document.getElementById('cMsg').textContent}">
-      <div class="sheet-actions"><button class="ebtn pri" onclick="saveDetails()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
-  } else if(type==='song'){
-    sheet.innerHTML=`<h3>Add your song</h3>
-      <label>Song title</label><input id="e_title" placeholder="e.g. Essence – Wizkid">
-      <label>Artist</label><input id="e_artist" placeholder="e.g. Wizkid ft. Tems">
-      <label>Upload mp3</label><input type="file" accept="audio/*" id="e_audio">
-      <div class="sheet-actions"><button class="ebtn pri" onclick="saveSong()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
-  } else if(type==='messages'){
-    let html=`<h3>Edit balloon messages</h3><p style="font-size:12px;color:#9d7a9b;margin-bottom:12px">Each message is revealed when she pops a balloon</p>`;
-    balloonMessages.forEach((m,i)=>{
-      html+=`<label>Balloon ${i+1}</label><input class="bmsg" data-i="${i}" value="${m}">`;
-    });
-    html+=`<div class="sheet-actions"><button class="ebtn pri" onclick="saveMessages()">save</button><button class="ebtn" onclick="closeModal()">cancel</button></div>`;
-    sheet.innerHTML=html;
-  }
-}
-
-function closeModal(){document.getElementById('modalWrap').classList.add('hidden');}
-
-function saveDetails(){
-  document.getElementById('hName').textContent=document.getElementById('e_name').value;
-  document.getElementById('hSub').textContent=document.getElementById('e_sub').value;
-  document.getElementById('cFrom').textContent=document.getElementById('e_from').value;
-  document.getElementById('cMsg').textContent=document.getElementById('e_msg').value;
-  closeModal();
-}
-
-function saveSong(){
-  const t=document.getElementById('e_title').value,a=document.getElementById('e_artist').value,f=document.getElementById('e_audio').files[0];
-  if(t)document.getElementById('sTitle').textContent=t;
-  if(a)document.getElementById('sArtist').textContent=a;
-  if(f)document.getElementById('audio').src=URL.createObjectURL(f);
-  closeModal();
-}
-
-function saveMessages(){
-  document.querySelectorAll('.bmsg').forEach((inp,i)=>{ balloonMessages[i]=inp.value; });
-  closeModal();
-  initGame();
 }
 
 function doShare(){
@@ -1573,7 +1453,6 @@ function initMotion() {
   elements.forEach(el => observer.observe(el));
 }
 
-document.getElementById('modalWrap').addEventListener('click',e=>{if(e.target===document.getElementById('modalWrap'))closeModal();});
 window.addEventListener('resize', resizeEggFireworks);
 
 buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
@@ -1583,9 +1462,6 @@ initEasterEgg();
 resizeEggFireworks();
 wordNewGame();
 initMotion();
-
-// Disable editing initially
-document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = false);
 
 </script>
 </body>
