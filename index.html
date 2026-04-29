@@ -205,6 +205,22 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .mini-game-btn:hover{background:rgba(200,144,184,0.28);transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,144,184,0.20);}
 .mini-game-btn:active{transform:scale(0.97);}
 
+.dreams-page{position:fixed;inset:0;z-index:4850;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
+.dreams-page.show{opacity:1;pointer-events:auto;}
+.dreams-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
+.dreams-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(13,8,20,0.72);backdrop-filter:blur(12px);color:#fdf0f8;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:0.5px solid rgba(212,168,199,0.3);}
+.dreams-back-btn:hover{background:rgba(24,15,31,0.86);}
+.dreams-wrap{width:min(420px,100%);}
+.dreams-head{background:#1a0f1f;border-radius:24px;padding:24px 22px 20px;margin-bottom:14px;border:1px solid rgba(212,168,199,0.16);box-shadow:var(--shadow-soft);}
+.dreams-kicker{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#b87fa8;margin-bottom:10px;}
+.dreams-title{font-family:'Playfair Display',serif;font-style:italic;font-size:28px;line-height:1.15;color:#fdf0f8;margin-bottom:10px;}
+.dreams-sub{font-size:13px;line-height:1.8;color:rgba(212,168,199,0.72);}
+.dreams-list-card{background:#1a0f1f;border-radius:24px;padding:24px 22px;border:1px solid rgba(212,168,199,0.16);box-shadow:var(--shadow-soft);}
+.dreams-list{padding-left:22px;display:grid;gap:14px;}
+.dreams-list li{color:#fdf0f8;font-size:14px;line-height:1.8;padding-left:4px;}
+.dreams-list li::marker{font-family:'Playfair Display',serif;font-style:italic;color:#c890b8;}
+.dreams-list-end{margin-top:20px;padding-top:18px;border-top:1px solid rgba(212,168,199,0.14);font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.8;color:#dcb8cf;}
+
 .wheel-card{background:linear-gradient(180deg,#1f1323 0%,#180f1d 100%);border:1px solid rgba(212,168,199,0.18);border-radius:24px;padding:24px 18px 20px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;box-shadow:var(--shadow-soft);overflow:hidden;}
 .wheel-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:6px;}
 .wheel-sub{font-size:12px;color:rgba(212,168,199,0.62);text-align:center;line-height:1.6;max-width:280px;margin-bottom:20px;}
@@ -426,28 +442,10 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       </div>
 
       <div class="sec-label">18 things i want to do with you</div>
-      <div class="moments-section">
-        <div class="moments-intro">Now that you're 18, here are eighteen miniscule dreams I want to live out with you, I want to create  memories we will never stop talking about.</div>
-        <div class="moments-grid">
-          <div class="moment-card">
-            <div class="moment-tag">♡ little list</div>
-            <div class="moment-title">The first nine</div>
-            <div class="moment-body">1. Go on a proper late-night drive with your song playing.<br>2. Go on a overseas trip to Santorini<br>3. Watch the sunrise after staying up together.<br>4. Watch a movie together alone.<br>5. Wear matching outfits and go out.<br>6. Recreate our very first walk + first kiss.<br>7. Bake something together.<br>8. Late night maccas runs.<br>9. Cuddle in a bed together.</div>
-            <div class="moment-close">The ordinary ones might end up meaning the most.</div>
-          </div>
-          <div class="moment-card">
-            <div class="moment-tag">✦ more of us</div>
-            <div class="moment-title">The next six</div>
-            <div class="moment-body">10. Watch the stars together away from here.<br>11. Write each other little notes and swap them on the same day.<br>12. Have one no-phone date where it's just us and the moment.<br>13. Try something new together just for the memory of it.<br>14. Celebrate our own holidays eg. Throwback Tuesday.<br>15. Go on a cruise together and have the time of our lives.<br>16. Spend a whole day (24 hours) doing absolutely nothing but being together.</div>
-            <div class="moment-close">I want our love to feel full of life, not rushed.</div>
-          </div>
-          <div class="moment-card">
-            <div class="moment-tag">∞ the last three</div>
-            <div class="moment-title">The ones that matter most</div>
-            <div class="moment-body">17. Keep learning every version of you as you grow.<br>18. Be there for all the birthdays, bad days, victories, quiet nights, and everything in between.<br><br>And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on.</div>
-            <div class="moment-close">You are my favourite plan for the future.</div>
-          </div>
-        </div>
+      <div class="mini-game-card">
+        <div class="mini-game-title">a little list for us</div>
+        <div class="mini-game-sub">eighteen things I want us to do now that you are 18, all tucked away on their own page.</div>
+        <button class="mini-game-btn" type="button" onclick="openDreamsPage()">open the list ✦</button>
       </div>
 
       <div class="sec-label">reasons i love you</div>
@@ -695,6 +693,42 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   </div>
 </div>
 
+<div class="dreams-page hidden" id="dreamsPage">
+  <button class="dreams-back-btn" type="button" onclick="closeDreamsPage()">← back</button>
+  <div class="dreams-shell">
+    <div class="dreams-wrap">
+      <div class="dreams-head">
+        <div class="dreams-kicker">18 things i want to do with you</div>
+        <div class="dreams-title">little dreams,<br>big us</div>
+        <div class="dreams-sub">Now that you're 18, here are eighteen miniscule dreams I want to live out with you, and memories I want us to keep talking about forever.</div>
+      </div>
+      <div class="dreams-list-card">
+        <ol class="dreams-list">
+          <li>Go on a proper late-night drive with your song playing.</li>
+          <li>Go on a overseas trip to Santorini.</li>
+          <li>Watch the sunrise after staying up together.</li>
+          <li>Watch a movie together alone.</li>
+          <li>Wear matching outfits and go out.</li>
+          <li>Recreate our very first walk + first kiss.</li>
+          <li>Bake something together.</li>
+          <li>Late night maccas runs.</li>
+          <li>Cuddle in a bed together.</li>
+          <li>Watch the stars together away from here.</li>
+          <li>Write each other little notes and swap them on the same day.</li>
+          <li>Have one no-phone date where it's just us and the moment.</li>
+          <li>Try something new together just for the memory of it.</li>
+          <li>Celebrate our own holidays eg. Throwback Tuesday.</li>
+          <li>Go on a cruise together and have the time of our lives.</li>
+          <li>Spend a whole day (24 hours) doing absolutely nothing but being together.</li>
+          <li>Keep learning every version of you as you grow.</li>
+          <li>Be there for all the birthdays, bad days, victories, quiet nights, and everything in between.</li>
+        </ol>
+        <div class="dreams-list-end">And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 let carIdx=0, carSlides=0, carTimer=null, playing=false, confettiAnim=null;
 const PASSWORD = "ammu";
@@ -935,16 +969,36 @@ function initStaticAssets() {
   const heroImage = document.getElementById('heroImage');
   const audio = document.getElementById('audio');
   if (heroImage) heroImage.src = getHeroImagePath();
-  if (audio) audio.src = getSongPath();
+  if (audio) {
+    audio.src = getSongPath();
+    audio.load();
+  }
+}
+
+function setWaveState(isPlaying) {
+  const bars=document.querySelectorAll('.wbar');
+  bars.forEach(b=>b.style.animationPlayState = isPlaying ? 'running' : 'paused');
+}
+
+function startAudioPlayback() {
+  const a=document.getElementById('audio');
+  if(!a?.src || a.src===window.location.href) return;
+  return a.play().then(() => {
+    playing = true;
+    setWaveState(true);
+  }).catch(() => {});
 }
 
 function togglePlay(){
   const a=document.getElementById('audio');
-  if(!a.src||a.src===window.location.href){return;}
-  const bars=document.querySelectorAll('.wbar');
-  if(playing){a.pause();bars.forEach(b=>b.style.animationPlayState='paused');}
-  else{a.play();bars.forEach(b=>b.style.animationPlayState='running');}
-  playing=!playing;
+  if(!a?.src||a.src===window.location.href){return;}
+  if(playing){
+    a.pause();
+    playing=false;
+    setWaveState(false);
+  } else {
+    startAudioPlayback();
+  }
 }
 
 function openEasterEgg() {
@@ -986,6 +1040,23 @@ function openWordGame() {
 
 function closeWordGame() {
   const page = document.getElementById('wordPage');
+  if (!page) return;
+  page.classList.remove('show');
+  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  setTimeout(() => page.classList.add('hidden'), 350);
+}
+
+function openDreamsPage() {
+  const page = document.getElementById('dreamsPage');
+  if (!page) return;
+  hapticTap();
+  page.classList.remove('hidden');
+  requestAnimationFrame(() => page.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDreamsPage() {
+  const page = document.getElementById('dreamsPage');
   if (!page) return;
   page.classList.remove('show');
   document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
@@ -1506,6 +1577,7 @@ function unlockSite() {
   input.classList.add('right');
   feedback.className = 'gate-feedback ok';
   feedback.textContent = 'welcome ♡';
+  startAudioPlayback();
   spawnGateParticles();
 
   setTimeout(() => {
