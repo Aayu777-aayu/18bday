@@ -350,7 +350,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
   <div class="screen">
     <div class="hero">
       <div class="hero-photo" id="heroSlot">
-        <img src="birthday-site/IMG_0091.JPG" alt="Niki" decoding="async">
+        <img id="heroImage" src="" alt="Niki" decoding="async">
       </div>
       <div class="age-badge">Happy 18th birthday!</div>
       <div class="hero-name" id="hName">Niki</div>
@@ -370,7 +370,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
           <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.15s"></div>
           <div class="wbar" style="animation:wv 1.2s ease-in-out infinite;animation-delay:0.3s"></div>
         </div>
-        <audio id="audio" src="song1.mp3"></audio>
+        <audio id="audio"></audio>
       </div>
     </div>
     <div class="content">
@@ -899,6 +899,21 @@ function buildBalloonsDeco(){
     b.innerHTML=`<div class="balloon-deco-body" style="background:${colors[i]};box-shadow:inset -4px -4px 0 rgba(0,0,0,0.12);width:36px;height:44px"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:500;color:#fff">${labels[i]}</span></div><div class="balloon-deco-string"></div>`;
     row.appendChild(b);
   }
+}
+
+function getHeroImagePath() {
+  return window.location.pathname.includes('/birthday-site/') ? 'IMG_0091.JPG' : 'birthday-site/IMG_0091.JPG';
+}
+
+function getSongPath() {
+  return window.location.pathname.includes('/birthday-site/') ? '../song1.mp3' : 'song1.mp3';
+}
+
+function initStaticAssets() {
+  const heroImage = document.getElementById('heroImage');
+  const audio = document.getElementById('audio');
+  if (heroImage) heroImage.src = getHeroImagePath();
+  if (audio) audio.src = getSongPath();
 }
 
 function togglePlay(){
@@ -1519,6 +1534,7 @@ function initMotion() {
 
 window.addEventListener('resize', resizeEggFireworks);
 
+initStaticAssets();
 buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
 setTimeout(launchConfetti, 500);
 initPasswordGate();
