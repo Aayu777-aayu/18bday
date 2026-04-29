@@ -97,8 +97,7 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .slideshow{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;}
 .slide-frame{position:relative;width:100%;max-width:100%;height:440px;border-radius:18px;border:1px solid #ead9e4;background:linear-gradient(180deg,#f8f1f5 0%,#f3e8ee 100%);overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);padding:18px;}
 .slide-frame::after{content:"";position:absolute;inset:0;border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);pointer-events:none;}
-.slide-frame img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity 0.6s var(--ease-apple),transform 0.6s var(--ease-apple),filter 0.6s var(--ease-apple);}
-.slide-frame img.is-swapping{opacity:0.18;transform:scale(0.985);filter:blur(10px);}
+.slide-frame img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity 0.6s var(--ease-apple),transform 0.6s var(--ease-apple);}
 .slide-shell{width:100%;max-width:100%;}
 @media (max-width: 420px){
   .slide-frame{height:400px;}
@@ -106,8 +105,6 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .slide-dots{display:flex;justify-content:center;gap:6px;margin-top:12px;}
 .slide-dot{width:6px;height:6px;border-radius:50%;background:#e0c8d8;transition:all 0.35s var(--ease-apple);}
 .slide-dot.active{background:#b87fa8;width:18px;border-radius:4px;}
-.tap-feedback{position:fixed;left:0;top:0;width:18px;height:18px;border-radius:999px;pointer-events:none;z-index:12000;background:radial-gradient(circle,rgba(200,144,184,0.35) 0%,rgba(200,144,184,0.12) 45%,rgba(200,144,184,0) 72%);transform:translate(-50%,-50%) scale(0.35);animation:tapPulse 0.45s var(--ease-apple) forwards;}
-.success-flash{position:fixed;inset:0;pointer-events:none;z-index:11500;background:radial-gradient(circle at center,rgba(255,255,255,0.18),rgba(255,255,255,0) 58%);opacity:0;animation:successFlash 0.65s var(--ease-apple) forwards;}
 @media (max-width: 420px) {
   .memory-frame{height:380px;padding:12px;}
 }
@@ -127,23 +124,6 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .moment-title{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#3d1f3a;margin-bottom:8px;line-height:1.35;}
 .moment-body{font-size:13px;line-height:1.8;color:#5a3d58;}
 .moment-close{margin-top:14px;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:#b87fa8;}
-.dreams-page{position:fixed;inset:0;z-index:4850;background:#f7eff4;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
-.dreams-page.show{opacity:1;pointer-events:auto;}
-.dreams-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;background:
-  radial-gradient(circle at top, rgba(200,144,184,0.14), transparent 28%),
-  linear-gradient(180deg,#f8f1f5 0%,#fdf8f5 100%);}
-.dreams-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(255,255,255,0.82);backdrop-filter:blur(12px);color:#5a3d58;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:0.5px solid rgba(212,168,199,0.28);box-shadow:0 10px 26px rgba(61,31,58,0.10);}
-.dreams-back-btn:hover{background:#fff;}
-.dreams-wrap{width:min(380px,100%);}
-.dreams-head{margin-bottom:18px;text-align:center;}
-.dreams-kicker{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#b87fa8;margin-bottom:10px;}
-.dreams-title{font-family:'Playfair Display',serif;font-style:italic;font-size:30px;color:#3d1f3a;line-height:1.15;margin-bottom:10px;}
-.dreams-sub{font-size:13px;line-height:1.8;color:#6a4c67;max-width:320px;margin:0 auto;}
-.dreams-list-card{background:linear-gradient(180deg,#fff 0%,#fcf7fa 100%);border:0.5px solid #ead9e4;border-radius:20px;padding:20px 20px 18px;box-shadow:var(--shadow-soft);}
-.dreams-list{margin:0;padding-left:22px;display:grid;gap:12px;}
-.dreams-list li{font-size:13px;line-height:1.8;color:#5a3d58;padding-left:4px;}
-.dreams-list li::marker{font-family:'Playfair Display',serif;color:#b87fa8;}
-.dreams-list-end{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.7;color:#b87fa8;text-align:center;}
 
 .reasons{margin-bottom:8px;}
 .reason-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:0.5px solid #f0e4ec;}
@@ -325,8 +305,6 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .unlock-particle{position:fixed;pointer-events:none;z-index:10000;font-size:14px;animation:burstUp 0.9s ease-out forwards;}
 @keyframes burstUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.5)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-@keyframes tapPulse{0%{opacity:0.95;transform:translate(-50%,-50%) scale(0.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(4.4)}}
-@keyframes successFlash{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
 .reveal{opacity:0;transform:translateY(18px) scale(0.985);filter:blur(8px);transition:opacity 0.8s var(--ease-apple),transform 0.8s var(--ease-apple),filter 0.8s var(--ease-apple);}
 .reveal.in-view{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}
 .reveal-delay-1{transition-delay:0.04s;}
@@ -448,10 +426,28 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       </div>
 
       <div class="sec-label">18 things i want to do with you</div>
-      <div class="mini-game-card">
-        <div class="mini-game-title">a whole little future list</div>
-        <div class="mini-game-sub">I made a separate page with the eighteen things I want to do with you now that you're officially 18.</div>
-        <button class="mini-game-btn" type="button" onclick="openDreamsPage()">open the list ✦</button>
+      <div class="moments-section">
+        <div class="moments-intro">Now that you're 18, here are eighteen miniscule dreams I want to live out with you, I want to create  memories we will never stop talking about.</div>
+        <div class="moments-grid">
+          <div class="moment-card">
+            <div class="moment-tag">♡ little list</div>
+            <div class="moment-title">The first nine</div>
+            <div class="moment-body">1. Go on a proper late-night drive with your song playing.<br>2. Go on a overseas trip to Santorini<br>3. Watch the sunrise after staying up together.<br>4. Watch a movie together alone.<br>5. Wear matching outfits and go out.<br>6. Recreate our very first walk + first kiss.<br>7. Bake something together.<br>8. Late night maccas runs.<br>9. Cuddle in a bed together.</div>
+            <div class="moment-close">The ordinary ones might end up meaning the most.</div>
+          </div>
+          <div class="moment-card">
+            <div class="moment-tag">✦ more of us</div>
+            <div class="moment-title">The next six</div>
+            <div class="moment-body">10. Watch the stars together away from here.<br>11. Write each other little notes and swap them on the same day.<br>12. Have one no-phone date where it's just us and the moment.<br>13. Try something new together just for the memory of it.<br>14. Celebrate our own holidays eg. Throwback Tuesday.<br>15. Go on a cruise together and have the time of our lives.<br>16. Spend a whole day (24 hours) doing absolutely nothing but being together.</div>
+            <div class="moment-close">I want our love to feel full of life, not rushed.</div>
+          </div>
+          <div class="moment-card">
+            <div class="moment-tag">∞ the last three</div>
+            <div class="moment-title">The ones that matter most</div>
+            <div class="moment-body">17. Keep learning every version of you as you grow.<br>18. Be there for all the birthdays, bad days, victories, quiet nights, and everything in between.<br><br>And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on.</div>
+            <div class="moment-close">You are my favourite plan for the future.</div>
+          </div>
+        </div>
       </div>
 
       <div class="sec-label">reasons i love you</div>
@@ -460,7 +456,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="reason-item"><div class="rnum">2</div><div class="rtxt">How you always show compassion towards everyone</div></div>
         <div class="reason-item"><div class="rnum">3</div><div class="rtxt">Your way of words, awwww so cute iykyk</div></div>
         <div class="reason-item"><div class="rnum">4</div><div class="rtxt">The way you make ordinary moments feel magical</div></div>
-        <div class="reason-item"><div class="rnum">5</div><div class="rtxt">Simply everything — I could fill a thousand pages</div></div>
+        <div class="reason-item"><div class="rnum">5</div><div class="rtxt">Simply everything, I could fill a billions of pages</div></div>
       </div>
 
       <div class="sec-label">a secret just for you</div>
@@ -474,9 +470,9 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 
       <div class="sec-label">my promises to you</div>
       <div class="promises" id="promiseList">
-        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To always make you feel seen, heard, and loved</div></div>
-        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To be your biggest supporter in everything you chase</div></div>
-        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To choose you, every single day, for as long as you'll have me</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To always make you feel seen, heard and loved</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To be your biggest supporter as you chase your goals</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To choose you, every single day forever</div></div>
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To never stop finding new reasons to fall in love with you</div></div>
       </div>
 
@@ -699,42 +695,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   </div>
 </div>
 
-<div class="dreams-page hidden" id="dreamsPage">
-  <button class="dreams-back-btn" type="button" onclick="closeDreamsPage()">← back</button>
-  <div class="dreams-shell">
-    <div class="dreams-wrap">
-      <div class="dreams-head">
-        <div class="dreams-kicker">for your eighteenth year</div>
-        <div class="dreams-title">18 things I want to do with you</div>
-        <div class="dreams-sub">Now that you're 18, here are eighteen little dreams I want to live out with you, from tiny ordinary dates to the kind of memories we never stop talking about.</div>
-      </div>
-      <div class="dreams-list-card">
-        <ol class="dreams-list">
-          <li>Go on a proper late-night drive with our song playing.</li>
-          <li>Take cute photo booth pictures we'll keep forever.</li>
-          <li>Watch the sunrise after staying up talking for too long.</li>
-          <li>Have a soft little picnic date somewhere pretty.</li>
-          <li>Try a new cafe and pretend we're critics.</li>
-          <li>Dress up and go on a date that feels movie-level special.</li>
-          <li>Cook something together, even if it's chaotic.</li>
-          <li>Build a playlist that's just ours.</li>
-          <li>Watch one of your favourite films curled up beside you.</li>
-          <li>Go somewhere with city lights and just hold you for a while.</li>
-          <li>Write each other little notes and swap them on the same day.</li>
-          <li>Have one no-phone date where it's just us and the moment.</li>
-          <li>Try something new together just for the memory of it.</li>
-          <li>Make a tiny tradition that's only ours.</li>
-          <li>Dance together even if there's no reason to.</li>
-          <li>Spend a whole day doing absolutely nothing but being together.</li>
-          <li>Keep learning every version of you as you grow.</li>
-          <li>Be there for all the birthdays, bad days, wins, quiet nights, and everything in between.</li>
-        </ol>
-        <div class="dreams-list-end">And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on. You are my favourite plan for the future.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 let carIdx=0, carSlides=0, carTimer=null, playing=false, confettiAnim=null;
 const PASSWORD = "ammu";
@@ -809,70 +769,15 @@ function triggerHaptic(pattern = 10) {
   } catch (e) {}
 }
 
-function playUiTone(kind = 'tap') {
-  try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    const ctx = new AC();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = kind === 'celebrate' ? 2200 : 1800;
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctx.destination);
-    const now = ctx.currentTime;
-    const tones = {
-      tap: [320, 450, 0.035, 0.018],
-      soft: [420, 620, 0.05, 0.025],
-      success: [520, 860, 0.12, 0.035],
-      celebrate: [380, 980, 0.18, 0.04]
-    };
-    const [start, end, duration, peak] = tones[kind] || tones.tap;
-    osc.type = kind === 'tap' ? 'triangle' : 'sine';
-    osc.frequency.setValueAtTime(start, now);
-    osc.frequency.exponentialRampToValueAtTime(end, now + duration);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(peak, now + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    osc.start(now);
-    osc.stop(now + duration + 0.02);
-    setTimeout(() => ctx.close().catch(() => {}), 220);
-  } catch (e) {}
-}
-
-function showTapPulse(x, y) {
-  const pulse = document.createElement('div');
-  pulse.className = 'tap-feedback';
-  pulse.style.left = `${x}px`;
-  pulse.style.top = `${y}px`;
-  document.body.appendChild(pulse);
-  setTimeout(() => pulse.remove(), 520);
-}
-
-function showSuccessFlash() {
-  const flash = document.createElement('div');
-  flash.className = 'success-flash';
-  document.body.appendChild(flash);
-  setTimeout(() => flash.remove(), 700);
-}
-
-function hapticTap(event) {
-  if (event?.clientX && event?.clientY) showTapPulse(event.clientX, event.clientY);
-  playUiTone('tap');
+function hapticTap() {
   triggerHaptic(8);
 }
 
 function hapticSuccess() {
-  showSuccessFlash();
-  playUiTone('success');
   triggerHaptic([18, 24, 18]);
 }
 
 function hapticCelebrate() {
-  showSuccessFlash();
-  playUiTone('celebrate');
   triggerHaptic([20, 40, 20, 40, 30]);
 }
 
@@ -962,10 +867,6 @@ function playPop() {
   } catch(e) {}
 }
 
-function playSoftPress() {
-  playUiTone('soft');
-}
-
 function buildCarousel() {
   const image = document.getElementById('slideImage');
   const dots = document.getElementById('slideDots');
@@ -973,8 +874,6 @@ function buildCarousel() {
   carSlides = photos.length;
   if (!image || !dots || !carSlides) return;
   image.src = photos[0];
-  image.dataset.currentSrc = photos[0];
-  image.classList.remove('is-swapping');
   dots.innerHTML = '';
   for (let i = 0; i < carSlides; i++) {
     const dot = document.createElement('div');
@@ -1002,23 +901,13 @@ function updateCar() {
   const photos = getSlideshowPhotos();
   const image = document.getElementById('slideImage');
   if (!image || !photos.length) return;
-  const nextSrc = photos[carIdx];
-  if (image.dataset.currentSrc === nextSrc) {
-    image.classList.remove('is-swapping');
-  } else {
-    const preload = new Image();
-    preload.onload = () => {
-      image.classList.add('is-swapping');
-      setTimeout(() => {
-        image.src = nextSrc;
-        image.dataset.currentSrc = nextSrc;
-        requestAnimationFrame(() => {
-          image.classList.remove('is-swapping');
-        });
-      }, 180);
-    };
-    preload.src = nextSrc;
-  }
+  image.style.opacity = '0.35';
+  image.style.transform = 'scale(0.985)';
+  setTimeout(() => {
+    image.src = photos[carIdx];
+    image.style.opacity = '1';
+    image.style.transform = 'scale(1)';
+  }, 140);
   document.querySelectorAll('.slide-dot').forEach((d, i) => d.className = 'slide-dot' + (i === carIdx ? ' active' : ''));
 }
 
@@ -1052,7 +941,6 @@ function initStaticAssets() {
 function togglePlay(){
   const a=document.getElementById('audio');
   if(!a.src||a.src===window.location.href){return;}
-  playSoftPress();
   const bars=document.querySelectorAll('.wbar');
   if(playing){a.pause();bars.forEach(b=>b.style.animationPlayState='paused');}
   else{a.play();bars.forEach(b=>b.style.animationPlayState='running');}
@@ -1098,23 +986,6 @@ function openWordGame() {
 
 function closeWordGame() {
   const page = document.getElementById('wordPage');
-  if (!page) return;
-  page.classList.remove('show');
-  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
-  setTimeout(() => page.classList.add('hidden'), 350);
-}
-
-function openDreamsPage() {
-  const page = document.getElementById('dreamsPage');
-  if (!page) return;
-  hapticTap();
-  page.classList.remove('hidden');
-  requestAnimationFrame(() => page.classList.add('show'));
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDreamsPage() {
-  const page = document.getElementById('dreamsPage');
   if (!page) return;
   page.classList.remove('show');
   document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
@@ -1629,19 +1500,12 @@ function unlockSite() {
   const gate = document.getElementById('gate');
   const input = document.getElementById('gateInput');
   const feedback = document.getElementById('gateFeedback');
-  const audio = document.getElementById('audio');
   if (!gate || !input || !feedback) return;
 
   hapticSuccess();
   input.classList.add('right');
   feedback.className = 'gate-feedback ok';
   feedback.textContent = 'welcome ♡';
-  if (audio && !playing) {
-    audio.play().then(() => {
-      playing = true;
-      document.querySelectorAll('.wbar').forEach(b => b.style.animationPlayState = 'running');
-    }).catch(() => {});
-  }
   spawnGateParticles();
 
   setTimeout(() => {
@@ -1698,12 +1562,12 @@ function initMotion() {
 
 function initButtonHaptics() {
   document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('pointerdown', event => {
-      if (!button.disabled) hapticTap(event);
+    button.addEventListener('pointerdown', () => {
+      if (!button.disabled) hapticTap();
     }, { passive: true });
   });
   document.querySelectorAll('.secret-box,.memory-thumb,.slide-dot').forEach(target => {
-    target.addEventListener('pointerdown', event => hapticTap(event), { passive: true });
+    target.addEventListener('pointerdown', () => hapticTap(), { passive: true });
   });
 }
 
