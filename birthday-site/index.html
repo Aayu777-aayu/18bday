@@ -55,10 +55,24 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .content{padding:30px 22px 34px;}
 .sec-label{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#b87fa8;margin-bottom:14px;font-weight:400;}
 
-.balloons-hero{display:flex;justify-content:center;gap:18px;margin-bottom:28px;padding:16px 0;}
-.balloon-deco{display:flex;flex-direction:column;align-items:center;}
-.balloon-deco-body{width:36px;height:44px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:flex;align-items:center;justify-content:center;}
-.balloon-deco-string{width:1px;height:20px;background:#ccc;margin-top:2px;}
+.balloons-hero{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;margin:2px 0 28px;padding:18px 16px;background:linear-gradient(180deg,#fcf6fa 0%,#f5eaf1 100%);border:1px solid #ead9e4;border-radius:22px;box-shadow:var(--shadow-soft);}
+.balloon-deco{display:flex;align-items:center;gap:10px;min-width:0;}
+.balloon-deco.right{justify-content:flex-end;}
+.balloon-deco-body{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;padding:0 14px;border-radius:999px;background:#f2d8e8;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,0.45),0 10px 18px rgba(184,127,168,0.18);font-family:'Playfair Display',serif;font-size:14px;font-weight:500;letter-spacing:0.4px;}
+.balloon-deco-body.soft{background:#d8b0cd;}
+.balloon-deco-body.deep{background:#a676a1;}
+.balloon-deco-string{display:none;}
+.balloon-center{width:92px;height:92px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#ebcde1 0%,#cf9cc0 45%,#a975a1 100%);border:6px solid rgba(255,255,255,0.72);box-shadow:0 18px 34px rgba(169,117,161,0.22);}
+.balloon-center-num{font-family:'Playfair Display',serif;font-size:32px;line-height:1;color:#fff;}
+.balloon-center-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.76);margin-top:6px;}
+@media (max-width: 420px){
+  .balloons-hero{gap:10px;padding:16px 12px;}
+  .balloon-deco{gap:8px;}
+  .balloon-deco-body{min-width:34px;height:34px;padding:0 10px;font-size:12px;}
+  .balloon-center{width:78px;height:78px;}
+  .balloon-center-num{font-size:28px;}
+  .balloon-center-sub{font-size:8px;letter-spacing:1.6px;}
+}
 
 .game-section{margin-bottom:28px;}
 .game-card{background:#1a0f1f;border-radius:20px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--shadow-soft);transition:transform 0.55s var(--ease-apple),box-shadow 0.55s var(--ease-apple);}
@@ -512,7 +526,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
     { label:"pinkie", color:"#b87fa8", emoji:"\uD83E\uDEF6", msg:"make Niki one tiny promise and pinkie swear it." },
     { label:"selfie", color:"#a06090", emoji:"\uD83D\uDCF8", msg:"take a cute selfie together right now." },
     { label:"snack", color:"#e8c4df", emoji:"\uD83C\uDF6D", msg:"she gets to pick the next snack or sweet treat." },
-    { label:"forehead", color:"#cc9abb", emoji:"\uD83E\uDD70", msg:"sweet forehead kiss for her" },
+    { label:"forehead kiss", color:"#cc9abb", emoji:"\uD83E\uDD70", msg:"sweet forehead kiss for her" },
     { label:"dare", color:"#7a4f78", emoji:"\uD83C\uDF80", msg:"she picks a dare for you!" }
   ];
   const cvs = document.getElementById('loveWheelCanvas');
@@ -947,14 +961,21 @@ function updateCar() {
 
 function buildBalloonsDeco(){
   const row=document.getElementById('balloonsRow');
-  const colors=['#c890b8','#d4a8c7','#b87fa8','#e8c4df','#9d6a95'];
-  const labels=['♡','♡','18','♡','♡'];
-  for(let i=0;i<5;i++){
-    const b=document.createElement('div'); b.className='balloon-deco';
-    b.style.animation=`float ${2.5+i*0.3}s ease-in-out infinite`; b.style.animationDelay=(i*0.2)+'s';
-    b.innerHTML=`<div class="balloon-deco-body" style="background:${colors[i]};box-shadow:inset -4px -4px 0 rgba(0,0,0,0.12);width:36px;height:44px"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:500;color:#fff">${labels[i]}</span></div><div class="balloon-deco-string"></div>`;
-    row.appendChild(b);
-  }
+  if(!row) return;
+  row.innerHTML = `
+    <div class="balloon-deco">
+      <div class="balloon-deco-body soft">happy</div>
+      <div class="balloon-deco-body">birthday</div>
+    </div>
+    <div class="balloon-center" style="animation:float 3.2s ease-in-out infinite">
+      <div class="balloon-center-num">18</div>
+      <div class="balloon-center-sub">Niki</div>
+    </div>
+    <div class="balloon-deco right">
+      <div class="balloon-deco-body">my girl</div>
+      <div class="balloon-deco-body deep">♡</div>
+    </div>
+  `;
 }
 
 function getHeroImagePath() {
