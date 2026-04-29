@@ -97,7 +97,8 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .slideshow{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;}
 .slide-frame{position:relative;width:100%;max-width:100%;height:440px;border-radius:18px;border:1px solid #ead9e4;background:linear-gradient(180deg,#f8f1f5 0%,#f3e8ee 100%);overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);padding:18px;}
 .slide-frame::after{content:"";position:absolute;inset:0;border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);pointer-events:none;}
-.slide-frame img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity 0.6s var(--ease-apple),transform 0.6s var(--ease-apple);}
+.slide-frame img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity 0.6s var(--ease-apple),transform 0.6s var(--ease-apple),filter 0.6s var(--ease-apple);}
+.slide-frame img.is-swapping{opacity:0.18;transform:scale(0.985);filter:blur(10px);}
 .slide-shell{width:100%;max-width:100%;}
 @media (max-width: 420px){
   .slide-frame{height:400px;}
@@ -138,6 +139,11 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .dreams-kicker{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#b87fa8;margin-bottom:10px;}
 .dreams-title{font-family:'Playfair Display',serif;font-style:italic;font-size:30px;color:#3d1f3a;line-height:1.15;margin-bottom:10px;}
 .dreams-sub{font-size:13px;line-height:1.8;color:#6a4c67;max-width:320px;margin:0 auto;}
+.dreams-list-card{background:linear-gradient(180deg,#fff 0%,#fcf7fa 100%);border:0.5px solid #ead9e4;border-radius:20px;padding:20px 20px 18px;box-shadow:var(--shadow-soft);}
+.dreams-list{margin:0;padding-left:22px;display:grid;gap:12px;}
+.dreams-list li{font-size:13px;line-height:1.8;color:#5a3d58;padding-left:4px;}
+.dreams-list li::marker{font-family:'Playfair Display',serif;color:#b87fa8;}
+.dreams-list-end{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.7;color:#b87fa8;text-align:center;}
 
 .reasons{margin-bottom:8px;}
 .reason-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:0.5px solid #f0e4ec;}
@@ -702,25 +708,28 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="dreams-title">18 things I want to do with you</div>
         <div class="dreams-sub">Now that you're 18, here are eighteen little dreams I want to live out with you, from tiny ordinary dates to the kind of memories we never stop talking about.</div>
       </div>
-      <div class="moments-grid">
-        <div class="moment-card">
-          <div class="moment-tag">♡ little list</div>
-          <div class="moment-title">The first nine</div>
-          <div class="moment-body">1. Go on a proper late-night drive with our song playing.<br>2. Take cute photo booth pictures we'll keep forever.<br>3. Watch the sunrise after staying up talking for too long.<br>4. Have a soft little picnic date somewhere pretty.<br>5. Try a new cafe and pretend we're critics.<br>6. Dress up and go on a date that feels movie-level special.<br>7. Cook something together, even if it's chaotic.<br>8. Build a playlist that's just ours.<br>9. Watch one of your favourite films curled up beside you.</div>
-          <div class="moment-close">The ordinary ones might end up meaning the most.</div>
-        </div>
-        <div class="moment-card">
-          <div class="moment-tag">✦ more of us</div>
-          <div class="moment-title">The next six</div>
-          <div class="moment-body">10. Go somewhere with city lights and just hold you for a while.<br>11. Write each other little notes and swap them on the same day.<br>12. Have one no-phone date where it's just us and the moment.<br>13. Try something new together just for the memory of it.<br>14. Make a tiny tradition that's only ours.<br>15. Dance together even if there's no reason to.<br>16. Spend a whole day doing absolutely nothing but being together.</div>
-          <div class="moment-close">I want our love to feel full of life, not rushed.</div>
-        </div>
-        <div class="moment-card">
-          <div class="moment-tag">∞ the last three</div>
-          <div class="moment-title">The ones that matter most</div>
-          <div class="moment-body">17. Keep learning every version of you as you grow.<br>18. Be there for all the birthdays, bad days, wins, quiet nights, and everything in between.<br><br>And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on.</div>
-          <div class="moment-close">You are my favourite plan for the future.</div>
-        </div>
+      <div class="dreams-list-card">
+        <ol class="dreams-list">
+          <li>Go on a proper late-night drive with our song playing.</li>
+          <li>Take cute photo booth pictures we'll keep forever.</li>
+          <li>Watch the sunrise after staying up talking for too long.</li>
+          <li>Have a soft little picnic date somewhere pretty.</li>
+          <li>Try a new cafe and pretend we're critics.</li>
+          <li>Dress up and go on a date that feels movie-level special.</li>
+          <li>Cook something together, even if it's chaotic.</li>
+          <li>Build a playlist that's just ours.</li>
+          <li>Watch one of your favourite films curled up beside you.</li>
+          <li>Go somewhere with city lights and just hold you for a while.</li>
+          <li>Write each other little notes and swap them on the same day.</li>
+          <li>Have one no-phone date where it's just us and the moment.</li>
+          <li>Try something new together just for the memory of it.</li>
+          <li>Make a tiny tradition that's only ours.</li>
+          <li>Dance together even if there's no reason to.</li>
+          <li>Spend a whole day doing absolutely nothing but being together.</li>
+          <li>Keep learning every version of you as you grow.</li>
+          <li>Be there for all the birthdays, bad days, wins, quiet nights, and everything in between.</li>
+        </ol>
+        <div class="dreams-list-end">And if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on. You are my favourite plan for the future.</div>
       </div>
     </div>
   </div>
@@ -964,6 +973,8 @@ function buildCarousel() {
   carSlides = photos.length;
   if (!image || !dots || !carSlides) return;
   image.src = photos[0];
+  image.dataset.currentSrc = photos[0];
+  image.classList.remove('is-swapping');
   dots.innerHTML = '';
   for (let i = 0; i < carSlides; i++) {
     const dot = document.createElement('div');
@@ -991,13 +1002,23 @@ function updateCar() {
   const photos = getSlideshowPhotos();
   const image = document.getElementById('slideImage');
   if (!image || !photos.length) return;
-  image.style.opacity = '0.35';
-  image.style.transform = 'scale(0.985)';
-  setTimeout(() => {
-    image.src = photos[carIdx];
-    image.style.opacity = '1';
-    image.style.transform = 'scale(1)';
-  }, 140);
+  const nextSrc = photos[carIdx];
+  if (image.dataset.currentSrc === nextSrc) {
+    image.classList.remove('is-swapping');
+  } else {
+    const preload = new Image();
+    preload.onload = () => {
+      image.classList.add('is-swapping');
+      setTimeout(() => {
+        image.src = nextSrc;
+        image.dataset.currentSrc = nextSrc;
+        requestAnimationFrame(() => {
+          image.classList.remove('is-swapping');
+        });
+      }, 180);
+    };
+    preload.src = nextSrc;
+  }
   document.querySelectorAll('.slide-dot').forEach((d, i) => d.className = 'slide-dot' + (i === carIdx ? ' active' : ''));
 }
 
@@ -1608,12 +1629,19 @@ function unlockSite() {
   const gate = document.getElementById('gate');
   const input = document.getElementById('gateInput');
   const feedback = document.getElementById('gateFeedback');
+  const audio = document.getElementById('audio');
   if (!gate || !input || !feedback) return;
 
   hapticSuccess();
   input.classList.add('right');
   feedback.className = 'gate-feedback ok';
   feedback.textContent = 'welcome ♡';
+  if (audio && !playing) {
+    audio.play().then(() => {
+      playing = true;
+      document.querySelectorAll('.wbar').forEach(b => b.style.animationPlayState = 'running');
+    }).catch(() => {});
+  }
   spawnGateParticles();
 
   setTimeout(() => {
