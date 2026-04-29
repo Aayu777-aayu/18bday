@@ -463,7 +463,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       <div class="secret-box" id="secretBox" onclick="openEasterEgg()">
         <div id="secretLock">
           <div style="font-size:28px;margin-bottom:8px">🗝️</div>
-          <div class="secret-hint">tap to enter your secret easter egg</div>
+          <div class="secret-hint">tap to enter </div>
           <div class="secret-tap">solve the riddle</div>
         </div>
       </div>
@@ -561,6 +561,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 
   window.spinLoveWheel=function(){
     if(spinning)return;
+    hapticTap();
     spinning=true;
     document.getElementById('loveWheelBtn').disabled=true;
     document.getElementById('loveWheelOut').style.display='none';
@@ -575,6 +576,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       if(p<1){requestAnimationFrame(step);}
       else{
         angle=angle%(2*Math.PI);spinning=false;
+        hapticSuccess();
         document.getElementById('loveWheelBtn').disabled=false;
         const arc2=(2*Math.PI)/N;
         const norm=((3*Math.PI/2-angle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
@@ -761,6 +763,24 @@ let popped = [];
 let poppedCount = 0;
 const SLIDESHOW_FILES = ['photo1.jpg','photo2.jpg','photo3.jpg','photo4.jpg','photo5.jpg','photo6.jpg','photo7.jpg'];
 
+function triggerHaptic(pattern = 10) {
+  try {
+    if (navigator.vibrate) navigator.vibrate(pattern);
+  } catch (e) {}
+}
+
+function hapticTap() {
+  triggerHaptic(8);
+}
+
+function hapticSuccess() {
+  triggerHaptic([18, 24, 18]);
+}
+
+function hapticCelebrate() {
+  triggerHaptic([20, 40, 20, 40, 30]);
+}
+
 
 function initGame() {
   popped = Array(8).fill(false);
@@ -795,6 +815,7 @@ function buildGrid() {
 
 function popBalloon(i) {
   if (popped[i]) return;
+  hapticTap();
   popped[i] = true;
   poppedCount++;
 
@@ -821,6 +842,7 @@ function popBalloon(i) {
 
   if (poppedCount === 8) {
     setTimeout(() => {
+      hapticCelebrate();
       document.getElementById('progressLabel').textContent = 'all messages revealed!';
       document.getElementById('gameComplete').style.display = 'block';
       setTimeout(() => document.getElementById('gameComplete').classList.add('show'), 50);
@@ -929,6 +951,7 @@ function openEasterEgg() {
   const eggPage = document.getElementById('eggPage');
   const video = document.getElementById('eggVideo');
   if (!eggPage) return;
+  hapticTap();
   resetEasterEgg();
   eggPage.classList.remove('hidden');
   requestAnimationFrame(() => eggPage.classList.add('show'));
@@ -1077,6 +1100,7 @@ function showEggSuccess() {
   const eggPage = document.getElementById('eggPage');
   const video = document.getElementById('eggVideo');
   eggPage?.classList.add('solved');
+  hapticSuccess();
   if (video) {
     video.currentTime = 0;
     video.play().catch(() => {});
@@ -1180,6 +1204,7 @@ function randomEggLaunch() {
 function startEggFireworks() {
   if (eggFireworksRunning) return;
   eggFireworksRunning = true;
+  hapticCelebrate();
   eggFireworksLoop();
   for (let i = 0; i < 5; i++) setTimeout(randomEggLaunch, i * 250);
   eggFireworksTimer = setInterval(() => {
@@ -1351,6 +1376,7 @@ function wordSubmit() {
   const word = wordSelected.map(([r, c]) => wordGridData[r][c]).join('');
   const match = wordTargets.find(({w}) => w === word);
   if (match && !wordFound.has(word)) {
+    hapticSuccess();
     wordFound.add(word);
     const pts = match.pts + (wordHintUsed.has(word) ? 0 : 2);
     wordScore += pts;
@@ -1451,6 +1477,7 @@ function tryPassword() {
   const input = document.getElementById('gateInput');
   const feedback = document.getElementById('gateFeedback');
   if (!input || !feedback) return;
+  hapticTap();
   const val = input.value.trim().toLowerCase();
   if (!val) return;
 
@@ -1475,6 +1502,7 @@ function unlockSite() {
   const feedback = document.getElementById('gateFeedback');
   if (!gate || !input || !feedback) return;
 
+  hapticSuccess();
   input.classList.add('right');
   feedback.className = 'gate-feedback ok';
   feedback.textContent = 'welcome ♡';
@@ -1532,6 +1560,17 @@ function initMotion() {
   elements.forEach(el => observer.observe(el));
 }
 
+function initButtonHaptics() {
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('pointerdown', () => {
+      if (!button.disabled) hapticTap();
+    }, { passive: true });
+  });
+  document.querySelectorAll('.secret-box,.memory-thumb,.slide-dot').forEach(target => {
+    target.addEventListener('pointerdown', () => hapticTap(), { passive: true });
+  });
+}
+
 window.addEventListener('resize', resizeEggFireworks);
 
 initStaticAssets();
@@ -1542,6 +1581,7 @@ initEasterEgg();
 resizeEggFireworks();
 wordNewGame();
 initMotion();
+initButtonHaptics();
 
 </script>
 </body>
