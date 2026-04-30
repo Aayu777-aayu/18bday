@@ -730,7 +730,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 </div>
 
 <script>
-let carIdx=0, carSlides=0, carTimer=null, playing=false, confettiAnim=null;
+let carIdx=0, carSlides=0, carTimer=null, carSwapTimer=null, carSwapToken=0, playing=false, confettiAnim=null;
 const PASSWORD = "ammu";
 const HINT_TEXT = "who's birthday is it? 🎂";
 const WRONG_MSGS = [
@@ -907,18 +907,18 @@ function buildCarousel() {
   const photos = getSlideshowPhotos();
   carSlides = photos.length;
   if (!image || !dots || !carSlides) return;
+  carIdx = 0;
   image.src = photos[0];
+  image.dataset.currentSrc = photos[0];
+  image.style.opacity = '1';
+  image.style.transform = 'scale(1)';
   dots.innerHTML = '';
   for (let i = 0; i < carSlides; i++) {
     const dot = document.createElement('div');
     dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
     dots.appendChild(dot);
   }
-  if (carTimer) clearInterval(carTimer);
-  carTimer = setInterval(() => {
-    carIdx = (carIdx + 1) % carSlides;
-    updateCar();
-  }, 3000);
+  scheduleNextCarouselSlide();
 }
 
 function getCarouselPhotoBase() {
@@ -931,18 +931,76 @@ function getSlideshowPhotos() {
   return SLIDESHOW_FILES.map(file => `${base}${file}?v=${photoVersion}`);
 }
 
-function updateCar() {
+function clearCarouselTimers() {
+  if (carTimer) {
+    clearTimeout(carTimer);
+    carTimer = null;
+  }
+  if (carSwapTimer) {
+    clearTimeout(carSwapTimer);
+    carSwapTimer = null;
+  }
+}
+
+function scheduleNextCarouselSlide() {
+  clearTimeout(carTimer);
+  if (carSlides <= 1) return;
+  carTimer = setTimeout(() => {
+    carIdx = (carIdx + 1) % carSlides;
+    updateCar();
+  }, 3200);
+}
+
+function updateCar(options = {}) {
+  const { immediate = false } = options;
   const photos = getSlideshowPhotos();
   const image = document.getElementById('slideImage');
   if (!image || !photos.length) return;
-  image.style.opacity = '0.35';
-  image.style.transform = 'scale(0.985)';
-  setTimeout(() => {
-    image.src = photos[carIdx];
-    image.style.opacity = '1';
-    image.style.transform = 'scale(1)';
-  }, 140);
   document.querySelectorAll('.slide-dot').forEach((d, i) => d.className = 'slide-dot' + (i === carIdx ? ' active' : ''));
+  const nextSrc = photos[carIdx];
+  if (image.dataset.currentSrc === nextSrc && !immediate) {
+    scheduleNextCarouselSlide();
+    return;
+  }
+
+  const token = ++carSwapToken;
+  clearTimeout(carSwapTimer);
+
+  const applySwap = () => {
+    if (token !== carSwapToken) return;
+    if (immediate) {
+      image.src = nextSrc;
+      image.dataset.currentSrc = nextSrc;
+      image.style.opacity = '1';
+      image.style.transform = 'scale(1)';
+      scheduleNextCarouselSlide();
+      return;
+    }
+
+    image.style.opacity = '0.42';
+    image.style.transform = 'scale(0.992)';
+    carSwapTimer = setTimeout(() => {
+      if (token !== carSwapToken) return;
+      image.src = nextSrc;
+      image.dataset.currentSrc = nextSrc;
+      requestAnimationFrame(() => {
+        if (token !== carSwapToken) return;
+        image.style.opacity = '1';
+        image.style.transform = 'scale(1)';
+      });
+      scheduleNextCarouselSlide();
+    }, 180);
+  };
+
+  if (immediate) {
+    applySwap();
+    return;
+  }
+
+  const preloader = new Image();
+  preloader.onload = applySwap;
+  preloader.onerror = applySwap;
+  preloader.src = nextSrc;
 }
 
 function buildBalloonsDeco(){
@@ -1585,6 +1643,7 @@ function unlockSite() {
   setTimeout(() => {
     gate.classList.add('unlocking');
     document.body.classList.remove('gate-locked');
+    updateCar({ immediate: true });
     setTimeout(() => {
       gate.style.display = 'none';
     }, 900);
@@ -1648,7 +1707,7 @@ function initButtonHaptics() {
 window.addEventListener('resize', resizeEggFireworks);
 
 initStaticAssets();
-buildCarousel(); buildBalloonsDeco(); updateCar(); initGame();
+buildCarousel(); buildBalloonsDeco(); initGame();
 setTimeout(launchConfetti, 500);
 initPasswordGate();
 initEasterEgg();
