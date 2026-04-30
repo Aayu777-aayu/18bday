@@ -58,7 +58,7 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 }
 
 .content{padding:30px 22px 34px;}
-.sec-label{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#cf83ab;margin-bottom:14px;font-weight:400;}
+.sec-label{font-size:11px;letter-spacing:3.1px;text-transform:uppercase;color:#cf83ab;margin-bottom:16px;font-weight:500;line-height:1.4;}
 
 .balloons-hero{display:flex;justify-content:center;gap:18px;margin-bottom:28px;padding:16px 0;}
 .balloon-deco{display:flex;flex-direction:column;align-items:center;}
@@ -123,14 +123,13 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-wrap{margin-bottom:28px;}
 .loved-ones-card{position:relative;background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:22px;padding:24px 22px 20px;box-shadow:var(--shadow-soft);overflow:hidden;}
 .loved-ones-card::after{content:"";position:absolute;inset:auto -10% -38% -10%;height:120px;background:radial-gradient(circle,rgba(231,162,199,0.16),transparent 65%);pointer-events:none;}
-.loved-ones-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
-.loved-ones-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#4a233d;}
+.loved-ones-top{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
 .loved-ones-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cf83ab;}
 .loved-ones-stage{position:relative;z-index:1;touch-action:pan-y;user-select:none;}
 .loved-ones-message{min-height:168px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
 .loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#5a2d4b;margin-bottom:16px;}
-.loved-ones-from{font-size:11px;color:#b56f99;letter-spacing:0.6px;}
-.loved-ones-relation{font-size:10px;color:#d08aad;margin-top:4px;}
+.loved-ones-from{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#a85c87;letter-spacing:0.2px;}
+.loved-ones-relation{font-size:10px;color:#d08aad;margin-top:4px;letter-spacing:1.1px;text-transform:uppercase;}
 .loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
 .loved-ones-nav{display:flex;gap:8px;}
 .loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
@@ -142,6 +141,8 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 @media (max-width: 420px){
   .loved-ones-card{padding:22px 18px 18px;}
   .loved-ones-quote{font-size:17px;}
+  .sec-label{font-size:10px;letter-spacing:2.8px;}
+  .loved-ones-from{font-size:14px;}
   .loved-ones-message{min-height:176px;}
 }
 
@@ -634,7 +635,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       <div class="loved-ones-wrap">
         <div class="loved-ones-card" id="lovedOnesCard">
           <div class="loved-ones-top">
-            <div class="loved-ones-title">little notes for Niki</div>
             <div class="loved-ones-meta" id="lovedOnesMeta">1 / 4</div>
           </div>
           <div class="loved-ones-stage" id="lovedOnesStage">
@@ -838,23 +838,23 @@ let lovedOnesIdx = 0, lovedOnesTimer = null, lovedOnesTouchStartX = 0, lovedOnes
 
 const LOVED_ONES_MESSAGES = [
   {
-    quote: "Happy 18th, Niki. You deserve a year that feels soft, exciting, and full of people loving you loudly.",
-    from: "Mum",
+    quote: "hi ammu, finally eighteen yayyy!!! thank you for being the bestfriend who always stuck by my side and competed in just dance with. i love you so much and god bless you 💕.",
+    from: "Akhi",
     relation: "with all my love"
   },
   {
-    quote: "Keep being exactly who you are. You make everyone around you brighter, and this year is going to adore you back.",
-    from: "Your best friend",
+    quote: "hey ams i love you so much and i wish you a very happy birthday :) im so grateful to have you in my life for sooo long and i can’t wait to grow old together :) u deserve the absolute best always🤍.",
+    from: "Saanvi",
     relation: "always in your corner"
   },
   {
-    quote: "You have the sweetest heart and the prettiest soul. I hope 18 gives you memories you never stop smiling about.",
-    from: "Your family",
+    quote: "happiest birthday nikithaaaa🥹🥹 can’t believe you are officially an adult my childhood wouldn’t have ever been the same without you🥰 thank you for always being a constant in my life i love and appreciate you so much. lots of love.",
+    from: "Naishu",
     relation: "so proud of you"
   },
   {
-    quote: "You are loved more than you know, and today should feel like proof of that from every direction.",
-    from: "Aaryan",
+    quote: "niki!! you’re such a loving and radiant person to be around. you will always be someone who feels like home no matter where we are. i love you so much.",
+    from: "Aarya",
     relation: "your biggest fan"
   }
 ];
