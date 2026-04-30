@@ -127,10 +127,10 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#4a233d;}
 .loved-ones-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cf83ab;}
 .loved-ones-stage{position:relative;z-index:1;touch-action:pan-y;user-select:none;}
-.loved-ones-message{min-height:178px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
-.loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;line-height:1.45;color:#5a2d4b;margin-bottom:18px;}
-.loved-ones-from{font-size:12px;color:#b56f99;letter-spacing:0.6px;}
-.loved-ones-relation{font-size:11px;color:#d08aad;margin-top:4px;}
+.loved-ones-message{min-height:168px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
+.loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#5a2d4b;margin-bottom:16px;}
+.loved-ones-from{font-size:11px;color:#b56f99;letter-spacing:0.6px;}
+.loved-ones-relation{font-size:10px;color:#d08aad;margin-top:4px;}
 .loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
 .loved-ones-nav{display:flex;gap:8px;}
 .loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
@@ -141,8 +141,8 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-dot.active{width:20px;border-radius:999px;background:#d783ad;}
 @media (max-width: 420px){
   .loved-ones-card{padding:22px 18px 18px;}
-  .loved-ones-quote{font-size:20px;}
-  .loved-ones-message{min-height:190px;}
+  .loved-ones-quote{font-size:17px;}
+  .loved-ones-message{min-height:176px;}
 }
 
 .moments-section{margin-bottom:28px;}
@@ -398,7 +398,6 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="hero-photo" id="heroSlot">
         <img id="heroImage" src="" alt="Niki" decoding="async">
       </div>
-      <div class="age-badge">for the birthday girl</div>
       <div class="hero-celebrate"><span>Happy 18th Birthday</span></div>
       <div class="hero-name" id="hName">Niki</div>
       <div class="hero-sub" id="hSub">forever my baby</div>
@@ -470,30 +469,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 
 18 feels like the beginning of everything beautiful. And I want to be there for all of it.</div>
         <div class="letter-close" id="lClose">Yours, always ♡</div>
-      </div>
-
-      <div class="sec-label">messages from your loved ones</div>
-      <div class="loved-ones-wrap">
-        <div class="loved-ones-card" id="lovedOnesCard">
-          <div class="loved-ones-top">
-            <div class="loved-ones-title">little notes for Niki</div>
-            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 4</div>
-          </div>
-          <div class="loved-ones-stage" id="lovedOnesStage">
-            <div class="loved-ones-message" id="lovedOnesMessage">
-              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
-              <div class="loved-ones-from" id="lovedOnesFrom"></div>
-              <div class="loved-ones-relation" id="lovedOnesRelation"></div>
-            </div>
-          </div>
-          <div class="loved-ones-controls">
-            <div class="loved-ones-nav">
-              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
-              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
-            </div>
-            <div class="loved-ones-dots" id="lovedOnesDots"></div>
-          </div>
-        </div>
       </div>
 
       <div class="sec-label">18 things i want to do with you</div>
@@ -655,6 +630,29 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 })();
 </script>
 <!-- ===== END SPIN THE WHEEL ===== -->
+      <div class="sec-label">messages from your loved ones</div>
+      <div class="loved-ones-wrap">
+        <div class="loved-ones-card" id="lovedOnesCard">
+          <div class="loved-ones-top">
+            <div class="loved-ones-title">little notes for Niki</div>
+            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 4</div>
+          </div>
+          <div class="loved-ones-stage" id="lovedOnesStage">
+            <div class="loved-ones-message" id="lovedOnesMessage">
+              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
+              <div class="loved-ones-from" id="lovedOnesFrom"></div>
+              <div class="loved-ones-relation" id="lovedOnesRelation"></div>
+            </div>
+          </div>
+          <div class="loved-ones-controls">
+            <div class="loved-ones-nav">
+              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
+              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
+            </div>
+            <div class="loved-ones-dots" id="lovedOnesDots"></div>
+          </div>
+        </div>
+      </div>
       <div class="closing">
         <div style="font-size:20px;letter-spacing:6px;margin-bottom:10px;color:#fdf0f8">♡ ♡ ♡</div>
         <div class="closing-txt" id="cMsg">Happy 18th, Niki</div>
