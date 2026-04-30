@@ -452,9 +452,9 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       <div class="reasons" id="reasonList">
         <div class="reason-item"><div class="rnum">1</div><div class="rtxt">The energy you bring with you everywhere</div></div>
         <div class="reason-item"><div class="rnum">2</div><div class="rtxt">How you always show compassion towards everyone</div></div>
-        <div class="reason-item"><div class="rnum">3</div><div class="rtxt">Your way of words, awwww so cute iykyk</div></div>
+        <div class="reason-item"><div class="rnum">3</div><div class="rtxt">Your way of words, your singing & your cute references</div></div>
         <div class="reason-item"><div class="rnum">4</div><div class="rtxt">The way you make ordinary moments feel magical</div></div>
-        <div class="reason-item"><div class="rnum">5</div><div class="rtxt">Simply everything, I could fill a billions of pages</div></div>
+        <div class="reason-item"><div class="rnum">5</div><div class="rtxt">Highkey everything, I could fill a billions of pages</div></div>
       </div>
 
       <div class="sec-label">a secret just for you</div>
@@ -471,7 +471,8 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To always make you feel seen, heard and loved</div></div>
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To be your biggest supporter as you chase your goals</div></div>
         <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To choose you, every single day forever</div></div>
-        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To never stop finding new reasons to fall in love with you</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To always be there for you, through thick and thin</div></div>
+        <div class="promise-item"><div style="font-size:14px;color:#c890b8;flex-shrink:0">♡</div><div class="ptxt">To always listen to you</div></div>
       </div>
 
       <div class="sec-label">play something cute</div>
@@ -619,7 +620,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   <button class="egg-back-btn" type="button" onclick="closeEasterEgg()">← back</button>
   <div class="egg-shell">
     <div class="egg-wrap" id="eggWrap">
-      <div class="egg-tag">🔐 secret easter egg</div>
+      <div class="egg-tag">🔐 secret </div>
       <div class="riddle-card">
         <div class="riddle-icon">🌸</div>
         <div class="riddle-title">solve the riddle</div>
@@ -641,7 +642,7 @@ Watching you grow into who you are has been one of the greatest gifts of my life
   <div class="success-overlay" id="successOverlay">
     <div class="success-msg fade-up">
       <div class="success-tag">🎉 you solved it</div>
-      <div class="success-title">you got it,<br>Niki ♡</div>
+      <div class="success-title">you got it,<br>Baby ♡</div>
       <div class="success-sub">time — it's the one thing I never want to run out of when I'm with you.</div>
       <div class="success-reveal">
         <div class="success-reveal-text" id="secretRevealText"></div>
@@ -749,7 +750,7 @@ const EGG_HINTS = [
   "it measures something you can never get back...",
   "it's on your wrist or on the wall 👀"
 ];
-const EGG_SECRET_MESSAGE = "Every second with you is my favourite second. Happy 18th — here's to all the time ahead of us. I love you more than words. ♡";
+const EGG_SECRET_MESSAGE = "Every second with you is my favourite second. Happy 18th Niki, here's to all the time ahead of us. I love you more than words. ♡";
 let eggAttempts = 0;
 const eggMaxAttempts = 3;
 let eggFireworks = [];
@@ -1130,7 +1131,21 @@ function launchConfetti(){
   const colors=['#e7a2c7','#fff2f7','#efbed7','#f6d7e7','#cc77a8','#ffffff','#f8c6df','#ffe3f0'];
   const pieces=[];
   for(let i=0;i<120;i++){
-    pieces.push({x:Math.random()*W,y:-20-Math.random()*200,vx:(Math.random()-0.5)*3,vy:2+Math.random()*4,rot:Math.random()*360,rv:(Math.random()-0.5)*10,w:5+Math.random()*8,h:3+Math.random()*5,color:colors[Math.floor(Math.random()*colors.length)],alpha:1,shape:Math.random()>0.5?'rect':'circle'});
+    const shapeRoll = Math.random();
+    const shape = shapeRoll > 0.78 ? 'text18' : (shapeRoll > 0.4 ? 'rect' : 'circle');
+    pieces.push({
+      x:Math.random()*W,
+      y:-20-Math.random()*200,
+      vx:(Math.random()-0.5)*3,
+      vy:2+Math.random()*4,
+      rot:Math.random()*360,
+      rv:(Math.random()-0.5)*10,
+      w:shape === 'text18' ? 16 + Math.random()*8 : 5 + Math.random()*8,
+      h:3+Math.random()*5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      alpha:1,
+      shape
+    });
   }
   function draw(){
     ctx.clearRect(0,0,W,H); let alive=false;
@@ -1139,8 +1154,16 @@ function launchConfetti(){
       if(p.y>H+20)p.alpha=0;
       if(p.alpha>0)alive=true;
       ctx.save();ctx.globalAlpha=Math.max(0,p.alpha);ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;
-      if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
-      else ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      if(p.shape==='circle'){
+        ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();
+      } else if (p.shape === 'text18') {
+        ctx.font=`700 ${Math.round(p.w)}px Inter, sans-serif`;
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.fillText('18',0,0);
+      } else {
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      }
       ctx.restore();
     });
     if(alive)confettiAnim=requestAnimationFrame(draw);else ctx.clearRect(0,0,W,H);
