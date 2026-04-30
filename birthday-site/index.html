@@ -29,7 +29,9 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 
 .hero{background:linear-gradient(180deg,#3b1730 0%,#2b1325 100%);padding:52px 24px 36px;text-align:center;position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;inset:auto -20% -38% -20%;height:180px;background:radial-gradient(circle,rgba(239,181,214,0.20),transparent 62%);pointer-events:none;filter:blur(10px);}
-.age-badge{display:inline-block;font-size:10px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:#efb5d6;margin-bottom:14px;padding:5px 16px;border:0.5px solid rgba(239,181,214,0.4);border-radius:20px;}
+.age-badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#fff7fb;margin-bottom:12px;padding:7px 18px;border:0.5px solid rgba(255,225,240,0.4);border-radius:999px;background:linear-gradient(180deg,rgba(240,170,207,0.24) 0%,rgba(216,112,167,0.20) 100%);box-shadow:0 10px 24px rgba(231,162,199,0.18),inset 0 1px 0 rgba(255,255,255,0.2);}
+.hero-celebrate{font-family:'Playfair Display',serif;font-size:30px;line-height:1.08;color:#fff7fb;margin-bottom:10px;text-shadow:0 10px 30px rgba(0,0,0,0.18);}
+.hero-celebrate span{display:inline-block;background:linear-gradient(180deg,#fffafc 0%,#f3bfdc 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-photo{width:100px;height:100px;border-radius:50%;margin:0 auto 14px;border:2px solid rgba(239,181,214,0.55);background:rgba(255,255,255,0.08);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.18);transition:transform 0.6s var(--ease-apple),box-shadow 0.6s var(--ease-apple);}
 .hero-photo img{width:100%;height:100%;object-fit:cover;}
 .hero-photo:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 36px rgba(0,0,0,0.22);}
@@ -51,6 +53,9 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 @keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 @keyframes burst{0%{transform:scale(1);opacity:1}100%{transform:scale(2.5);opacity:0}}
 @keyframes msgSlide{0%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@media (max-width: 420px){
+  .hero-celebrate{font-size:26px;}
+}
 
 .content{padding:30px 22px 34px;}
 .sec-label{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#cf83ab;margin-bottom:14px;font-weight:400;}
@@ -368,7 +373,8 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="hero-photo" id="heroSlot">
         <img id="heroImage" src="" alt="Niki" decoding="async">
       </div>
-      <div class="age-badge">Happy 18th birthday!</div>
+      <div class="age-badge">for the birthday girl</div>
+      <div class="hero-celebrate"><span>Happy 18th Birthday</span></div>
       <div class="hero-name" id="hName">Niki</div>
       <div class="hero-sub" id="hSub">forever my baby</div>
       <div class="music-bar">
