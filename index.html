@@ -120,6 +120,31 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .letter-body{font-size:13px;line-height:1.85;color:#5a3d58;white-space:pre-wrap;outline:none;}
 .letter-close{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#3d1f3a;text-align:right;outline:none;}
 
+.loved-ones-wrap{margin-bottom:28px;}
+.loved-ones-card{position:relative;background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:22px;padding:24px 22px 20px;box-shadow:var(--shadow-soft);overflow:hidden;}
+.loved-ones-card::after{content:"";position:absolute;inset:auto -10% -38% -10%;height:120px;background:radial-gradient(circle,rgba(231,162,199,0.16),transparent 65%);pointer-events:none;}
+.loved-ones-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
+.loved-ones-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#4a233d;}
+.loved-ones-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cf83ab;}
+.loved-ones-stage{position:relative;z-index:1;touch-action:pan-y;user-select:none;}
+.loved-ones-message{min-height:178px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
+.loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;line-height:1.45;color:#5a2d4b;margin-bottom:18px;}
+.loved-ones-from{font-size:12px;color:#b56f99;letter-spacing:0.6px;}
+.loved-ones-relation{font-size:11px;color:#d08aad;margin-top:4px;}
+.loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
+.loved-ones-nav{display:flex;gap:8px;}
+.loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
+.loved-ones-btn:hover{transform:translateY(-1px);background:#f4d2e4;color:#6f365b;}
+.loved-ones-btn:active{transform:scale(0.96);}
+.loved-ones-dots{display:flex;gap:7px;align-items:center;justify-content:center;flex:1;}
+.loved-ones-dot{width:7px;height:7px;border:none;padding:0;border-radius:50%;background:#edc7db;transition:all 0.3s var(--ease-apple);cursor:pointer;}
+.loved-ones-dot.active{width:20px;border-radius:999px;background:#d783ad;}
+@media (max-width: 420px){
+  .loved-ones-card{padding:22px 18px 18px;}
+  .loved-ones-quote{font-size:20px;}
+  .loved-ones-message{min-height:190px;}
+}
+
 .moments-section{margin-bottom:28px;}
 .moments-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#5e3b58;line-height:1.7;margin:0 0 14px;}
 .moments-grid{display:grid;gap:12px;}
@@ -445,6 +470,30 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 
 18 feels like the beginning of everything beautiful. And I want to be there for all of it.</div>
         <div class="letter-close" id="lClose">Yours, always ♡</div>
+      </div>
+
+      <div class="sec-label">messages from your loved ones</div>
+      <div class="loved-ones-wrap">
+        <div class="loved-ones-card" id="lovedOnesCard">
+          <div class="loved-ones-top">
+            <div class="loved-ones-title">little notes for Niki</div>
+            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 4</div>
+          </div>
+          <div class="loved-ones-stage" id="lovedOnesStage">
+            <div class="loved-ones-message" id="lovedOnesMessage">
+              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
+              <div class="loved-ones-from" id="lovedOnesFrom"></div>
+              <div class="loved-ones-relation" id="lovedOnesRelation"></div>
+            </div>
+          </div>
+          <div class="loved-ones-controls">
+            <div class="loved-ones-nav">
+              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
+              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
+            </div>
+            <div class="loved-ones-dots" id="lovedOnesDots"></div>
+          </div>
+        </div>
       </div>
 
       <div class="sec-label">18 things i want to do with you</div>
@@ -787,6 +836,30 @@ const WORD_BANK = [
 const WORD_SIZE = 9;
 const WORD_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
 let wordGridData = [], wordFound = new Set(), wordScore = 0, wordSelected = [], wordTargets = [], wordHintUsed = new Set();
+let lovedOnesIdx = 0, lovedOnesTimer = null, lovedOnesTouchStartX = 0, lovedOnesTouchDeltaX = 0;
+
+const LOVED_ONES_MESSAGES = [
+  {
+    quote: "Happy 18th, Niki. You deserve a year that feels soft, exciting, and full of people loving you loudly.",
+    from: "Mum",
+    relation: "with all my love"
+  },
+  {
+    quote: "Keep being exactly who you are. You make everyone around you brighter, and this year is going to adore you back.",
+    from: "Your best friend",
+    relation: "always in your corner"
+  },
+  {
+    quote: "You have the sweetest heart and the prettiest soul. I hope 18 gives you memories you never stop smiling about.",
+    from: "Your family",
+    relation: "so proud of you"
+  },
+  {
+    quote: "You are loved more than you know, and today should feel like proof of that from every direction.",
+    from: "Aaryan",
+    relation: "your biggest fan"
+  }
+];
 
 let balloonMessages = [
   "You are my light, my everything",
@@ -906,6 +979,81 @@ function playPop() {
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
     osc.start(); osc.stop(ctx.currentTime + 0.1);
   } catch(e) {}
+}
+
+function scheduleLovedOneMessage() {
+  if (lovedOnesTimer) clearTimeout(lovedOnesTimer);
+  if (LOVED_ONES_MESSAGES.length <= 1) return;
+  lovedOnesTimer = setTimeout(() => {
+    lovedOnesIdx = (lovedOnesIdx + 1) % LOVED_ONES_MESSAGES.length;
+    renderLovedOneMessage();
+  }, 4200);
+}
+
+function renderLovedOneMessage() {
+  const quote = document.getElementById('lovedOnesQuote');
+  const from = document.getElementById('lovedOnesFrom');
+  const relation = document.getElementById('lovedOnesRelation');
+  const meta = document.getElementById('lovedOnesMeta');
+  const messageWrap = document.getElementById('lovedOnesMessage');
+  const dots = document.getElementById('lovedOnesDots');
+  if (!quote || !from || !relation || !meta || !messageWrap || !dots || !LOVED_ONES_MESSAGES.length) return;
+
+  const item = LOVED_ONES_MESSAGES[lovedOnesIdx];
+  messageWrap.style.opacity = '0.35';
+  messageWrap.style.transform = 'translateX(10px)';
+  setTimeout(() => {
+    quote.textContent = `“${item.quote}”`;
+    from.textContent = item.from;
+    relation.textContent = item.relation;
+    meta.textContent = `${lovedOnesIdx + 1} / ${LOVED_ONES_MESSAGES.length}`;
+    messageWrap.style.opacity = '1';
+    messageWrap.style.transform = 'translateX(0)';
+  }, 120);
+
+  dots.innerHTML = '';
+  LOVED_ONES_MESSAGES.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'loved-ones-dot' + (index === lovedOnesIdx ? ' active' : '');
+    dot.setAttribute('aria-label', `Show message ${index + 1}`);
+    dot.onclick = () => {
+      lovedOnesIdx = index;
+      hapticTap();
+      renderLovedOneMessage();
+    };
+    dots.appendChild(dot);
+  });
+
+  scheduleLovedOneMessage();
+}
+
+function changeLovedOneMessage(direction) {
+  if (!LOVED_ONES_MESSAGES.length) return;
+  hapticTap();
+  lovedOnesIdx = (lovedOnesIdx + direction + LOVED_ONES_MESSAGES.length) % LOVED_ONES_MESSAGES.length;
+  renderLovedOneMessage();
+}
+
+function initLovedOnesMessages() {
+  const stage = document.getElementById('lovedOnesStage');
+  if (!stage || !LOVED_ONES_MESSAGES.length) return;
+
+  renderLovedOneMessage();
+
+  stage.addEventListener('touchstart', event => {
+    lovedOnesTouchStartX = event.touches[0].clientX;
+    lovedOnesTouchDeltaX = 0;
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', event => {
+    lovedOnesTouchDeltaX = event.touches[0].clientX - lovedOnesTouchStartX;
+  }, { passive: true });
+
+  stage.addEventListener('touchend', () => {
+    if (Math.abs(lovedOnesTouchDeltaX) < 36) return;
+    changeLovedOneMessage(lovedOnesTouchDeltaX < 0 ? 1 : -1);
+  });
 }
 
 function buildCarousel() {
@@ -1711,7 +1859,7 @@ function spawnGateParticles() {
 }
 
 function initMotion() {
-  const revealSelectors = ['.hero','.game-card','.slideshow','.letter-card','#reasonList','.secret-box','#promiseList','.mini-game-card','.wheel-card','.closing'];
+  const revealSelectors = ['.hero','.game-card','.slideshow','.letter-card','.loved-ones-wrap','#reasonList','.secret-box','#promiseList','.mini-game-card','.wheel-card','.closing'];
   const elements = [];
   revealSelectors.forEach(selector => {
     document.querySelectorAll(selector).forEach(el => {
@@ -1748,7 +1896,7 @@ function initButtonHaptics() {
 window.addEventListener('resize', resizeEggFireworks);
 
 initStaticAssets();
-buildCarousel(); buildBalloonsDeco(); initGame();
+buildCarousel(); buildBalloonsDeco(); initGame(); initLovedOnesMessages();
 initPasswordGate();
 initEasterEgg();
 resizeEggFireworks();
