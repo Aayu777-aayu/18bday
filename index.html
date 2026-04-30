@@ -1125,8 +1125,19 @@ function closeDreamsPage() {
 }
 
 function launchConfetti(){
-  const canvas=document.getElementById('confettiCanvas'),ctx=canvas.getContext('2d'),W=360,H=700;
-  canvas.width=W;canvas.height=H;
+  const canvas=document.getElementById('confettiCanvas');
+  const wrap=document.getElementById('mainWrap');
+  if(!canvas || !wrap) return;
+  const ctx=canvas.getContext('2d');
+  const rect=wrap.getBoundingClientRect();
+  const dpr=Math.max(1, window.devicePixelRatio || 1);
+  const W=Math.max(320, Math.round(rect.width));
+  const H=Math.max(640, Math.round(wrap.offsetHeight || rect.height));
+  canvas.style.width=`${W}px`;
+  canvas.style.height=`${H}px`;
+  canvas.width=Math.round(W * dpr);
+  canvas.height=Math.round(H * dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
   if(confettiAnim)cancelAnimationFrame(confettiAnim);
   const colors=['#e7a2c7','#fff2f7','#efbed7','#f6d7e7','#cc77a8','#ffffff','#f8c6df','#ffe3f0'];
   const pieces=[];
@@ -1667,6 +1678,7 @@ function unlockSite() {
     gate.classList.add('unlocking');
     document.body.classList.remove('gate-locked');
     updateCar({ immediate: true });
+    launchConfetti();
     setTimeout(() => {
       gate.style.display = 'none';
     }, 900);
@@ -1731,7 +1743,6 @@ window.addEventListener('resize', resizeEggFireworks);
 
 initStaticAssets();
 buildCarousel(); buildBalloonsDeco(); initGame();
-setTimeout(launchConfetti, 500);
 initPasswordGate();
 initEasterEgg();
 resizeEggFireworks();
