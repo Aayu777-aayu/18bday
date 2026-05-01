@@ -138,22 +138,10 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-dots{display:flex;gap:7px;align-items:center;justify-content:center;flex:1;}
 .loved-ones-dot{width:7px;height:7px;border:none;padding:0;border-radius:50%;background:#edc7db;transition:all 0.3s var(--ease-apple);cursor:pointer;}
 .loved-ones-dot.active{width:20px;border-radius:999px;background:#d783ad;}
-.pet-tribute-section{margin-bottom:28px;}
-.pet-card{max-width:100%;width:100%;padding:28px 24px;border-radius:28px;background:linear-gradient(180deg,#fff8f2 0%,#fff4fa 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 45px rgba(120,80,80,0.12);text-align:center;border:1px solid rgba(255,255,255,0.78);}
-.paw{font-size:38px;margin-bottom:12px;animation:gentleFloat 3s ease-in-out infinite;}
-.pet-photo{width:184px;height:184px;object-fit:cover;border-radius:50%;margin:8px auto 18px;display:block;box-shadow:0 12px 30px rgba(0,0,0,0.12);border:5px solid white;}
-.pet-card h2{margin:0 0 16px;font-family:'Playfair Display',serif;font-style:italic;font-size:26px;line-height:1.2;color:#6b4f4f;}
-.pet-card p{margin:14px 0;color:#5f5555;font-size:15px;line-height:1.7;}
-.soft-line{margin-top:20px;font-style:italic;color:#8a6f6f;}
-@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media (max-width: 420px){
   .loved-ones-card{padding:22px 18px 18px;}
   .loved-ones-quote{font-size:17px;}
   .loved-ones-message{min-height:176px;}
-  .pet-card{padding:24px 18px;}
-  .pet-photo{width:164px;height:164px;}
-  .pet-card h2{font-size:23px;}
-  .pet-card p{font-size:14px;}
 }
 
 .moments-section{margin-bottom:28px;}
@@ -189,7 +177,7 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 
 .hidden{display:none;}
 
-.egg-page{position:fixed;inset:0;z-index:5000;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);}
+.egg-page{position:fixed;inset:0;z-index:7000;background:#0d0814;opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);}
 .egg-page.show{opacity:1;pointer-events:auto;}
 .egg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 0.3s ease;}
 .egg-video.ready{opacity:1;}
@@ -523,29 +511,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <button class="mini-game-btn" type="button" onclick="openWordGame()">open word game ✦</button>
       </div>
 
-      <div class="sec-label">messages from your loved ones</div>
-      <div class="loved-ones-wrap">
-        <div class="loved-ones-card" id="lovedOnesCard">
-          <div class="loved-ones-top">
-            <div class="loved-ones-title">little notes for Niki</div>
-            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
-          </div>
-          <div class="loved-ones-stage" id="lovedOnesStage">
-            <div class="loved-ones-message" id="lovedOnesMessage">
-              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
-              <div class="loved-ones-from" id="lovedOnesFrom"></div>
-            </div>
-          </div>
-          <div class="loved-ones-controls">
-            <div class="loved-ones-nav">
-              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
-              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
-            </div>
-            <div class="loved-ones-dots" id="lovedOnesDots"></div>
-          </div>
-        </div>
-      </div>
-
     <!-- ===== SPIN THE WHEEL OF LOVE ===== -->
 <!-- Paste this block anywhere inside your app's .content div -->
 
@@ -664,27 +629,28 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 })();
 </script>
 <!-- ===== END SPIN THE WHEEL ===== -->
-      <div class="sec-label">a little moment for him</div>
-      <section class="pet-tribute-section">
-        <div class="pet-card">
-          <div class="paw">🐾</div>
-          <img src="" alt="A special photo in memory of him" class="pet-photo hidden" id="petTributePhoto">
-          <h2>A Little Moment for Him</h2>
-          <p>
-            I know today is about celebrating you, but I also wanted to make a little
-            space for someone who meant so much to you.
-          </p>
-          <p>
-            He was such a special part of your life, and I know how much love you had
-            for him. He will always be remembered, always be loved, and always have a
-            place in your heart.
-          </p>
-          <p class="soft-line">
-            I hope this little moment reminds you that it is okay to miss him today too.
-            He was lucky to be loved by you. 🤍
-          </p>
+      <div class="sec-label">messages from your loved ones</div>
+      <div class="loved-ones-wrap">
+        <div class="loved-ones-card" id="lovedOnesCard">
+          <div class="loved-ones-top">
+            <div class="loved-ones-title">little notes for Niki</div>
+            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
+          </div>
+          <div class="loved-ones-stage" id="lovedOnesStage">
+            <div class="loved-ones-message" id="lovedOnesMessage">
+              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
+              <div class="loved-ones-from" id="lovedOnesFrom"></div>
+            </div>
+          </div>
+          <div class="loved-ones-controls">
+            <div class="loved-ones-nav">
+              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
+              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
+            </div>
+            <div class="loved-ones-dots" id="lovedOnesDots"></div>
+          </div>
         </div>
-      </section>
+      </div>
       <div class="closing">
         <div style="font-size:20px;letter-spacing:6px;margin-bottom:10px;color:#fdf0f8">♡ ♡ ♡</div>
         <div class="closing-txt" id="cMsg">Happy 18th, Niki</div>
@@ -1224,23 +1190,13 @@ function getSongPath() {
   return window.location.pathname.includes('/birthday-site/') ? '../song1.mp3' : 'song1.mp3';
 }
 
-function getPetTributeImagePath() {
-  return window.location.pathname.includes('/birthday-site/') ? 'pet-tribute.jpg' : 'birthday-site/pet-tribute.jpg';
-}
-
 function initStaticAssets() {
   const heroImage = document.getElementById('heroImage');
   const audio = document.getElementById('audio');
-  const petTributePhoto = document.getElementById('petTributePhoto');
   if (heroImage) heroImage.src = getHeroImagePath();
   if (audio) {
     audio.src = getSongPath();
     audio.load();
-  }
-  if (petTributePhoto) {
-    petTributePhoto.src = getPetTributeImagePath();
-    petTributePhoto.onload = () => petTributePhoto.classList.remove('hidden');
-    petTributePhoto.onerror = () => petTributePhoto.classList.add('hidden');
   }
 }
 
