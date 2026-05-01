@@ -285,35 +285,31 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .word-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(255,247,251,0.88);backdrop-filter:blur(12px);color:#7f476b;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:1px solid rgba(225,174,202,0.45);box-shadow:0 10px 24px rgba(174,108,143,0.10);}
 .word-back-btn:hover{background:rgba(255,240,247,0.96);}
 .word-game{width:min(380px,100%);}
-.word-top-bar{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:20px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-soft);}
+.word-top-bar{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:20px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:var(--shadow-soft);}
 .word-top-title{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#4a233d;}
 .word-top-stats{display:flex;gap:12px;}
 .word-stat{text-align:center;}
 .word-stat-n{font-family:'Playfair Display',serif;font-size:18px;color:#cf83ab;line-height:1;}
 .word-stat-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(181,111,153,0.65);margin-top:2px;}
-.word-grid-wrap{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:20px;padding:14px;margin-bottom:12px;position:relative;box-shadow:var(--shadow-soft);}
-.word-grid{display:grid;gap:3px;}
-.word-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;cursor:default;transition:all 0.15s;position:relative;user-select:none;}
-.word-cell.letter{background:#fffafc;border:0.5px solid rgba(212,168,199,0.22);color:#6d4865;cursor:pointer;}
-.word-cell.letter:hover{background:#fdebf4;border-color:rgba(212,168,199,0.45);}
-.word-cell.selected{background:rgba(226,154,192,0.22);border-color:#d783ad;color:#7a2f59;transform:scale(1.05);}
-.word-cell.found{background:rgba(226,154,192,0.12);border-color:rgba(215,131,173,0.3);color:#c16f9d;}
-.word-cell.found-flash{background:#e29ac0;color:#fff7fb;transform:scale(1.08);}
-.word-cell.hint-flash{background:rgba(255,200,100,0.2);border-color:rgba(255,200,100,0.5);}
-.word-sel-bar{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;min-height:48px;gap:12px;box-shadow:var(--shadow-soft);}
-.word-sel-letters{font-family:'Playfair Display',serif;font-size:20px;color:#4a233d;letter-spacing:4px;min-width:120px;}
-.word-sel-placeholder{font-size:11px;color:rgba(181,111,153,0.45);letter-spacing:2px;text-transform:uppercase;}
-.word-sel-actions{display:flex;gap:8px;}
-.word-action-btn{padding:7px 16px;border:0.5px solid rgba(212,168,199,0.35);border-radius:20px;background:transparent;color:#a86a8f;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;white-space:nowrap;}
-.word-action-btn:hover{border-color:#d783ad;color:#7a2f59;background:#fff3f8;}
-.word-submit-btn{background:rgba(226,154,192,0.18);border-color:#d783ad;color:#7a2f59;}
-.word-submit-btn:hover{background:#e29ac0;color:#fff7fb;}
-.word-submit-btn:disabled{opacity:0.3;cursor:not-allowed;}
-.word-words-panel{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow-soft);}
-.word-words-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(181,111,153,0.65);margin-bottom:12px;}
-.word-words-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.word-chip{padding:8px 12px;background:#fffafc;border:0.5px solid rgba(212,168,199,0.16);border-radius:10px;font-size:12px;color:rgba(181,111,153,0.55);letter-spacing:1px;text-align:center;transition:all 0.3s;font-family:'Playfair Display',serif;font-style:italic;}
-.word-chip.found{background:rgba(226,154,192,0.10);border-color:rgba(215,131,173,0.3);color:#c16f9d;text-decoration:line-through;}
+.word-grid-wrap{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:20px;padding:18px 16px 16px;margin-bottom:12px;position:relative;box-shadow:var(--shadow-soft);}
+.word-clue-kicker{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(181,111,153,0.68);margin-bottom:10px;}
+.word-clue-text{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#7f476b;line-height:1.5;margin-bottom:16px;}
+.word-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:296px;margin:0 auto;}
+.word-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:24px;font-weight:600;font-family:'Inter',sans-serif;transition:transform 0.18s var(--ease-apple),background 0.18s var(--ease-apple),border-color 0.18s var(--ease-apple),color 0.18s var(--ease-apple),box-shadow 0.18s var(--ease-apple);position:relative;user-select:none;text-transform:uppercase;background:#fffafc;border:1px solid rgba(212,168,199,0.2);color:#6d4865;box-shadow:inset 0 -1px 0 rgba(212,168,199,0.08);}
+.word-cell.filled{border-color:rgba(215,131,173,0.44);background:#fff5f9;}
+.word-cell.reveal{animation:wordFlipReveal 0.42s ease both;}
+.word-cell.correct{background:#d98cb7;border-color:#d98cb7;color:#fff8fc;}
+.word-cell.present{background:#efbfd7;border-color:#efbfd7;color:#6b3353;}
+.word-cell.absent{background:#eadce5;border-color:#eadce5;color:#92788a;}
+.word-keyboard{display:grid;gap:8px;margin-bottom:12px;}
+.word-key-row{display:flex;justify-content:center;gap:6px;}
+.word-key{min-width:28px;height:46px;padding:0 8px;border:none;border-radius:12px;background:#fffafc;color:#7a4e68;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;box-shadow:var(--shadow-soft);border:1px solid rgba(212,168,199,0.18);cursor:pointer;transition:transform 0.15s var(--ease-apple),background 0.15s var(--ease-apple),color 0.15s var(--ease-apple),border-color 0.15s var(--ease-apple);}
+.word-key:hover{transform:translateY(-1px);background:#fff2f7;}
+.word-key:active{transform:scale(0.97);}
+.word-key.wide{min-width:68px;font-size:11px;}
+.word-key.correct{background:#d98cb7;border-color:#d98cb7;color:#fff8fc;}
+.word-key.present{background:#efbfd7;border-color:#efbfd7;color:#6b3353;}
+.word-key.absent{background:#eadce5;border-color:#eadce5;color:#92788a;}
 .word-msg-bar{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:14px;padding:10px 16px;margin-bottom:12px;text-align:center;min-height:38px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft);}
 .word-msg-txt{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:#c16f9d;transition:all 0.3s;}
 .word-msg-txt.correct{color:#a0e8c0;}
@@ -331,6 +327,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .word-new-btn{padding:12px 32px;background:#e29ac0;color:#fff7fb;border:none;border-radius:14px;font-size:14px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;transition:all 0.15s;}
 .word-new-btn:hover{background:#eab0ce;transform:scale(1.03);}
 @keyframes wordShakeRow{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes wordFlipReveal{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
 
 #gate{position:fixed;top:0;right:0;bottom:0;left:0;width:100vw;height:100vh;height:100dvh;min-height:100vh;z-index:9999;background:#0d0814;display:flex;align-items:center;justify-content:center;padding:24px 16px calc(24px + env(safe-area-inset-bottom));transition:opacity 0.8s ease,transform 0.8s ease;overflow:hidden;}
 #gate.unlocking{opacity:0;transform:scale(1.05);pointer-events:none;}
@@ -519,9 +516,9 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 
       <div class="sec-label">play something cute</div>
       <div class="mini-game-card">
-        <div class="mini-game-title">romantic word hunt</div>
-        <div class="mini-game-sub">find the hidden words, I know you love word games.</div>
-        <button class="mini-game-btn" type="button" onclick="openWordGame()">open word game ✦</button>
+        <div class="mini-game-title">a little wordle for you</div>
+        <div class="mini-game-sub">guess the word, refresh for a new one, and keep going for as long as you want.</div>
+        <button class="mini-game-btn" type="button" onclick="openWordGame()">open wordle ✦</button>
       </div>
 
       <div class="sec-label">messages from your loved ones</div>
@@ -741,39 +738,35 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
   <div class="word-shell">
     <div class="word-game" id="wordGame">
       <div class="word-top-bar">
-        <div class="word-top-title">word hunt</div>
+        <div class="word-top-title">wordle for you</div>
         <div class="word-top-stats">
-          <div class="word-stat"><div class="word-stat-n" id="wordFoundCount">0</div><div class="word-stat-l">found</div></div>
-          <div class="word-stat"><div class="word-stat-n" id="wordTotalCount">0</div><div class="word-stat-l">total</div></div>
-          <div class="word-stat"><div class="word-stat-n" id="wordScoreNum">0</div><div class="word-stat-l">score</div></div>
+          <div class="word-stat"><div class="word-stat-n" id="wordGuessCount">1</div><div class="word-stat-l">guess</div></div>
+          <div class="word-stat"><div class="word-stat-n" id="wordLengthNum">5</div><div class="word-stat-l">letters</div></div>
+          <div class="word-stat"><div class="word-stat-n" id="wordWinCount">0</div><div class="word-stat-l">wins</div></div>
         </div>
       </div>
       <div class="word-grid-wrap">
+        <div class="word-clue-kicker">little clue</div>
+        <div class="word-clue-text" id="wordClueText">tap show clue if you want a little nudge.</div>
         <div class="word-grid" id="wordGrid"></div>
       </div>
-      <div class="word-sel-bar" id="wordSelBar">
-        <div id="wordSelDisplay"><div class="word-sel-placeholder">tap letters to spell a word</div></div>
-        <div class="word-sel-actions">
-          <button class="word-action-btn" type="button" onclick="wordClearSel()">clear</button>
-          <button class="word-action-btn word-submit-btn" id="wordSubmitBtn" type="button" onclick="wordSubmit()" disabled>submit</button>
-        </div>
+      <div class="word-keyboard" id="wordKeyboard">
+        <div class="word-key-row" id="wordKeyRow1"></div>
+        <div class="word-key-row" id="wordKeyRow2"></div>
+        <div class="word-key-row" id="wordKeyRow3"></div>
       </div>
-      <div class="word-msg-bar"><div class="word-msg-txt" id="wordMsgTxt">find all the romantic words hidden in the grid</div></div>
-      <div class="word-words-panel">
-        <div class="word-words-title">words to find</div>
-        <div class="word-words-grid" id="wordWordsGrid"></div>
-      </div>
+      <div class="word-msg-bar"><div class="word-msg-txt" id="wordMsgTxt">guess the five-letter word in six tries.</div></div>
       <div class="word-complete-screen" id="wordCompleteScreen">
         <div class="word-comp-emoji">🌸</div>
-        <div class="word-comp-title">you found them all!</div>
-        <div class="word-comp-sub" id="wordCompSub">every word was hiding in there for you</div>
-        <div class="word-comp-score" id="wordCompScore">0</div>
-        <div class="word-comp-score-lbl">total score</div>
-        <button class="word-new-btn" type="button" onclick="wordNewGame()">play again</button>
+        <div class="word-comp-title" id="wordCompTitle">you got it!</div>
+        <div class="word-comp-sub" id="wordCompSub">you found the word and looked very cute doing it.</div>
+        <div class="word-comp-score" id="wordCompScore">HEART</div>
+        <div class="word-comp-score-lbl">answer</div>
+        <button class="word-new-btn" type="button" onclick="wordNewGame(true)">new word</button>
       </div>
       <div class="word-bottom-btns">
-        <button class="word-bot-btn" type="button" onclick="wordHint()">hint</button>
-        <button class="word-bot-btn" type="button" onclick="wordNewGame()">new game</button>
+        <button class="word-bot-btn" type="button" onclick="wordRevealClue()">show clue</button>
+        <button class="word-bot-btn" type="button" onclick="wordNewGame(true)">new word</button>
       </div>
     </div>
   </div>
@@ -841,31 +834,34 @@ const eggMaxAttempts = 3;
 let eggFireworks = [];
 let eggFireworksRunning = false;
 let eggFireworksTimer = null;
-const WORD_BANK = [
-  {w:'LOVE',pts:4,hint:'the biggest feeling in the whole site'},
-  {w:'KISS',pts:4,hint:'a tiny romantic gesture'},
-  {w:'NIKI',pts:4,hint:'the birthday girl herself'},
-  {w:'HEART',pts:5,hint:'where all the feelings live'},
-  {w:'ADORE',pts:5,hint:'love deeply and tenderly'},
-  {w:'SWEET',pts:5,hint:'gentle, cute, and full of sugar'},
-  {w:'BLISS',pts:5,hint:'pure happiness'},
-  {w:'CHARM',pts:5,hint:'that special pull someone has'},
-  {w:'BABE',pts:4,hint:'a cute nickname'},
-  {w:'FLAME',pts:5,hint:'a spark that keeps burning'},
-  {w:'HONEY',pts:5,hint:'a classic pet name'},
-  {w:'DREAM',pts:5,hint:'something beautiful you hope for'},
-  {w:'ANGEL',pts:5,hint:'someone who feels heaven-sent'},
-  {w:'CHERISH',pts:7,hint:'to hold someone close and dearly'},
-  {w:'DEVOTION',pts:8,hint:'steady, loyal love'},
-  {w:'SOULMATE',pts:8,hint:'the person who feels made for you'},
-  {w:'FOREVER',pts:7,hint:'the longest promise'},
-  {w:'TENDER',pts:6,hint:'soft, caring, and gentle'},
-  {w:'WARMTH',pts:6,hint:'the feeling of comfort and closeness'},
-  {w:'EMBRACE',pts:7,hint:'another word for a loving hug'}
+const WORDLE_BANK = [
+  {w:'HEART', clue:'where all the feelings live'},
+  {w:'ADORE', clue:'to love deeply and tenderly'},
+  {w:'SWEET', clue:'gentle, cute, and full of sugar'},
+  {w:'BLISS', clue:'pure happiness'},
+  {w:'CHARM', clue:'that special pull someone has'},
+  {w:'FLAME', clue:'a spark that keeps burning'},
+  {w:'HONEY', clue:'a classic pet name'},
+  {w:'DREAM', clue:'something beautiful you hope for'},
+  {w:'ANGEL', clue:'someone who feels heaven-sent'},
+  {w:'TENDER', clue:'soft, caring, and gentle'},
+  {w:'WARMTH', clue:'the feeling of comfort and closeness'},
+  {w:'SMILE', clue:'the thing of hers you could stare at forever'},
+  {w:'PINKY', clue:'the tiny finger that belongs in a promise'},
+  {w:'AMOUR', clue:'love, but said a little more poetically'}
 ];
-const WORD_SIZE = 9;
-const WORD_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
-let wordGridData = [], wordFound = new Set(), wordScore = 0, wordSelected = [], wordTargets = [], wordHintUsed = new Set();
+const WORDLE_SIZE = 5;
+const WORDLE_ROWS = 6;
+const WORDLE_KEYS = [
+  ['Q','W','E','R','T','Y','U','I','O','P'],
+  ['A','S','D','F','G','H','J','K','L'],
+  ['ENTER','Z','X','C','V','B','N','M','BACKSPACE']
+];
+let wordCurrent = null;
+let wordGuesses = [];
+let wordCurrentGuess = '';
+let wordWins = 0;
+let wordComplete = false;
 let lovedOnesIdx = 0, lovedOnesTimer = null, lovedOnesTouchStartX = 0, lovedOnesTouchDeltaX = 0;
 
 const LOVED_ONES_MESSAGES = [
@@ -1315,6 +1311,30 @@ function closeWordGame() {
   setTimeout(() => page.classList.add('hidden'), 350);
 }
 
+window.addEventListener('keydown', (event) => {
+  const page = document.getElementById('wordPage');
+  if (!page || !page.classList.contains('show')) return;
+  if (event.key === 'Escape') {
+    closeWordGame();
+    return;
+  }
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    wordHandleInput('ENTER');
+    return;
+  }
+  if (event.key === 'Backspace') {
+    event.preventDefault();
+    wordHandleInput('BACKSPACE');
+    return;
+  }
+  const key = event.key.toUpperCase();
+  if (/^[A-Z]$/.test(key)) {
+    event.preventDefault();
+    wordHandleInput(key);
+  }
+});
+
 function openDreamsPage() {
   const page = document.getElementById('dreamsPage');
   if (!page) return;
@@ -1600,208 +1620,173 @@ function stopEggFireworks() {
   }
 }
 
-function wordNewGame() {
-  wordGridData = Array.from({length:WORD_SIZE}, () => Array(WORD_SIZE).fill(''));
-  wordFound.clear();
-  wordScore = 0;
-  wordSelected = [];
-  wordHintUsed.clear();
-  const shuffled = [...WORD_BANK].sort(() => Math.random() - 0.5);
-  wordTargets = shuffled.slice(0, 8);
-  wordTargets.forEach(({w}) => wordPlaceWord(w));
-  wordFillGrid();
-  wordRender();
+function wordNewGame(forceDifferent = false) {
+  const pool = WORDLE_BANK.filter(({w}) => w.length === WORDLE_SIZE);
+  if (!pool.length) return;
+  let next = pool[Math.floor(Math.random() * pool.length)];
+  if (forceDifferent && wordCurrent && pool.length > 1) {
+    while (next.w === wordCurrent.w) next = pool[Math.floor(Math.random() * pool.length)];
+  }
+  wordCurrent = next;
+  wordGuesses = [];
+  wordCurrentGuess = '';
+  wordComplete = false;
   document.getElementById('wordCompleteScreen').classList.remove('show');
-  wordSetMsg('find all the romantic words hidden in the grid', '');
-  document.getElementById('wordTotalCount').textContent = wordTargets.length;
-  document.getElementById('wordFoundCount').textContent = 0;
-  document.getElementById('wordScoreNum').textContent = 0;
+  document.getElementById('wordGuessCount').textContent = '1';
+  document.getElementById('wordLengthNum').textContent = WORDLE_SIZE;
+  document.getElementById('wordClueText').textContent = 'tap show clue if you want a little nudge.';
+  wordSetMsg('guess the five-letter word in six tries.', '');
+  wordRenderBoard();
+  wordRenderKeyboard();
 }
 
-function wordPlaceWord(word) {
-  let placed = false;
-  let tries = 0;
-  while (!placed && tries < 200) {
-    tries++;
-    const dir = WORD_DIRS[Math.floor(Math.random() * WORD_DIRS.length)];
-    const r = Math.floor(Math.random() * WORD_SIZE);
-    const c = Math.floor(Math.random() * WORD_SIZE);
-    let fits = true;
-    const cells = [];
-    for (let i = 0; i < word.length; i++) {
-      const nr = r + dir[0] * i;
-      const nc = c + dir[1] * i;
-      if (nr < 0 || nr >= WORD_SIZE || nc < 0 || nc >= WORD_SIZE) { fits = false; break; }
-      if (wordGridData[nr][nc] && wordGridData[nr][nc] !== word[i]) { fits = false; break; }
-      cells.push([nr, nc]);
-    }
-    if (fits) {
-      cells.forEach(([nr, nc], i) => wordGridData[nr][nc] = word[i]);
-      placed = true;
-    }
-  }
-}
-
-function wordFillGrid() {
-  const alpha = 'ABCDEFGHIJKLMNOPRSTUW';
-  for (let r = 0; r < WORD_SIZE; r++) {
-    for (let c = 0; c < WORD_SIZE; c++) {
-      if (!wordGridData[r][c]) wordGridData[r][c] = alpha[Math.floor(Math.random() * alpha.length)];
-    }
-  }
-}
-
-function wordRender() {
+function wordRenderBoard() {
   const el = document.getElementById('wordGrid');
-  el.style.gridTemplateColumns = `repeat(${WORD_SIZE}, 1fr)`;
   el.innerHTML = '';
-  for (let r = 0; r < WORD_SIZE; r++) {
-    for (let c = 0; c < WORD_SIZE; c++) {
+  for (let r = 0; r < WORDLE_ROWS; r++) {
+    const guess = wordGuesses[r] || '';
+    const result = guess ? wordEvaluateGuess(guess, wordCurrent.w) : null;
+    for (let c = 0; c < WORDLE_SIZE; c++) {
       const cell = document.createElement('div');
-      cell.className = 'word-cell letter';
-      cell.textContent = wordGridData[r][c];
-      cell.id = `word-cell-${r}-${c}`;
-      if (wordIsCellFound(r, c)) cell.classList.add('found');
-      else if (wordSelected.some(s => s[0] === r && s[1] === c)) cell.classList.add('selected');
-      cell.addEventListener('click', () => wordToggleCell(r, c));
+      const letter = r === wordGuesses.length ? wordCurrentGuess[c] || '' : guess[c] || '';
+      cell.className = 'word-cell';
+      if (letter) cell.classList.add('filled');
+      if (result && result[c]) cell.classList.add(result[c], 'reveal');
+      cell.textContent = letter;
       el.appendChild(cell);
     }
   }
-  const wg = document.getElementById('wordWordsGrid');
-  wg.innerHTML = '';
-  wordTargets.forEach(({w,hint}) => {
-    const chip = document.createElement('div');
-    chip.className = 'word-chip' + (wordFound.has(w) ? ' found' : '');
-    chip.textContent = wordFound.has(w) ? w : hint;
-    chip.id = 'word-chip-' + w;
-    wg.appendChild(chip);
+  document.getElementById('wordGuessCount').textContent = String(Math.min(wordGuesses.length + 1, WORDLE_ROWS));
+}
+
+function wordRenderKeyboard() {
+  const statusMap = {};
+  wordGuesses.forEach((guess) => {
+    const result = wordEvaluateGuess(guess, wordCurrent.w);
+    guess.split('').forEach((char, idx) => {
+      const state = result[idx];
+      const rank = {absent: 0, present: 1, correct: 2};
+      if (!statusMap[char] || rank[state] > rank[statusMap[char]]) statusMap[char] = state;
+    });
+  });
+  WORDLE_KEYS.forEach((row, idx) => {
+    const rowEl = document.getElementById(`wordKeyRow${idx + 1}`);
+    rowEl.innerHTML = '';
+    row.forEach((key) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'word-key';
+      let label = key;
+      if (key === 'BACKSPACE') {
+        label = '⌫';
+        btn.classList.add('wide');
+      } else if (key === 'ENTER') {
+        label = 'enter';
+        btn.classList.add('wide');
+      }
+      btn.textContent = label;
+      btn.addEventListener('click', () => wordHandleInput(key));
+      if (statusMap[key]) btn.classList.add(statusMap[key]);
+      rowEl.appendChild(btn);
+    });
   });
 }
 
-function wordIsCellFound(r, c) {
-  for (const w of wordFound) {
-    const cells = wordGetCells(w);
-    if (cells && cells.some(([wr, wc]) => wr === r && wc === c)) return true;
+function wordHandleInput(key) {
+  if (wordComplete || !document.getElementById('wordPage').classList.contains('show')) return;
+  if (key === 'ENTER') {
+    wordSubmit();
+    return;
   }
-  return false;
-}
-
-function wordGetCells(word) {
-  for (let r = 0; r < WORD_SIZE; r++) {
-    for (let c = 0; c < WORD_SIZE; c++) {
-      for (const dir of WORD_DIRS) {
-        let match = true;
-        const cells = [];
-        for (let i = 0; i < word.length; i++) {
-          const nr = r + dir[0] * i;
-          const nc = c + dir[1] * i;
-          if (nr < 0 || nr >= WORD_SIZE || nc < 0 || nc >= WORD_SIZE || wordGridData[nr][nc] !== word[i]) { match = false; break; }
-          cells.push([nr, nc]);
-        }
-        if (match) return cells;
-      }
-    }
+  if (key === 'BACKSPACE') {
+    if (!wordCurrentGuess) return;
+    hapticTap();
+    wordCurrentGuess = wordCurrentGuess.slice(0, -1);
+    wordRenderBoard();
+    return;
   }
-  return null;
-}
-
-function wordToggleCell(r, c) {
-  if (wordIsCellFound(r, c)) return;
-  const idx = wordSelected.findIndex(s => s[0] === r && s[1] === c);
-  if (idx !== -1) wordSelected.splice(idx, 1);
-  else wordSelected.push([r, c]);
-  wordUpdateSelection();
-  wordRefreshCells();
-}
-
-function wordUpdateSelection() {
-  const sd = document.getElementById('wordSelDisplay');
-  const btn = document.getElementById('wordSubmitBtn');
-  if (wordSelected.length === 0) {
-    sd.innerHTML = '<div class="word-sel-placeholder">tap letters to spell a word</div>';
-    btn.disabled = true;
-  } else {
-    const word = wordSelected.map(([r, c]) => wordGridData[r][c]).join('');
-    sd.innerHTML = `<div class="word-sel-letters">${word}</div>`;
-    btn.disabled = false;
-  }
-}
-
-function wordRefreshCells() {
-  for (let r = 0; r < WORD_SIZE; r++) {
-    for (let c = 0; c < WORD_SIZE; c++) {
-      const cell = document.getElementById(`word-cell-${r}-${c}`);
-      if (!cell) continue;
-      cell.className = 'word-cell letter';
-      if (wordIsCellFound(r, c)) cell.classList.add('found');
-      else if (wordSelected.some(s => s[0] === r && s[1] === c)) cell.classList.add('selected');
-    }
-  }
-}
-
-function wordClearSel() {
-  wordSelected = [];
-  wordUpdateSelection();
-  wordRefreshCells();
+  if (!/^[A-Z]$/.test(key) || wordCurrentGuess.length >= WORDLE_SIZE) return;
+  hapticTap();
+  wordCurrentGuess += key;
+  wordRenderBoard();
 }
 
 function wordSubmit() {
-  const word = wordSelected.map(([r, c]) => wordGridData[r][c]).join('');
-  const match = wordTargets.find(({w}) => w === word);
-  if (match && !wordFound.has(word)) {
+  if (wordCurrentGuess.length < WORDLE_SIZE) {
+    wordSetMsg('you need all five letters first.', 'wrong');
+    wordShakeBoard();
+    return;
+  }
+  if (!WORDLE_BANK.some(({w}) => w === wordCurrentGuess)) {
+    wordSetMsg('that word is not in this little word bank.', 'wrong');
+    wordShakeBoard();
+    return;
+  }
+  const guess = wordCurrentGuess;
+  wordGuesses.push(guess);
+  wordCurrentGuess = '';
+  wordRenderBoard();
+  wordRenderKeyboard();
+
+  if (guess === wordCurrent.w) {
+    wordWins += 1;
+    document.getElementById('wordWinCount').textContent = String(wordWins);
+    wordSetMsg('you got it ♡', 'correct');
+    wordShowComplete(true);
     hapticSuccess();
-    wordFound.add(word);
-    const pts = match.pts + (wordHintUsed.has(word) ? 0 : 2);
-    wordScore += pts;
-    document.getElementById('wordScoreNum').textContent = wordScore;
-    document.getElementById('wordFoundCount').textContent = wordFound.size;
-    const cells = wordGetCells(word);
-    if (cells) {
-      cells.forEach(([r, c]) => {
-        const cell = document.getElementById(`word-cell-${r}-${c}`);
-        if (cell) {
-          cell.classList.add('found-flash');
-          setTimeout(() => { cell.classList.remove('found-flash'); cell.classList.add('found'); }, 400);
-        }
-      });
+    return;
+  }
+
+  if (wordGuesses.length >= WORDLE_ROWS) {
+    wordSetMsg(`so close — the word was ${wordCurrent.w}.`, 'wrong');
+    wordShowComplete(false);
+    return;
+  }
+
+  const remaining = WORDLE_ROWS - wordGuesses.length;
+  wordSetMsg(`${remaining} ${remaining === 1 ? 'try' : 'tries'} left.`, '');
+}
+
+function wordEvaluateGuess(guess, answer) {
+  const result = Array(WORDLE_SIZE).fill('absent');
+  const answerLetters = answer.split('');
+  const guessLetters = guess.split('');
+  guessLetters.forEach((char, idx) => {
+    if (char === answerLetters[idx]) {
+      result[idx] = 'correct';
+      answerLetters[idx] = null;
+      guessLetters[idx] = null;
     }
-    const chip = document.getElementById('word-chip-' + word);
-    if (chip) setTimeout(() => { chip.classList.add('found'); chip.textContent = word; }, 300);
-    const msgs = ['beautiful! ♡','yes! that one!','you found it!','lovely! ♡','perfect! ✨'];
-    wordSetMsg(msgs[Math.floor(Math.random() * msgs.length)], 'correct');
-    wordSelected = [];
-    wordUpdateSelection();
-    wordRefreshCells();
-    if (wordFound.size === wordTargets.length) setTimeout(wordShowComplete, 800);
-  } else if (wordFound.has(word)) {
-    wordSetMsg('already found that one!', 'wrong');
-  } else {
-    wordSetMsg('not in the list — keep looking', 'wrong');
-    const bar = document.getElementById('wordSelBar');
-    bar.style.animation = 'wordShakeRow 0.3s ease-out';
-    setTimeout(() => { bar.style.animation = ''; }, 400);
-  }
+  });
+  guessLetters.forEach((char, idx) => {
+    if (!char) return;
+    const matchIdx = answerLetters.indexOf(char);
+    if (matchIdx !== -1) {
+      result[idx] = 'present';
+      answerLetters[matchIdx] = null;
+    }
+  });
+  return result;
 }
 
-function wordHint() {
-  const remaining = wordTargets.filter(({w}) => !wordFound.has(w));
-  if (!remaining.length) return;
-  const {w,hint} = remaining[Math.floor(Math.random() * remaining.length)];
-  const cells = wordGetCells(w);
-  if (!cells) return;
-  wordHintUsed.add(w);
-  const [r, c] = cells[Math.floor(Math.random() * cells.length)];
-  const cell = document.getElementById(`word-cell-${r}-${c}`);
-  if (cell) {
-    cell.classList.add('hint-flash');
-    setTimeout(() => cell.classList.remove('hint-flash'), 1200);
-  }
-  wordSetMsg(`hint: ${hint}`, '');
+function wordRevealClue() {
+  if (!wordCurrent) return;
+  document.getElementById('wordClueText').textContent = wordCurrent.clue;
+  wordSetMsg('little clue unlocked.', '');
 }
 
-function wordShowComplete() {
-  document.getElementById('wordCompleteScreen').classList.add('show');
-  document.getElementById('wordCompScore').textContent = wordScore;
+function wordShowComplete(won) {
+  wordComplete = true;
+  const screen = document.getElementById('wordCompleteScreen');
+  const title = document.getElementById('wordCompTitle');
+  const sub = document.getElementById('wordCompSub');
+  const score = document.getElementById('wordCompScore');
+  title.textContent = won ? 'you got it!' : 'next one?';
+  sub.textContent = won
+    ? 'you found the word and looked very cute doing it.'
+    : 'no stress, refresh it and try a new one.';
+  score.textContent = wordCurrent.w;
+  screen.classList.add('show');
 }
 
 function wordSetMsg(text, type) {
@@ -1809,6 +1794,13 @@ function wordSetMsg(text, type) {
   el.textContent = text;
   el.className = 'word-msg-txt' + (type ? ` ${type}` : '');
   if (type) setTimeout(() => { el.className = 'word-msg-txt'; }, 2000);
+}
+
+function wordShakeBoard() {
+  const board = document.getElementById('wordGrid');
+  if (!board) return;
+  board.style.animation = 'wordShakeRow 0.3s ease-out';
+  setTimeout(() => { board.style.animation = ''; }, 400);
 }
 
 function initPasswordGate() {
