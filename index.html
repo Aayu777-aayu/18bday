@@ -246,6 +246,32 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .mini-game-btn:hover{background:rgba(226,154,192,0.30);transform:translateY(-1px);box-shadow:0 10px 24px rgba(226,154,192,0.22);}
 .mini-game-btn:active{transform:scale(0.97);}
 
+.gift-card{background:linear-gradient(180deg,#3a172f 0%,#2b1325 100%);border-radius:22px;padding:24px 20px 22px;margin-bottom:28px;text-align:center;box-shadow:var(--shadow-soft);overflow:hidden;position:relative;}
+.gift-card::after{content:"";position:absolute;inset:auto -15% -35% -15%;height:140px;background:radial-gradient(circle,rgba(239,181,214,0.16),transparent 62%);pointer-events:none;}
+.gift-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:8px;position:relative;z-index:1;}
+.gift-sub{font-size:12px;color:rgba(239,181,214,0.68);line-height:1.7;max-width:280px;margin:0 auto 18px;position:relative;z-index:1;}
+.gift-machine{display:flex;justify-content:center;gap:10px;margin-bottom:18px;position:relative;z-index:1;}
+.gift-reel{width:78px;height:104px;border-radius:18px;background:rgba(255,255,255,0.08);border:1px solid rgba(239,181,214,0.2);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);}
+.gift-track{display:flex;flex-direction:column;transform:translateY(0);}
+.gift-cell{height:104px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:44px;font-style:italic;color:#fdf0f8;text-shadow:0 8px 24px rgba(0,0,0,0.18);}
+.gift-highlight{position:absolute;left:50%;transform:translateX(-50%);top:50%;margin-top:-52px;width:268px;height:104px;border-radius:18px;border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);pointer-events:none;z-index:2;}
+.gift-actions{display:flex;gap:10px;justify-content:center;position:relative;z-index:1;}
+.gift-btn,.gift-reset-btn{border:none;border-radius:999px;font-family:'Playfair Display',serif;font-style:italic;cursor:pointer;transition:transform 0.35s var(--ease-apple),box-shadow 0.35s var(--ease-apple),background 0.35s var(--ease-apple),opacity 0.35s var(--ease-apple);}
+.gift-btn{padding:12px 28px;background:#f0d2e3;color:#241327;font-size:15px;}
+.gift-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(240,210,227,0.18);background:#f6deeb;}
+.gift-btn:active,.gift-reset-btn:active{transform:scale(0.97);}
+.gift-btn:disabled{opacity:0.5;cursor:not-allowed;box-shadow:none;}
+.gift-reset-btn{padding:12px 18px;background:rgba(255,255,255,0.08);border:1px solid rgba(239,181,214,0.24);color:#f3d0e6;font-size:13px;}
+.gift-reset-btn:hover{background:rgba(255,255,255,0.13);}
+.gift-reset-btn:disabled{opacity:0.45;cursor:not-allowed;}
+.gift-result{margin-top:18px;min-height:88px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,199,0.16);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;position:relative;z-index:1;}
+.gift-placeholder{font-size:10px;color:rgba(212,168,199,0.46);letter-spacing:2px;text-transform:uppercase;}
+.gift-out{display:none;}
+.gift-out.show{display:block;animation:popIn 0.4s ease-out;}
+.gift-emoji{font-size:28px;margin-bottom:6px;}
+.gift-msg{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#fdf0f8;line-height:1.55;}
+.gift-remaining{margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(239,181,214,0.58);position:relative;z-index:1;}
+
 .dreams-page{position:fixed;inset:0;z-index:4850;background:linear-gradient(180deg,#fff2f7 0%,#fff8fb 100%);opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
 .dreams-page.show{opacity:1;pointer-events:auto;}
 .dreams-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
@@ -517,8 +543,32 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="sec-label">play something cute</div>
       <div class="mini-game-card">
         <div class="mini-game-title">a little wordle for you</div>
-        <div class="mini-game-sub">guess the word, refresh for a new one, and keep going for as long as you want.</div>
+        <div class="mini-game-sub">guess the word, I know you love these hehe.</div>
         <button class="mini-game-btn" type="button" onclick="openWordGame()">open wordle ✦</button>
+      </div>
+
+      <div class="sec-label">pick a gift</div>
+      <div class="gift-card">
+        <div class="gift-title">slot machine of surprises</div>
+        <div class="gift-sub">There are three gifts waiting for you. Spin it, let it land on a number, and that number disappears from the machine.</div>
+        <div class="gift-machine">
+          <div class="gift-highlight"></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack1"></div></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack2"></div></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack3"></div></div>
+        </div>
+        <div class="gift-actions">
+          <button class="gift-btn" id="giftSpinBtn" type="button" onclick="spinGiftMachine()">spin ✦</button>
+          <button class="gift-reset-btn" type="button" onclick="resetGiftMachine()">reset</button>
+        </div>
+        <div class="gift-result">
+          <div class="gift-placeholder" id="giftPlaceholder">waiting for a spin...</div>
+          <div class="gift-out" id="giftOut">
+            <div class="gift-emoji" id="giftEmoji">🎁</div>
+            <div class="gift-msg" id="giftMsg"></div>
+          </div>
+        </div>
+        <div class="gift-remaining" id="giftRemaining">3 gifts still in play</div>
       </div>
 
       <div class="sec-label">messages from your loved ones</div>
@@ -779,7 +829,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="dreams-head">
         <div class="dreams-kicker">18 things i want to do with you</div>
         <div class="dreams-title">little dreams,<br>big us</div>
-        <div class="dreams-sub">Now that you're 18, here are eighteen miniscule dreams I want to live out with you and memories I want us to  about forever.</div>
+        <div class="dreams-sub">Now that you're 18, here are eighteen miniscule dreams I want to live out with you and memories I want us to think about forever.</div>
       </div>
       <div class="dreams-list-card">
         <ol class="dreams-list">
@@ -863,6 +913,9 @@ let wordCurrentGuess = '';
 let wordWins = 0;
 let wordComplete = false;
 let lovedOnesIdx = 0, lovedOnesTimer = null, lovedOnesTouchStartX = 0, lovedOnesTouchDeltaX = 0;
+const GIFT_OPTIONS = [1, 2, 3];
+let remainingGiftOptions = [...GIFT_OPTIONS];
+let giftMachineSpinning = false;
 
 const LOVED_ONES_MESSAGES = [
   {
@@ -1803,6 +1856,137 @@ function wordShakeBoard() {
   setTimeout(() => { board.style.animation = ''; }, 400);
 }
 
+function giftSequenceForStop(finalNumber, loops) {
+  const pool = [...GIFT_OPTIONS];
+  const sequence = [];
+  for (let i = 0; i < loops; i++) {
+    sequence.push(...pool);
+  }
+  sequence.push(...pool, finalNumber);
+  return sequence;
+}
+
+function renderGiftTrack(trackId, sequence) {
+  const track = document.getElementById(trackId);
+  if (!track) return null;
+  track.innerHTML = '';
+  sequence.forEach((num) => {
+    const cell = document.createElement('div');
+    cell.className = 'gift-cell';
+    cell.textContent = num;
+    track.appendChild(cell);
+  });
+  track.style.transition = 'none';
+  track.style.transform = 'translateY(0)';
+  return track;
+}
+
+function updateGiftRemainingText() {
+  const el = document.getElementById('giftRemaining');
+  if (!el) return;
+  if (remainingGiftOptions.length === 0) {
+    el.textContent = 'all gifts have been chosen';
+  } else if (remainingGiftOptions.length === 1) {
+    el.textContent = '1 gift still in play';
+  } else {
+    el.textContent = `${remainingGiftOptions.length} gifts still in play`;
+  }
+}
+
+function updateGiftResult(number, isFinished = false) {
+  const placeholder = document.getElementById('giftPlaceholder');
+  const out = document.getElementById('giftOut');
+  const msg = document.getElementById('giftMsg');
+  const emoji = document.getElementById('giftEmoji');
+  if (!placeholder || !out || !msg || !emoji) return;
+  placeholder.style.display = 'none';
+  out.classList.add('show');
+  emoji.textContent = remainingGiftOptions.length === 0 && isFinished ? '💝' : '🎁';
+  msg.textContent = isFinished
+    ? `open gift ${number} first, baby. That was the last number left, so now all three gifts have had their moment.`
+    : `open gift ${number} first, baby. That number is off the machine now, so it will not come back.`;
+}
+
+function resetGiftMachine() {
+  if (giftMachineSpinning) return;
+  remainingGiftOptions = [...GIFT_OPTIONS];
+  giftMachineSpinning = false;
+  ['giftTrack1', 'giftTrack2', 'giftTrack3'].forEach((id) => renderGiftTrack(id, GIFT_OPTIONS));
+  const placeholder = document.getElementById('giftPlaceholder');
+  const out = document.getElementById('giftOut');
+  const spinBtn = document.getElementById('giftSpinBtn');
+  const resetBtn = document.querySelector('.gift-reset-btn');
+  if (placeholder) {
+    placeholder.style.display = 'block';
+    placeholder.textContent = 'waiting for a spin...';
+  }
+  if (out) out.classList.remove('show');
+  if (spinBtn) spinBtn.disabled = false;
+  if (resetBtn) resetBtn.disabled = false;
+  updateGiftRemainingText();
+}
+
+function initGiftMachine() {
+  resetGiftMachine();
+}
+
+function spinGiftMachine() {
+  if (giftMachineSpinning) return;
+  if (remainingGiftOptions.length === 0) {
+    const placeholder = document.getElementById('giftPlaceholder');
+    const out = document.getElementById('giftOut');
+    if (out) out.classList.remove('show');
+    if (placeholder) {
+      placeholder.style.display = 'block';
+      placeholder.textContent = 'all gifts already chosen';
+    }
+    return;
+  }
+  hapticTap();
+  giftMachineSpinning = true;
+  const spinBtn = document.getElementById('giftSpinBtn');
+  const resetBtn = document.querySelector('.gift-reset-btn');
+  const placeholder = document.getElementById('giftPlaceholder');
+  const out = document.getElementById('giftOut');
+  if (spinBtn) spinBtn.disabled = true;
+  if (resetBtn) resetBtn.disabled = true;
+  if (out) out.classList.remove('show');
+  if (placeholder) {
+    placeholder.style.display = 'block';
+    placeholder.textContent = 'spinning...';
+  }
+
+  const chosenIndex = Math.floor(Math.random() * remainingGiftOptions.length);
+  const chosenNumber = remainingGiftOptions[chosenIndex];
+  const reels = [
+    { id: 'giftTrack1', loops: 5, duration: 1800 },
+    { id: 'giftTrack2', loops: 6, duration: 2200 },
+    { id: 'giftTrack3', loops: 7, duration: 2600 }
+  ];
+
+  reels.forEach(({ id, loops, duration }, idx) => {
+    const sequence = giftSequenceForStop(chosenNumber, loops + idx);
+    const track = renderGiftTrack(id, sequence);
+    if (!track) return;
+    const finalOffset = (sequence.length - 1) * 104;
+    requestAnimationFrame(() => {
+      track.style.transition = `transform ${duration}ms cubic-bezier(0.16,1,0.3,1)`;
+      track.style.transform = `translateY(-${finalOffset}px)`;
+    });
+  });
+
+  setTimeout(() => {
+    remainingGiftOptions = remainingGiftOptions.filter((num) => num !== chosenNumber);
+    updateGiftRemainingText();
+    const finished = remainingGiftOptions.length === 0;
+    updateGiftResult(chosenNumber, finished);
+    hapticSuccess();
+    giftMachineSpinning = false;
+    if (spinBtn) spinBtn.disabled = finished;
+    if (resetBtn) resetBtn.disabled = false;
+  }, 2750);
+}
+
 function initPasswordGate() {
   const gate = document.getElementById('gate');
   const input = document.getElementById('gateInput');
@@ -1905,7 +2089,7 @@ function spawnGateParticles() {
 }
 
 function initMotion() {
-  const revealSelectors = ['.hero','.game-card','.slideshow','.letter-card','.loved-ones-wrap','#reasonList','.secret-box','#promiseList','.mini-game-card','.wheel-card','.closing'];
+  const revealSelectors = ['.hero','.game-card','.slideshow','.letter-card','.loved-ones-wrap','#reasonList','.secret-box','#promiseList','.mini-game-card','.gift-card','.wheel-card','.closing'];
   const elements = [];
   revealSelectors.forEach(selector => {
     document.querySelectorAll(selector).forEach(el => {
@@ -1943,6 +2127,7 @@ window.addEventListener('resize', resizeEggFireworks);
 
 initStaticAssets();
 buildCarousel(); buildBalloonsDeco(); initGame(); initLovedOnesMessages();
+initGiftMachine();
 initPasswordGate();
 initEasterEgg();
 resizeEggFireworks();
