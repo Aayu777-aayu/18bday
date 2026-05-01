@@ -601,7 +601,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 
       <div class="mini-game-card">
         <div class="mini-game-title">pick a gift</div>
-        <div class="mini-game-sub">spin the slot machine and let it choose which gift number gets opened next.</div>
+        <div class="mini-game-sub">spin the slot machine and let it choose which gift  gets opened next.</div>
         <button class="mini-game-btn" type="button" onclick="openGiftPage()">open the machine ✦</button>
       </div>
 
@@ -884,7 +884,7 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
       <div class="gift-head">
         <div class="gift-kicker">pick a gift</div>
         <div class="gift-page-title">slot machine<br>of surprises</div>
-        <div class="gift-page-sub">There are three gifts waiting for you. Spin it, let it land on a number, and that number disappears from the machine.</div>
+        <div class="gift-page-sub">There are three gifts waiting for you. Spin it, let it land on a number.</div>
       </div>
       <div class="gift-card">
         <div class="gift-machine">
@@ -916,8 +916,6 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
     <div class="bts-wrap">
       <div class="bts-head">
         <div class="bts-kicker">behind the scenes</div>
-        <div class="bts-title">the little moments<br>around us</div>
-        <div class="bts-sub">A soft little page just for the extra memories, outtakes, and the bits that still matter because they were ours.</div>
       </div>
       <div class="bts-video-card">
         <div class="bts-video-wrap">
@@ -2037,8 +2035,8 @@ function updateGiftResult(number, isFinished = false) {
   out.classList.add('show');
   emoji.textContent = remainingGiftOptions.length === 0 && isFinished ? '💝' : '🎁';
   msg.textContent = isFinished
-    ? `open gift ${number} first, baby. That was the last number left, so now all three gifts have had their moment.`
-    : `open gift ${number} first, baby. That number is off the machine now, so it will not come back.`;
+    ? `open gift ${number} , baby. That was the last number left, so now all three gifts have had their moment.`
+    : `open gift ${number} , baby. There are still ${remainingGiftOptions.length} gifts in play, so you can spin again if you want to keep going.`;
 }
 
 function resetGiftMachine() {
