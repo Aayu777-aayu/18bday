@@ -522,6 +522,29 @@ Watching you grow into who you are has been one of the greatest gifts of my life
         <button class="mini-game-btn" type="button" onclick="openWordGame()">open word game ✦</button>
       </div>
 
+      <div class="sec-label">messages from your loved ones</div>
+      <div class="loved-ones-wrap">
+        <div class="loved-ones-card" id="lovedOnesCard">
+          <div class="loved-ones-top">
+            <div class="loved-ones-title">little notes for Niki</div>
+            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
+          </div>
+          <div class="loved-ones-stage" id="lovedOnesStage">
+            <div class="loved-ones-message" id="lovedOnesMessage">
+              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
+              <div class="loved-ones-from" id="lovedOnesFrom"></div>
+            </div>
+          </div>
+          <div class="loved-ones-controls">
+            <div class="loved-ones-nav">
+              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
+              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
+            </div>
+            <div class="loved-ones-dots" id="lovedOnesDots"></div>
+          </div>
+        </div>
+      </div>
+
     <!-- ===== SPIN THE WHEEL OF LOVE ===== -->
 <!-- Paste this block anywhere inside your app's .content div -->
 
@@ -661,28 +684,6 @@ Watching you grow into who you are has been one of the greatest gifts of my life
           </p>
         </div>
       </section>
-      <div class="sec-label">messages from your loved ones</div>
-      <div class="loved-ones-wrap">
-        <div class="loved-ones-card" id="lovedOnesCard">
-          <div class="loved-ones-top">
-            <div class="loved-ones-title">little notes for Niki</div>
-            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
-          </div>
-          <div class="loved-ones-stage" id="lovedOnesStage">
-            <div class="loved-ones-message" id="lovedOnesMessage">
-              <div class="loved-ones-quote" id="lovedOnesQuote"></div>
-              <div class="loved-ones-from" id="lovedOnesFrom"></div>
-            </div>
-          </div>
-          <div class="loved-ones-controls">
-            <div class="loved-ones-nav">
-              <button class="loved-ones-btn" type="button" aria-label="Previous message" onclick="changeLovedOneMessage(-1)">‹</button>
-              <button class="loved-ones-btn" type="button" aria-label="Next message" onclick="changeLovedOneMessage(1)">›</button>
-            </div>
-            <div class="loved-ones-dots" id="lovedOnesDots"></div>
-          </div>
-        </div>
-      </div>
       <div class="closing">
         <div style="font-size:20px;letter-spacing:6px;margin-bottom:10px;color:#fdf0f8">♡ ♡ ♡</div>
         <div class="closing-txt" id="cMsg">Happy 18th, Niki</div>
