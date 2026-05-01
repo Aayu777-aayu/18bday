@@ -58,7 +58,7 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 }
 
 .content{padding:30px 22px 34px;}
-.sec-label{font-size:11px;letter-spacing:3.1px;text-transform:uppercase;color:#cf83ab;margin-bottom:16px;font-weight:500;line-height:1.4;}
+.sec-label{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#cf83ab;margin-bottom:14px;font-weight:400;}
 
 .balloons-hero{display:flex;justify-content:center;gap:18px;margin-bottom:28px;padding:16px 0;}
 .balloon-deco{display:flex;flex-direction:column;align-items:center;}
@@ -123,12 +123,13 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-wrap{margin-bottom:28px;}
 .loved-ones-card{position:relative;background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border:1px solid #f1d5e3;border-radius:22px;padding:24px 22px 20px;box-shadow:var(--shadow-soft);overflow:hidden;}
 .loved-ones-card::after{content:"";position:absolute;inset:auto -10% -38% -10%;height:120px;background:radial-gradient(circle,rgba(231,162,199,0.16),transparent 65%);pointer-events:none;}
-.loved-ones-top{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
+.loved-ones-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
+.loved-ones-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#4a233d;}
 .loved-ones-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cf83ab;}
 .loved-ones-stage{position:relative;z-index:1;touch-action:pan-y;user-select:none;}
 .loved-ones-message{min-height:168px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
 .loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#5a2d4b;margin-bottom:16px;}
-.loved-ones-from{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#a85c87;letter-spacing:0.2px;}
+.loved-ones-from{font-size:11px;color:#b56f99;letter-spacing:0.6px;}
 .loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
 .loved-ones-nav{display:flex;gap:8px;}
 .loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
@@ -137,12 +138,21 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-dots{display:flex;gap:7px;align-items:center;justify-content:center;flex:1;}
 .loved-ones-dot{width:7px;height:7px;border:none;padding:0;border-radius:50%;background:#edc7db;transition:all 0.3s var(--ease-apple);cursor:pointer;}
 .loved-ones-dot.active{width:20px;border-radius:999px;background:#d783ad;}
+.pet-tribute-section{margin-bottom:28px;}
+.pet-card{max-width:100%;width:100%;padding:28px 24px;border-radius:28px;background:linear-gradient(180deg,#fff8f2 0%,#fff4fa 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 45px rgba(120,80,80,0.12);text-align:center;border:1px solid rgba(255,255,255,0.78);}
+.paw{font-size:38px;margin-bottom:12px;animation:gentleFloat 3s ease-in-out infinite;}
+.pet-photo{width:150px;height:150px;object-fit:cover;border-radius:50%;margin:8px auto 18px;display:block;box-shadow:0 12px 30px rgba(0,0,0,0.12);border:4px solid white;}
+.pet-card h2{margin:0 0 16px;font-family:'Playfair Display',serif;font-style:italic;font-size:26px;line-height:1.2;color:#6b4f4f;}
+.pet-card p{margin:14px 0;color:#5f5555;font-size:15px;line-height:1.7;}
+.soft-line{margin-top:20px;font-style:italic;color:#8a6f6f;}
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media (max-width: 420px){
   .loved-ones-card{padding:22px 18px 18px;}
   .loved-ones-quote{font-size:17px;}
-  .sec-label{font-size:10px;letter-spacing:2.8px;}
-  .loved-ones-from{font-size:14px;}
   .loved-ones-message{min-height:176px;}
+  .pet-card{padding:24px 18px;}
+  .pet-card h2{font-size:23px;}
+  .pet-card p{font-size:14px;}
 }
 
 .moments-section{margin-bottom:28px;}
@@ -630,10 +640,32 @@ Watching you grow into who you are has been one of the greatest gifts of my life
 })();
 </script>
 <!-- ===== END SPIN THE WHEEL ===== -->
+      <div class="sec-label">a little moment for him</div>
+      <section class="pet-tribute-section">
+        <div class="pet-card">
+          <div class="paw">🐾</div>
+          <img src="" alt="A special photo in memory of him" class="pet-photo hidden" id="petTributePhoto">
+          <h2>A Little Moment for Him</h2>
+          <p>
+            I know today is about celebrating you, but I also wanted to make a little
+            space for someone who meant so much to you.
+          </p>
+          <p>
+            He was such a special part of your life, and I know how much love you had
+            for him. He will always be remembered, always be loved, and always have a
+            place in your heart.
+          </p>
+          <p class="soft-line">
+            I hope this little moment reminds you that it is okay to miss him today too.
+            He was lucky to be loved by you. 🤍
+          </p>
+        </div>
+      </section>
       <div class="sec-label">messages from your loved ones</div>
       <div class="loved-ones-wrap">
         <div class="loved-ones-card" id="lovedOnesCard">
           <div class="loved-ones-top">
+            <div class="loved-ones-title">little notes for Niki</div>
             <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
           </div>
           <div class="loved-ones-stage" id="lovedOnesStage">
@@ -1190,13 +1222,23 @@ function getSongPath() {
   return window.location.pathname.includes('/birthday-site/') ? '../song1.mp3' : 'song1.mp3';
 }
 
+function getPetTributeImagePath() {
+  return window.location.pathname.includes('/birthday-site/') ? 'pet-tribute.jpg' : 'birthday-site/pet-tribute.jpg';
+}
+
 function initStaticAssets() {
   const heroImage = document.getElementById('heroImage');
   const audio = document.getElementById('audio');
+  const petTributePhoto = document.getElementById('petTributePhoto');
   if (heroImage) heroImage.src = getHeroImagePath();
   if (audio) {
     audio.src = getSongPath();
     audio.load();
+  }
+  if (petTributePhoto) {
+    petTributePhoto.src = getPetTributeImagePath();
+    petTributePhoto.onload = () => petTributePhoto.classList.remove('hidden');
+    petTributePhoto.onerror = () => petTributePhoto.classList.add('hidden');
   }
 }
 
