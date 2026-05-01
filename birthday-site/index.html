@@ -288,6 +288,36 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
 .dreams-list li::marker{font-family:'Playfair Display',serif;font-style:italic;color:#e29ac0;}
 .dreams-list-end{margin-top:20px;padding-top:18px;border-top:1px solid #f1d5e3;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.8;color:#b56f99;}
 
+.gift-page{position:fixed;inset:0;z-index:4865;background:linear-gradient(180deg,#fff2f7 0%,#fff8fb 100%);opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
+.gift-page.show{opacity:1;pointer-events:auto;}
+.gift-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
+.gift-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(255,247,251,0.88);backdrop-filter:blur(12px);color:#7f476b;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:1px solid rgba(225,174,202,0.45);box-shadow:0 10px 24px rgba(174,108,143,0.10);}
+.gift-back-btn:hover{background:rgba(255,240,247,0.96);}
+.gift-wrap{width:min(420px,100%);}
+.gift-head{background:linear-gradient(180deg,#fff 0%,#fff5fa 100%);border-radius:24px;padding:24px 22px 20px;margin-bottom:14px;border:1px solid #f1d5e3;box-shadow:var(--shadow-soft);}
+.gift-kicker{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#cf83ab;margin-bottom:10px;}
+.gift-page-title{font-family:'Playfair Display',serif;font-style:italic;font-size:28px;line-height:1.15;color:#4a233d;margin-bottom:10px;}
+.gift-page-sub{font-size:13px;line-height:1.8;color:#7c5b72;}
+
+.bts-page{position:fixed;inset:0;z-index:4875;background:linear-gradient(180deg,#fff2f7 0%,#fff8fb 100%);opacity:0;pointer-events:none;transition:opacity 0.45s var(--ease-apple);overflow:auto;}
+.bts-page.show{opacity:1;pointer-events:auto;}
+.bts-shell{min-height:100vh;padding:88px 20px 32px;display:flex;justify-content:center;}
+.bts-back-btn{position:fixed;top:20px;left:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:none;border-radius:999px;background:rgba(255,247,251,0.88);backdrop-filter:blur(12px);color:#7f476b;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;border:1px solid rgba(225,174,202,0.45);box-shadow:0 10px 24px rgba(174,108,143,0.10);}
+.bts-back-btn:hover{background:rgba(255,240,247,0.96);}
+.bts-wrap{width:min(420px,100%);}
+.bts-head{background:linear-gradient(180deg,#fff 0%,#fff5fa 100%);border-radius:24px;padding:24px 22px 20px;margin-bottom:14px;border:1px solid #f1d5e3;box-shadow:var(--shadow-soft);}
+.bts-kicker{font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#cf83ab;margin-bottom:10px;}
+.bts-title{font-family:'Playfair Display',serif;font-style:italic;font-size:28px;line-height:1.15;color:#4a233d;margin-bottom:10px;}
+.bts-sub{font-size:13px;line-height:1.8;color:#7c5b72;}
+.bts-video-card{background:linear-gradient(180deg,#fff 0%,#fff6fa 100%);border-radius:24px;padding:16px;border:1px solid #f1d5e3;box-shadow:var(--shadow-soft);}
+.bts-video-wrap{border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#f9eef5 0%,#f3e2ec 100%);aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;position:relative;}
+.bts-video{width:100%;height:100%;object-fit:cover;display:block;}
+.bts-empty{padding:28px 22px;text-align:center;}
+.bts-empty-emoji{font-size:28px;margin-bottom:10px;}
+.bts-empty-title{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#5a2d4b;margin-bottom:8px;}
+.bts-empty-sub{font-size:12px;line-height:1.7;color:#8d6c82;}
+.bts-note{margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cf83ab;text-align:center;}
+
 .wheel-card{background:linear-gradient(180deg,#3a172f 0%,#2b1325 100%);border:1px solid rgba(239,181,214,0.18);border-radius:24px;padding:24px 18px 20px;margin-bottom:28px;display:flex;flex-direction:column;align-items:center;box-shadow:var(--shadow-soft);overflow:hidden;}
 .wheel-title{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fdf0f8;margin-bottom:6px;}
 .wheel-sub{font-size:12px;color:rgba(239,181,214,0.68);text-align:center;line-height:1.6;max-width:280px;margin-bottom:20px;}
@@ -547,28 +577,10 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
         <button class="mini-game-btn" type="button" onclick="openWordGame()">open wordle ✦</button>
       </div>
 
-      <div class="sec-label">pick a gift</div>
-      <div class="gift-card">
-        <div class="gift-title">slot machine of surprises</div>
-        <div class="gift-sub">There are three gifts waiting for you. Spin it, let it land on a number, and that number disappears from the machine.</div>
-        <div class="gift-machine">
-          <div class="gift-highlight"></div>
-          <div class="gift-reel"><div class="gift-track" id="giftTrack1"></div></div>
-          <div class="gift-reel"><div class="gift-track" id="giftTrack2"></div></div>
-          <div class="gift-reel"><div class="gift-track" id="giftTrack3"></div></div>
-        </div>
-        <div class="gift-actions">
-          <button class="gift-btn" id="giftSpinBtn" type="button" onclick="spinGiftMachine()">spin ✦</button>
-          <button class="gift-reset-btn" type="button" onclick="resetGiftMachine()">reset</button>
-        </div>
-        <div class="gift-result">
-          <div class="gift-placeholder" id="giftPlaceholder">waiting for a spin...</div>
-          <div class="gift-out" id="giftOut">
-            <div class="gift-emoji" id="giftEmoji">🎁</div>
-            <div class="gift-msg" id="giftMsg"></div>
-          </div>
-        </div>
-        <div class="gift-remaining" id="giftRemaining">3 gifts still in play</div>
+      <div class="mini-game-card">
+        <div class="mini-game-title">behind the scenes</div>
+        <div class="mini-game-sub">a little page for the moments around everything else, with your own video playing there.</div>
+        <button class="mini-game-btn" type="button" onclick="openBtsPage()">open the video ✦</button>
       </div>
 
       <div class="sec-label">messages from your loved ones</div>
@@ -591,6 +603,12 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
             <div class="loved-ones-dots" id="lovedOnesDots"></div>
           </div>
         </div>
+      </div>
+
+      <div class="mini-game-card">
+        <div class="mini-game-title">pick a gift</div>
+        <div class="mini-game-sub">spin the slot machine and let it choose which gift number gets opened next.</div>
+        <button class="mini-game-btn" type="button" onclick="openGiftPage()">open the machine ✦</button>
       </div>
 
     <!-- ===== SPIN THE WHEEL OF LOVE ===== -->
@@ -853,6 +871,63 @@ canvas#eggFireworks{position:absolute;inset:0;width:100%;height:100%;pointer-eve
           <li>Be there for all the birthdays, bad days, victories, quiet nights, and everything in between.</li>
         </ol>
         <div class="dreams-list-end">if I get one extra thing beyond the list, I just want a life where loving you never becomes something I have to look back on.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gift-page hidden" id="giftPage">
+  <button class="gift-back-btn" type="button" onclick="closeGiftPage()">← back</button>
+  <div class="gift-shell">
+    <div class="gift-wrap">
+      <div class="gift-head">
+        <div class="gift-kicker">pick a gift</div>
+        <div class="gift-page-title">slot machine<br>of surprises</div>
+        <div class="gift-page-sub">There are three gifts waiting for you. Spin it, let it land on a number, and that number disappears from the machine.</div>
+      </div>
+      <div class="gift-card">
+        <div class="gift-machine">
+          <div class="gift-highlight"></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack1"></div></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack2"></div></div>
+          <div class="gift-reel"><div class="gift-track" id="giftTrack3"></div></div>
+        </div>
+        <div class="gift-actions">
+          <button class="gift-btn" id="giftSpinBtn" type="button" onclick="spinGiftMachine()">spin ✦</button>
+          <button class="gift-reset-btn" type="button" onclick="resetGiftMachine()">reset</button>
+        </div>
+        <div class="gift-result">
+          <div class="gift-placeholder" id="giftPlaceholder">waiting for a spin...</div>
+          <div class="gift-out" id="giftOut">
+            <div class="gift-emoji" id="giftEmoji">🎁</div>
+            <div class="gift-msg" id="giftMsg"></div>
+          </div>
+        </div>
+        <div class="gift-remaining" id="giftRemaining">3 gifts still in play</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bts-page hidden" id="btsPage">
+  <button class="bts-back-btn" type="button" onclick="closeBtsPage()">← back</button>
+  <div class="bts-shell">
+    <div class="bts-wrap">
+      <div class="bts-head">
+        <div class="bts-kicker">behind the scenes</div>
+        <div class="bts-title">the little moments<br>around us</div>
+        <div class="bts-sub">A soft little page just for the extra memories, outtakes, and the bits that still matter because they were ours.</div>
+      </div>
+      <div class="bts-video-card">
+        <div class="bts-video-wrap">
+          <video class="bts-video hidden" id="btsVideo" controls playsinline webkit-playsinline preload="metadata"></video>
+          <div class="bts-empty" id="btsEmpty">
+            <div class="bts-empty-emoji">🎬</div>
+            <div class="bts-empty-title">drop your video in and it will show up here</div>
+            <div class="bts-empty-sub">Add <strong>behind-the-scenes.mp4</strong> to the project and this page will play it automatically.</div>
+          </div>
+        </div>
+        <div class="bts-note">portrait video works best here</div>
       </div>
     </div>
   </div>
@@ -1277,10 +1352,16 @@ function getPetTributeImagePath() {
   return window.location.pathname.includes('/birthday-site/') ? 'pet-tribute.jpg' : 'birthday-site/pet-tribute.jpg';
 }
 
+function getBtsVideoPath() {
+  return window.location.pathname.includes('/birthday-site/') ? 'behind-the-scenes.mp4' : 'birthday-site/behind-the-scenes.mp4';
+}
+
 function initStaticAssets() {
   const heroImage = document.getElementById('heroImage');
   const audio = document.getElementById('audio');
   const petTributePhoto = document.getElementById('petTributePhoto');
+  const btsVideo = document.getElementById('btsVideo');
+  const btsEmpty = document.getElementById('btsEmpty');
   if (heroImage) heroImage.src = getHeroImagePath();
   if (audio) {
     audio.src = getSongPath();
@@ -1290,6 +1371,18 @@ function initStaticAssets() {
     petTributePhoto.src = getPetTributeImagePath();
     petTributePhoto.onload = () => petTributePhoto.classList.remove('hidden');
     petTributePhoto.onerror = () => petTributePhoto.classList.add('hidden');
+  }
+  if (btsVideo) {
+    btsVideo.src = getBtsVideoPath();
+    btsVideo.load();
+    btsVideo.onloadeddata = () => {
+      btsVideo.classList.remove('hidden');
+      btsEmpty?.classList.add('hidden');
+    };
+    btsVideo.onerror = () => {
+      btsVideo.classList.add('hidden');
+      btsEmpty?.classList.remove('hidden');
+    };
   }
 }
 
@@ -1402,6 +1495,46 @@ function closeDreamsPage() {
   if (!page) return;
   page.classList.remove('show');
   document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  setTimeout(() => page.classList.add('hidden'), 350);
+}
+
+function openGiftPage() {
+  const page = document.getElementById('giftPage');
+  if (!page) return;
+  hapticTap();
+  page.classList.remove('hidden');
+  requestAnimationFrame(() => page.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGiftPage() {
+  const page = document.getElementById('giftPage');
+  if (!page) return;
+  page.classList.remove('show');
+  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  setTimeout(() => page.classList.add('hidden'), 350);
+}
+
+function openBtsPage() {
+  const page = document.getElementById('btsPage');
+  const video = document.getElementById('btsVideo');
+  if (!page) return;
+  hapticTap();
+  page.classList.remove('hidden');
+  requestAnimationFrame(() => page.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+  if (video && !video.classList.contains('hidden')) {
+    video.play().catch(() => {});
+  }
+}
+
+function closeBtsPage() {
+  const page = document.getElementById('btsPage');
+  const video = document.getElementById('btsVideo');
+  if (!page) return;
+  page.classList.remove('show');
+  document.body.style.overflow = document.body.classList.contains('gate-locked') ? 'hidden' : '';
+  if (video) video.pause();
   setTimeout(() => page.classList.add('hidden'), 350);
 }
 
