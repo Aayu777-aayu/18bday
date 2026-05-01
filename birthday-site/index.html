@@ -129,7 +129,6 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-message{min-height:168px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
 .loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#5a2d4b;margin-bottom:16px;}
 .loved-ones-from{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#a85c87;letter-spacing:0.2px;}
-.loved-ones-relation{font-size:10px;color:#d08aad;margin-top:4px;letter-spacing:1.1px;text-transform:uppercase;}
 .loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
 .loved-ones-nav{display:flex;gap:8px;}
 .loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
@@ -635,13 +634,12 @@ Watching you grow into who you are has been one of the greatest gifts of my life
       <div class="loved-ones-wrap">
         <div class="loved-ones-card" id="lovedOnesCard">
           <div class="loved-ones-top">
-            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 4</div>
+            <div class="loved-ones-meta" id="lovedOnesMeta">1 / 9</div>
           </div>
           <div class="loved-ones-stage" id="lovedOnesStage">
             <div class="loved-ones-message" id="lovedOnesMessage">
               <div class="loved-ones-quote" id="lovedOnesQuote"></div>
               <div class="loved-ones-from" id="lovedOnesFrom"></div>
-              <div class="loved-ones-relation" id="lovedOnesRelation"></div>
             </div>
           </div>
           <div class="loved-ones-controls">
@@ -839,23 +837,39 @@ let lovedOnesIdx = 0, lovedOnesTimer = null, lovedOnesTouchStartX = 0, lovedOnes
 const LOVED_ONES_MESSAGES = [
   {
     quote: "hi ammu, finally eighteen yayyy!!! thank you for being the bestfriend who always stuck by my side and competed in just dance with. i love you so much and god bless you 💕.",
-    from: "Akhi",
-    relation: "with all my love"
+    from: "Akhi"
   },
   {
     quote: "hey ams i love you so much and i wish you a very happy birthday :) im so grateful to have you in my life for sooo long and i can’t wait to grow old together :) u deserve the absolute best always🤍.",
-    from: "Saanvi",
-    relation: "always in your corner"
+    from: "Saanvi"
   },
   {
     quote: "happiest birthday nikithaaaa🥹🥹 can’t believe you are officially an adult my childhood wouldn’t have ever been the same without you🥰 thank you for always being a constant in my life i love and appreciate you so much. lots of love.",
-    from: "Naishu",
-    relation: "so proud of you"
+    from: "Naishu"
   },
   {
     quote: "niki!! you’re such a loving and radiant person to be around. you will always be someone who feels like home no matter where we are. i love you so much.",
-    from: "Aarya",
-    relation: "your biggest fan"
+    from: "Aarya"
+  },
+  {
+    quote: "happy 18th nikiii!! i hope this year gives you so much happiness, pretty memories, and everything your heart has been quietly wishing for. you deserve all of it and more.",
+    from: "Mahi"
+  },
+  {
+    quote: "you have one of the warmest hearts ever and it shows in the way you care for everyone around you. i hope 18 is full of love, laughter and the best surprises.",
+    from: "Riya"
+  },
+  {
+    quote: "happiest birthday gorgeous girl. you make people feel comfortable just by being yourself, and that is such a special thing. never forget how loved you are.",
+    from: "Anya"
+  },
+  {
+    quote: "i’m so lucky to know you and to have watched you grow into the person you are. i hope this birthday feels as beautiful and full-hearted as you make everyone else feel.",
+    from: "Ishita"
+  },
+  {
+    quote: "eighteen looks so good on you already. i hope this next chapter is full of peace, fun, big dreams and people who love you properly every step of the way.",
+    from: "Diya"
   }
 ];
 
@@ -985,17 +999,16 @@ function scheduleLovedOneMessage() {
   lovedOnesTimer = setTimeout(() => {
     lovedOnesIdx = (lovedOnesIdx + 1) % LOVED_ONES_MESSAGES.length;
     renderLovedOneMessage();
-  }, 5000);
+  }, 6000);
 }
 
 function renderLovedOneMessage() {
   const quote = document.getElementById('lovedOnesQuote');
   const from = document.getElementById('lovedOnesFrom');
-  const relation = document.getElementById('lovedOnesRelation');
   const meta = document.getElementById('lovedOnesMeta');
   const messageWrap = document.getElementById('lovedOnesMessage');
   const dots = document.getElementById('lovedOnesDots');
-  if (!quote || !from || !relation || !meta || !messageWrap || !dots || !LOVED_ONES_MESSAGES.length) return;
+  if (!quote || !from || !meta || !messageWrap || !dots || !LOVED_ONES_MESSAGES.length) return;
 
   const item = LOVED_ONES_MESSAGES[lovedOnesIdx];
   messageWrap.style.opacity = '0.35';
@@ -1003,7 +1016,6 @@ function renderLovedOneMessage() {
   setTimeout(() => {
     quote.textContent = `“${item.quote}”`;
     from.textContent = item.from;
-    relation.textContent = item.relation;
     meta.textContent = `${lovedOnesIdx + 1} / ${LOVED_ONES_MESSAGES.length}`;
     messageWrap.style.opacity = '1';
     messageWrap.style.transform = 'translateX(0)';
