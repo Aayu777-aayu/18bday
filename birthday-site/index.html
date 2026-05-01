@@ -129,7 +129,8 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 .loved-ones-stage{position:relative;z-index:1;touch-action:pan-y;user-select:none;}
 .loved-ones-message{min-height:168px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4px 0 8px;transition:opacity 0.4s var(--ease-apple),transform 0.4s var(--ease-apple);}
 .loved-ones-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#5a2d4b;margin-bottom:16px;}
-.loved-ones-from{font-size:11px;color:#b56f99;letter-spacing:0.6px;}
+.loved-ones-from{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.3;color:#b56f99;letter-spacing:0.2px;display:flex;align-items:center;gap:8px;}
+.loved-ones-from::before{content:"—";color:#d783ad;font-style:normal;}
 .loved-ones-controls{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
 .loved-ones-nav{display:flex;gap:8px;}
 .loved-ones-btn{width:38px;height:38px;border:none;border-radius:50%;background:#f9e3ef;color:#8e5478;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);transition:transform 0.25s var(--ease-apple),background 0.25s var(--ease-apple),color 0.25s var(--ease-apple);}
@@ -149,6 +150,7 @@ body{font-synthesis-weight:none;text-rendering:optimizeLegibility;-webkit-font-s
 @media (max-width: 420px){
   .loved-ones-card{padding:22px 18px 18px;}
   .loved-ones-quote{font-size:17px;}
+  .loved-ones-from{font-size:15px;}
   .loved-ones-message{min-height:176px;}
   .pet-card{padding:24px 18px;}
   .pet-photo{width:164px;height:164px;}
